@@ -1,4 +1,5 @@
 base:
   '*':
     - managed
+    - users
     - demo

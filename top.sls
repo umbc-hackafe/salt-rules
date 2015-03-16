@@ -1,3 +1,4 @@
 base:
   '*':
+    - managed
     - demo

@@ -7,8 +7,6 @@ dylan:
   ssh_auth.present:
     - user: dylan
     - source: salt://files/keys/dylan
-    - require:
-      - user: dylan
 
 mark25:
   user.present:
@@ -19,8 +17,6 @@ mark25:
   ssh_auth.present:
     - user: mark25
     - source: salt://files/keys/mark25
-    - require:
-      - user: mark25
 
 sasha:
   user.present:
@@ -31,5 +27,3 @@ sasha:
   ssh_auth.present:
     - user: sasha
     - source: salt://files/keys/sasha
-    - require:
-      - user: sasha

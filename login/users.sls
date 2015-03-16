@@ -6,5 +6,5 @@
       - wheel
   ssh_auth.present:
     - user: {{ user }}
-    - source: salt://files/keys/{{ user }}
+    - source: salt://files/login/keys/{{ user }}
 {% endfor %}

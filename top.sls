@@ -1,6 +1,6 @@
 base:
   '*':
     - managed
-    - ssh
-    - users
+    - login.users
+    - login.ssh
     - demo

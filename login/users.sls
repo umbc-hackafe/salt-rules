@@ -5,6 +5,7 @@
       - salt
       - wheel
       - audio
+      - video
   ssh_auth.present:
     - user: {{ user }}
     - source: salt://files/login/keys/{{ user }}

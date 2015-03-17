@@ -8,3 +8,4 @@ base:
 
   'vegasix.xn--hackaf-gva.net':
     - httpd.nginx
+    - homeautomation.openhab

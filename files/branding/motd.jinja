@@ -4,6 +4,6 @@
 
 This host is managed by Salt.
 
-{% if pillar['motd_quote'][grains['host']] %}
+{% if grains['host'] in pillar['motd_quote'] %}
 {{ pillar['motd_quote'][grains['host']] }}
 {% endif %}

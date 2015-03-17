@@ -2,7 +2,7 @@ base:
   '*':
     - managed
     - branding
-    - login.users
+    - login.admin
     - login.ssh
     - demo
 

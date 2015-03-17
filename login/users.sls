@@ -4,6 +4,7 @@
     - groups:
       - salt
       - wheel
+      - audio
   ssh_auth.present:
     - user: {{ user }}
     - source: salt://files/login/keys/{{ user }}

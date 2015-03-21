@@ -30,3 +30,12 @@ pulse:
       - audio
     - require:
       - group: alsa_group
+  group.present:
+    - name: pulse-access
+    - system: True
+    {% if pillar.admins %}
+    - members:
+      {% for admin in pillar.admins %}
+      - {{admin}}
+      {% endfor %}
+    {% endif %}

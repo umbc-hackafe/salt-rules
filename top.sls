@@ -11,4 +11,4 @@ base:
     - homeautomation.openhab
 
   'cheerilee.xn--hackaf-gva.net':
-    - sound
+    - audio

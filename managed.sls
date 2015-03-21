@@ -11,7 +11,7 @@ salt-group:
     - name: salt
     - system: True
     {% if pillar.admins %}
-    - addusers:
+    - members:
       {% for admin in pillar.admins %}
       - {{admin}}
       {% endfor %}

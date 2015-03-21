@@ -25,6 +25,7 @@ pulse:
   user.present:
     - name: pulse
     - system: True
+    - home: /var/run/pulse
     - groups:
       - audio
     - require:

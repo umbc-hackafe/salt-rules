@@ -10,3 +10,9 @@ salt-group:
   group.present:
     - name: salt
     - system: True
+    {% if pillar.admins %}
+    - addusers:
+      {% for admin in pillar.admins %}
+      - {{admin}}
+      {% endfor %}
+    {% endif %}

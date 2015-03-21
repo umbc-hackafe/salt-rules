@@ -12,3 +12,6 @@ base:
 
   'cheerilee.xn--hackaf-gva.net':
     - audio
+
+  'luna.xn--hackaf-gva.net':
+    - audio

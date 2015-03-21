@@ -4,8 +4,7 @@ alsa:
 
 alsa_group:
   group.present:
-    - name:
-      - audio
+    - name: audio
     - system: True
     {% if pillar.admins %}
     - members:

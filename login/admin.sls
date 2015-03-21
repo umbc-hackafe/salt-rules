@@ -1,7 +1,8 @@
 {% if pillar.admins %}
 {% for admin in pillar.admins %}
 {{ admin }}:
-  user.present: []
+  user.present:
+    - remove_groups: False
   ssh_auth.present:
     - user: {{ admin }}
     - source: salt://login/keys/{{ admin }}

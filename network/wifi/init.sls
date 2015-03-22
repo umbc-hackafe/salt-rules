@@ -1,3 +1,3 @@
 include:
-  - wpa_supplicant
-  - hackafe
+  - .wpa_supplicant
+  - .hackafe

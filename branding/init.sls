@@ -2,7 +2,7 @@ motd_salt:
   file.managed:
     - name: /etc/motd
     - source:
-      - salt://files/branding/motd.jinja
+      - salt://branding/motd.jinja
     - mode: 644
     - template: jinja
 

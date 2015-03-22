@@ -15,3 +15,4 @@ base:
 
   'luna.xn--hackaf-gva.net':
     - audio
+    - audio.pulse

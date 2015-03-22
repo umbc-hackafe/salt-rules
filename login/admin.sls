@@ -9,7 +9,7 @@
 {% endfor %}
 {% endif %}
 
-wheel:
+sudo:
   group.present:
     - name: wheel
     {% if pillar.admins %}
@@ -18,3 +18,5 @@ wheel:
       - {{admin}}
       {% endfor %}
     {% endif %}
+  pkg.installed:
+    - name: sudo

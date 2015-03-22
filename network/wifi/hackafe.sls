@@ -12,4 +12,4 @@ wpa_supplicant_wext:
       - pkg: wpa_supplicant
     - onchanges:
       - cmd.run:
-        - name: systemctl daemon-reload
+        - name: "systemctl daemon-reload"

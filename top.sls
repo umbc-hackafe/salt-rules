@@ -17,6 +17,6 @@ base:
     - audio
     - audio.pulse
 
-  'scootaloo.xn--hackaf-gva.net:
+  'scootaloo.xn--hackaf-gva.net':
     - network.wifi
     - network.wifi.rtl-8192

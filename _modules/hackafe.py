@@ -1,4 +1,8 @@
 import sys, subprocess
 
-def espeak(text):
-    subprocess.call(["espeak", text])
+def espeak(*words):
+    exitcode = subprocess.call(["espeak"] + list(words))
+    if exitcode == 0:
+        return True
+    else:
+        return False

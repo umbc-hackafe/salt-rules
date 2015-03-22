@@ -10,3 +10,6 @@ wpa_supplicant_wext:
     - source: salt://network/wifi/hackafe-wpa_supplicant-wext@.service
     - require:
       - pkg: wpa_supplicant
+    - onchanges:
+      - cmd.run:
+        - name: systemctl daemon-reload

@@ -16,3 +16,7 @@ base:
   'luna.xn--hackaf-gva.net':
     - audio
     - audio.pulse
+
+  'scootaloo.xn--hackaf-gva.net:
+    - network.wifi
+    - network.wifi.rtl-8192

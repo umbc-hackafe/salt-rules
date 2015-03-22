@@ -9,6 +9,7 @@ base:
   'vegasix.xn--hackaf-gva.net':
     - httpd.nginx
     - homeautomation.openhab
+    - containers
 
   'cheerilee.xn--hackaf-gva.net':
     - audio

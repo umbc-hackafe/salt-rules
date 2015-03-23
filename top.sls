@@ -13,6 +13,7 @@ base:
 
   'cheerilee.xn--hackaf-gva.net':
     - audio
+    - music.pianobar
 
   'luna.xn--hackaf-gva.net':
     - audio

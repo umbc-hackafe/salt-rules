@@ -21,3 +21,8 @@ base:
   'scootaloo.xn--hackaf-gva.net':
     - network.wifi
     - network.wifi.rtl-8192
+
+  'fluttershy.xn--hackaf-gva.net':
+    - audio
+    - network.wifi
+    - network.wifi.rtl-8192

@@ -29,3 +29,6 @@ base:
     - audio
     - network.wifi
     - network.wifi.rtl-8192
+
+  'icinga.xn--hackaf-gva.net':
+    - aur

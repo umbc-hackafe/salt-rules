@@ -10,6 +10,7 @@ base:
     - httpd.nginx
     - homeautomation.openhab
     - containers
+    - network.bridge
 
   'cheerilee.xn--hackaf-gva.net':
     - audio

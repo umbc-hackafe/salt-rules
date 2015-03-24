@@ -11,6 +11,7 @@ base:
     - homeautomation.openhab
     - containers
     - network.bridge
+    - aur
 
   'cheerilee.xn--hackaf-gva.net':
     - audio

@@ -6,7 +6,7 @@ sudo:
 
 install-cower:
   cmd.run:
-    - name: pacman -U http://www.hackafé.net/cower-latest.pkg.tar.gz
+    - name: pacman -U http://www.hackafé.net/pkgs/cower-latest.pkg.tar.gz
     - create: /usr/bin/cower
     - require: 
       - pkg: expac
@@ -14,7 +14,7 @@ install-cower:
 
 install-pacaur:
   cmd.run:
-    - name: pacman -U http://vegasix.hackafé.net/pacaur-latest.pkg.tar.gz
+    - name: pacman -U http://www.hackafé.net/pkgs/pacaur-latest.pkg.tar.gz
     - create: /usr/bin/pacaur
     - require: 
       - pkg: expac

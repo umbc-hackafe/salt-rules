@@ -32,3 +32,4 @@ base:
 
   'icinga.xn--hackaf-gva.net':
     - aur
+    - monitor.server

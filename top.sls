@@ -4,6 +4,7 @@ base:
     - branding
     - login.admin
     - login.ssh
+    - network.time
     - demo
 
   'vegasix.xn--hackaf-gva.net':

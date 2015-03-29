@@ -11,3 +11,8 @@ timesyncd:
   service.running:
     - name: systemd-timesyncd
     - enable: True
+
+timezone:
+  cmd.run:
+    - name: timedatectl set-timezone 'America/New_York'
+    - user: root

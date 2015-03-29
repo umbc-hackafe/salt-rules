@@ -14,5 +14,13 @@
     - persist: True
     - mount: False # do not mount immediately; just modify the fstab
     - mkmnt: True
+
+/data/{{container}}:
+  file.directory: []
+/data/overlay/{{container}}:
+  file.directory: []
+/data/work/{{container}}:
+  file.directory: []
+
 {% endfor %}
 {% endif %}

@@ -1,3 +1,11 @@
+openhalper_dependencies:
+  pkg.installed:
+    - pkgs:
+      - python
+      - python-flask
+      # - python-raspberry-gpio
+      - python-requests
+
 openhalper_bin:
   file.managed:
     - name: /usr/local/bin/openhalper.py
@@ -15,6 +23,7 @@ openhalper_service:
     - enable: True
     - require:
       - file: openhalper_service
+      - pkg: openhalper_dependencies
     - watch:
       - file: openhalper_bin
       - file: openhalper_config

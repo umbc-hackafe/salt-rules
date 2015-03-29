@@ -15,6 +15,7 @@ base:
 
   'cheerilee.xn--hackaf-gva.net':
     - audio
+    - homeautomation.openhalper
     - music.pianobar
 
   'luna.xn--hackaf-gva.net':

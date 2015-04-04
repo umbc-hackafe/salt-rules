@@ -5,7 +5,7 @@ timesyncd:
     - name: /etc/systemd/timesyncd.conf
     - source:
       - salt://network/timesyncd.conf
-  cmd.run:
+  cmd.wait:
     - name: timedatectl set-ntp true
     - user: root
     - watch:

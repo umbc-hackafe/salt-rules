@@ -1,3 +1,5 @@
+{% set timezone = 'America/New_York' %}
+
 timesyncd:
   file.managed:
     - name: /etc/systemd/timesyncd.conf
@@ -14,5 +16,6 @@ timesyncd:
 
 timezone:
   cmd.run:
-    - name: timedatectl set-timezone 'America/New_York'
+    - name: timedatectl set-timezone '{{ timezone }}'
     - user: root
+    - unless: ls -l '/etc/localtime' | grep '{{ timezone }}'

@@ -1,6 +1,8 @@
 salt-minion:
   service.running:
     - enable: True
+    - watch:
+      - file: highstate-schedule
 
 puppet:
   service.dead:
@@ -16,3 +18,9 @@ salt-group:
       - {{admin}}
       {% endfor %}
     {% endif %}
+
+highstate-schedule:
+  file.managed:
+    - name: /etc/salt/minion.d/highstate
+    - source:
+      - salt://managed/scheduled-highstate

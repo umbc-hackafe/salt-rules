@@ -3,7 +3,7 @@ openhalper_dependencies:
     - pkgs:
       - python
       - python-flask
-      # - python-raspberry-gpio
+      - python-raspberry-gpio
       - python-requests
 
 openhalper_bin:

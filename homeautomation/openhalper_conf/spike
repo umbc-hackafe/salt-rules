@@ -1,0 +1,9 @@
+{
+    "port": 8081,
+    "actions": {
+	"furnace": {
+            "gpio_out": 5,
+            "state": false
+	}
+    }
+}

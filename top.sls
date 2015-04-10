@@ -32,6 +32,12 @@ base:
     - network.wifi
     - network.wifi.rtl-8192
 
+  'spike.xn--hackaf-gva.net':
+    - aur
+    - network.wifi
+    - network.wifi.rtl-8192
+    - homeautomation.openhalper
+
   'icinga.xn--hackaf-gva.net':
     - aur
     - monitor.server

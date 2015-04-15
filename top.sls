@@ -24,6 +24,8 @@ base:
     - audio.pulse
 
   'scootaloo.xn--hackaf-gva.net':
+    - aur
+    - homeautomation.openhalper
     - network.wifi
     - network.wifi.rtl-8192
 

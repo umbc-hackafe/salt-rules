@@ -3,6 +3,7 @@ aur-prereqs:
     - pkgs:
       - expac
       - sudo
+      - base-devel
 
 makepkg_sudoers_d:
   file.managed:

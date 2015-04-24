@@ -40,6 +40,10 @@ base:
     - network.wifi.rtl-8192
     - homeautomation.openhalper
 
+  'pinkie.xn--hackaf-gva.net':
+    - aur
+    - homeautomation.openhalper
+
   'icinga.xn--hackaf-gva.net':
     - aur
     - monitor.server

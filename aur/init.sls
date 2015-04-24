@@ -14,7 +14,7 @@ makepkg_sudoers_d:
 
 install-cower:
   cmd.run:
-    - name: pacman --noconfirm -U http://www.xn--hackaf-gva.net/pkgs/cower-latest-{{grains['cpuarch']}}.pkg.tar.xz
+    - name: pacman --noconfirm -U http://www.xn--hackaf-gva.net/pkgs/cower-latest-{{grains['osarch']}}.pkg.tar.xz
     - create: /usr/bin/cower
     - require: 
       - pkg: aur-prereqs
@@ -22,7 +22,7 @@ install-cower:
 
 install-pacaur:
   cmd.run:
-    - name: pacman --noconfirm -U http://www.xn--hackaf-gva.net/pkgs/pacaur-latest-{{grains['cpuarch']}}.pkg.tar.xz
+    - name: pacman --noconfirm -U http://www.xn--hackaf-gva.net/pkgs/pacaur-latest-any.pkg.tar.xz
     - create: /usr/bin/pacaur
     - require: 
       - pkg: aur-prereqs

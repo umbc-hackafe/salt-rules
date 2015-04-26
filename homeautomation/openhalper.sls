@@ -3,7 +3,6 @@ openhalper_dependencies:
     - pkgs:
       - python
       - python-flask
-      - python-raspberry-gpio
       - python-requests
 
 openhalper_bin:
@@ -24,6 +23,7 @@ openhalper_service:
     - require:
       - file: openhalper_service
       - pkg: openhalper_dependencies
+      - cmd: install-python-raspberry-gpio
     - watch:
       - file: openhalper_bin
       - file: openhalper_config

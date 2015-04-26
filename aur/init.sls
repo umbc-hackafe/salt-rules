@@ -35,10 +35,9 @@ makepkg:
     - home: /tmp
     - system: True
 
-python-raspberry-gpio:
-  pkg.installed:
-    - provider:
-      - cmd: su makepkg '/usr/bin/pacaur --noconfirm --noedit -S python-raspberry-gpio'
+install-python-raspberry-gpio:
+  cmd.run:
+    - name: su makepkg '/usr/bin/pacaur --noconfirm --noedit -S python-raspberry-gpio'
     - require:
       - pkg: install-pacaur
       - user: makepkg

@@ -1,5 +1,14 @@
+ext_pianobar_pkgs:
+  pkg.installed:
+    - pkgs:
+      - gnutls
+      - nettle
+
 pianobar:
-  pkg.installed: []
+  pkg.installed:
+    - require:
+      - pkg: ext_pianobar_pkgs
+
 
 {% if pillar.pianobar_users %}
 {% for user in pillar.pianobar_users %}

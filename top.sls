@@ -29,6 +29,10 @@ base:
     - network.wifi
     - network.wifi.rtl-8192
 
+  'vinyl.xn--hackaf-gva.net':
+    - aur
+    - homeautomation.openhalper
+
   'fluttershy.xn--hackaf-gva.net':
     - audio
     - network.wifi

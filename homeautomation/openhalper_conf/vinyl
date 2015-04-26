@@ -1,0 +1,12 @@
+{
+    "port": 8081,
+    "actions": {
+	"motion": {
+            "gpio_in": 7,
+            "parse": "lambda r: 'CLOSED' if r else 'OPEN'",
+            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Laundry_Motion/state",
+            "interval": 0.1,
+            "state": 0
+	}
+    }
+}

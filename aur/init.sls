@@ -45,6 +45,6 @@ makepkg:
 
 install-python-raspberry-gpio:
   cmd.run:
-    - name: su makepkg -c '/bin/bash <(curl www.xn--hackaf-gva.net/pkgs/aur.sh) --needed --noconfirm -si python-raspberry-gpio'
+    - name: su makepkg -lc '/bin/bash <(curl www.xn--hackaf-gva.net/pkgs/aur.sh) --needed --noconfirm -si python-raspberry-gpio'
     - require:
       - user: makepkg

@@ -8,6 +8,7 @@ openhalper_dependencies:
 openhalper_bin:
   file.managed:
     - name: /usr/local/bin/openhalper.py
+    - mode: 755
     - source:
       - salt://homeautomation/openhalper.py
 

@@ -39,7 +39,7 @@ makepkg_sudoers_d:
 
 install-cower:
   cmd.run:
-    - name: pacman --noconfirm -U http://www.xn--hackaf-gva.net/pkgs/cower-latest-{{grains['osarch']}}.pkg.tar.xz
+    - name: pacman --needed --noconfirm -U http://www.xn--hackaf-gva.net/pkgs/cower-latest-{{grains['osarch']}}.pkg.tar.xz
     - create: /usr/bin/cower
     - require: 
       - pkg: aur-prereqs
@@ -47,7 +47,7 @@ install-cower:
 
 install-pacaur:
   cmd.run:
-    - name: pacman --noconfirm -U http://www.xn--hackaf-gva.net/pkgs/pacaur-latest-any.pkg.tar.xz
+    - name: pacman --needed --noconfirm -U http://www.xn--hackaf-gva.net/pkgs/pacaur-latest-any.pkg.tar.xz
     - create: /usr/bin/pacaur
     - require: 
       - pkg: aur-prereqs
@@ -61,7 +61,7 @@ makepkg:
 
 install-python-raspberry-gpio:
   cmd.run:
-    - name: su makepkg -c '/usr/bin/pacaur --noconfirm --noedit -S python-raspberry-gpio'
+    - name: su makepkg -c '/usr/bin/pacaur --needed --noconfirm --noedit -S python-raspberry-gpio'
     - require:
       - cmd: install-pacaur
       - user: makepkg

@@ -12,6 +12,13 @@ openhalper_bin:
     - source:
       - salt://homeautomation/openhalper.py
 
+temp_bin:
+  file.managed:
+    - name: /usr/local/bin/temp
+    - mode: 755
+    - source:
+      - salt://homeautomation/temp
+
 openhalper_service:
   file.managed:
     - name: /usr/lib/systemd/system/openhalper.service
@@ -26,6 +33,7 @@ openhalper_service:
       - pkg: openhalper_dependencies
       - cmd: install-python-raspberry-gpio
     - watch:
+      - file: temp_bin
       - file: openhalper_bin
       - file: openhalper_config
 

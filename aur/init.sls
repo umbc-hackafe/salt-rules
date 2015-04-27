@@ -63,5 +63,5 @@ install-python-raspberry-gpio:
   cmd.run:
     - name: su makepkg '/usr/bin/pacaur --noconfirm --noedit -S python-raspberry-gpio'
     - require:
-      - pkg: install-pacaur
+      - cmd: install-pacaur
       - user: makepkg

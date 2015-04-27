@@ -51,3 +51,8 @@ base:
   'icinga.xn--hackaf-gva.net':
     - aur
     - monitor.server
+
+  'rarity.xn--hackaf-gva.net':
+    - aur
+    - audio
+    - homeautomation.openhalper

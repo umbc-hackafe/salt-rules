@@ -1,0 +1,54 @@
+{
+    "actions": {
+        "awesome": {
+	    "type": "noop",
+            "exec": ["aplay", "/usr/local/share/sounds/awesome.wav"]
+        },
+	"notawesome": {
+            "type": "noop",
+	    "exec": ["pkill", "aplay"]
+	},
+	"motion_corner": {
+	    "gpio_in": 7,
+	    "parse": "lambda r: 'CLOSED' if r else 'OPEN'",
+	    "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Living_Motion_East/state",
+	    "interval": 0.1,
+	    "state": 0
+	},
+	"motion_room": {
+	    "gpio_in": 13,
+	    "parse": "lambda r: 'CLOSED' if r else 'OPEN'",
+	    "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Living_Motion_South/state",
+	    "interval": 0.1,
+	    "state": 0
+	},
+	"temp": {
+            "exec": ["temp", "24"],
+            "parse": "lambda r: float(r.split()[1])",
+            "validate": "lambda r: r > 0 and r < 40",
+            "interval": 60,
+            "lifetime": 15,
+            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Living_Temperature/state"
+	},
+	"hum": {
+            "exec": ["temp",  "24"],
+            "parse": "lambda r: float(r.split()[0])",
+            "validate": "lambda r: r > 0 and r <= 100",
+            "interval": 60,
+            "lifetime": 15,
+	    "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Living_Humidity/state"
+	},
+	"turret": {
+	    "exec": ["aplay", "/usr/local/share/sounds/turret-{[num]}.wav"]
+	},
+	"lx": {
+	    "modules": ["smbus"],
+	    "setup": ["i2c_bus = smbus.SMBus(1)"],
+	    "func": "lambda: i2c_bus.read_i2c_block_data(0x23, 0x11)",
+	    "parse": "lambda r: (r[1] + 256 * r[0]) / 1.2",
+	    "validate": "lambda r: r >= 0",
+	    "interval": 300,
+	    "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Brightness/state"
+        }
+    }
+}

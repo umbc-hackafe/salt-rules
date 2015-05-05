@@ -71,6 +71,23 @@ for action in ACTIONS.values():
     if "validate" in action and not callable(action["validate"]):
         action["validate"] = eval(action["validate"])
 
+    if "func" in action and not callable(action["func"]):
+        action["func"] = eval(action["func"])
+
+    if "modules" in action:
+        for module in action["modules"]:
+            try:
+                exec("import {}".format(module))
+            except:
+                print("Error importing {}".format(module))
+
+    if "setup" in action:
+        if type(action["setup"]) is list:
+            for act in action["setup"]:
+                exec(act)
+        else:
+            exec(action["setup"])
+
 if len(sys.argv) > 1:
     PORT = int(sys.argv[1])
 

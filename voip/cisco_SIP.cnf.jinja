@@ -6,8 +6,8 @@ line1_password: "{{ phone.password }}"
 line1_displayname: "Hackafe {{ phone_name | capitalize }}"
 proxy1_port: {{ phone.proxy1_port|d('5060') }}
 proxy1_address: {{ phone.proxy1_address|d('vegasix.xn--hackaf-gva.net') }}
-line2_name: {{ intercom.line_name }}
-line2_authname: "{{ intercom.line_name }}"
+line2_name: {{ intercom.line_name }}-{{ phone_name }}
+line2_authname: "{{ intercom.line_name }}-{{ phone_name }}"
 line2_shortname: "{{ intercom.line_name | capitalize }}"
 line2_password: "{{ intercom.password }}"
 line2_displayname: "Hackafe {{ intercom.line_name | capitalize }}"

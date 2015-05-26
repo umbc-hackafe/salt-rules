@@ -12,6 +12,7 @@ base:
     - homeautomation.openhab
     - containers
     - network.bridge
+    - voip
     - aur
 
   'cheerilee.xn--hackaf-gva.net':

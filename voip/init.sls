@@ -23,5 +23,6 @@ voip_sip_{{ phone.MAC }}:
     - context:
       phone_name: {{ phone_name }}
       phone: {{ phone }}
+      intercom: {{ pillar.phone_intercom }}
 {% endfor %}
 {% endif %}

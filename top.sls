@@ -5,6 +5,7 @@ base:
     - login.admin
     - login.ssh
     - network.time
+    - network.dhcp
     - demo
 
   'vegasix.xn--hackaf-gva.net':

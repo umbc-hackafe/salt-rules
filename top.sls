@@ -5,7 +5,6 @@ base:
     - login.admin
     - login.ssh
     - network.time
-    - network.dhcp
     - demo
 
   'vegasix.xn--hackaf-gva.net':
@@ -28,6 +27,7 @@ base:
   'scootaloo.xn--hackaf-gva.net':
     - aur
     - homeautomation.openhalper
+    - network.dhcp
     - network.wifi
     - network.wifi.rtl-8192
 

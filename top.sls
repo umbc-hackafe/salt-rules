@@ -23,6 +23,8 @@ base:
   'luna.xn--hackaf-gva.net':
     - audio
     - audio.pulse
+    - aur
+    - homeautomation.openhalper
 
   'scootaloo.xn--hackaf-gva.net':
     - aur

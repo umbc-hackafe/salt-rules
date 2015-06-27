@@ -22,6 +22,6 @@
             "interval": 60,
             "lifetime": 15,
 	    "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Office_Humidity/state"
-	},
+	}
     }
 }

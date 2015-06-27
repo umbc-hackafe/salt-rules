@@ -1,0 +1,27 @@
+{
+    "actions": {
+	"motion": {
+	    "gpio_in": 7,
+	    "parse": "lambda r: 'CLOSED' if r else 'OPEN'",
+	    "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Office_Motion/state",
+	    "interval": 0.1,
+	    "state": 0
+	},
+	"temp": {
+            "exec": ["temp", "24"],
+            "parse": "lambda r: float(r.split()[1])",
+            "validate": "lambda r: r > 0 and r < 40",
+            "interval": 60,
+            "lifetime": 15,
+            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Office_Temperature/state"
+	},
+	"hum": {
+            "exec": ["temp",  "24"],
+            "parse": "lambda r: float(r.split()[0])",
+            "validate": "lambda r: r > 0 and r <= 100",
+            "interval": 60,
+            "lifetime": 15,
+	    "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Office_Humidity/state"
+	},
+    }
+}

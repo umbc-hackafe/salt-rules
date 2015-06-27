@@ -58,3 +58,7 @@ base:
     - aur
     - audio
     - homeautomation.openhalper
+
+  'dash.xn--hackaf-gva.net':
+    - aur
+    - homeautomation.openhalper

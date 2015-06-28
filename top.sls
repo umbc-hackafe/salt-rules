@@ -64,3 +64,6 @@ base:
   'dash.xn--hackaf-gva.net':
     - aur
     - homeautomation.openhalper
+
+  'ci':
+    - ci.jenkins

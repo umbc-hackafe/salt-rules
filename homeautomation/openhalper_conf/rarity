@@ -7,7 +7,7 @@
             "validate": "lambda r: r > 0 and r < 40",
             "interval": 60,
             "lifetime": 15,
-            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Bed_Temperature/state"
+            "get": "http://idiotic:8081/api/item/Bedroom_Temperature/command/set?val={value}"
         },
         "hum": {
             "exec": ["temp",  "24"],
@@ -15,7 +15,7 @@
             "validate": "lambda r: r > 0 and r <= 100",
             "interval": 60,
             "lifetime": 15,
-            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Bed_Humidity/state"
+            "get": "http://idiotic:8081/api/item/Bedroom_Humidity/command/set?val={value}"
         },
 	"say": {
             "exec": "echo {[text]} | espeak --stdin --stdout | aplay",
@@ -24,15 +24,15 @@
 	},
 	"motion": {
             "gpio_in": 7,
-            "parse": "lambda r: 'CLOSED' if r else 'OPEN'",
-            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Bed_Motion/state",
+            "parse": "lambda r: 'on' if r else 'off'",
+            "get": "http://idiotic:8081/api/item/Bedroom_Motion/command/{value}",
             "interval": 0.1,
             "state": 0
 	},
         "door": {
             "gpio_in": 13,
-            "parse": "lambda r: 'CLOSED' if r else 'OPEN'",
-            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Bed_Door/state",
+            "parse": "lambda r: 'on' if r else 'off'",
+            "get": "http://idiotic:8081/api/item/Bedroom_Door/command/{value}",
             "interval": 3600,
             "state": 0
         }

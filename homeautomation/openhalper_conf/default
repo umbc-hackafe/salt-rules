@@ -7,7 +7,7 @@
             "validate": "lambda r: r > 0 and r < 40",
             "interval": 60,
             "lifetime": 15,
-            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Living_Temperature/state"
+            "put": "http://idiotic:8081/rest/items/Living_Temperature/state"
 	},
 	"hum": {
             "exec": ["temp",  "24"],
@@ -15,7 +15,7 @@
             "validate": "lambda r: r > 0 and r <= 100",
             "interval": 60,
             "lifetime": 15,
-	    "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Living_Humidity/state"
+	    "put": "http://idiotic:8081/rest/items/Living_Humidity/state"
 	},
 	"say": {
             "exec": "echo {[text]} | espeak --stdin --stdout | aplay",
@@ -24,8 +24,8 @@
 	},
 	"motion": {
             "gpio_in": 7,
-            "parse": "lambda r: 'OPEN' if r else 'CLOSED'",
-            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Living_Motion_East/state",
+            "parse": "lambda r: 'off' if r else 'on'",
+            "put": "http://idiotic:8081/rest/items/Living_Motion_East/state",
             "interval": 0.1,
             "state": 0
 	},

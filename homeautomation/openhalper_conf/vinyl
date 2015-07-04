@@ -3,8 +3,8 @@
     "actions": {
 	"motion": {
             "gpio_in": 7,
-            "parse": "lambda r: 'CLOSED' if r else 'OPEN'",
-            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Laundry_Motion/state",
+            "parse": "lambda r: 'on' if r else 'off'",
+            "get": "http://idiotic:8081/api/item/Laundry_Room_Motion/command/{value}",
             "interval": 0.1,
             "state": 0
 	}

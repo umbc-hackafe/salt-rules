@@ -4,7 +4,7 @@
 	"motion": {
             "gpio_in": 7,
             "parse": "lambda r: 'on' if r else 'off'",
-            "get": "http://idiotic:8081/api/item/Laundry_Room_Motion/command/{value}",
+            "get": "http://idiotic/api/item/Laundry_Room_Motion/command/{value}",
             "interval": 0.1,
             "state": 0
 	}

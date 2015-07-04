@@ -7,7 +7,7 @@
             "validate": "lambda r: r > 0 and r < 40",
             "interval": 60,
             "lifetime": 15,
-            "get": "http://idiotic/api/item/Hallway_Temperature/command/set?vl={value}"
+            "get": "http://idiotic/api/item/Hallway_Temperature/command/set?val={value}"
 	},
 	"hum": {
             "exec": ["temp",  "24"],
@@ -25,7 +25,7 @@
 	"motion": {
             "gpio_in": 7,
             "parse": "lambda r: 'on' if r else 'off'",
-            "get": "http://idiotic/api/item/Stairway_Motion/command/{value}",
+            "get": "http://idiotic/api/item/Hallway_Motion/command/{value}",
             "interval": 0.1,
             "state": 0
 	},

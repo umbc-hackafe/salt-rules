@@ -11,7 +11,7 @@
 	"motion_room": {
 	    "gpio_in": 13,
 	    "parse": "lambda r: 'on' if r else 'off'",
-	    "get": "http://idiotic/api/item/Living_Motion_South/command/{value}",
+	    "get": "http://idiotic/api/item/Living_Room_Motion/command/{value}",
 	    "interval": 0.1,
 	    "state": 0
 	},
@@ -21,7 +21,7 @@
             "validate": "lambda r: r > 0 and r < 40",
             "interval": 60,
             "lifetime": 15,
-            "get": "http://idiotic/api/item/Living_Temperature/command/set?val={value}"
+            "get": "http://idiotic/api/item/Living_Room_Temperature/command/set?val={value}"
 	},
 	"hum": {
             "exec": ["temp",  "24"],
@@ -29,7 +29,7 @@
             "validate": "lambda r: r > 0 and r <= 100",
             "interval": 60,
             "lifetime": 15,
-	    "get": "http://idiotic/api/item/Living_Humidity/command/set?val={value}"
+	    "get": "http://idiotic/api/item/Living_Room_Humidity/command/set?val={value}"
 	},
 	"turret": {
 	    "exec": ["aplay", "/usr/local/share/sounds/turret-{[num]}.wav"]

@@ -67,3 +67,6 @@ base:
 
   'ci':
     - ci.jenkins
+
+  'logs':
+    - logging.server

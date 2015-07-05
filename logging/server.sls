@@ -25,5 +25,12 @@ elasticsearch:
     - enable: True
 
 kibana:
-  pkg.installed:
-    - name: kibana
+  pkg.installed: []
+  file.managed:
+    - name: /usr/share/webapps/kibana/config/kibana.yml
+    - source: salt://logging/kibana.yml
+  service.running:
+    - enable: True
+    - watch:
+      - pkg: kibana
+      - file: kibana

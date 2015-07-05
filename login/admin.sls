@@ -20,3 +20,6 @@ sudo:
     {% endif %}
   pkg.installed:
     - name: sudo
+  file.managed:
+    - name: /etc/sudoers
+    - source: salt://login/sudoers

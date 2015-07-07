@@ -7,6 +7,13 @@
             "get": "http://idiotic/api/item/Laundry_Room_Motion/command/{value}",
             "interval": 0.1,
             "state": 0
+	},
+	"kitchen_motion": {
+	    "gpio_in": 11,
+	    "parse": "lambda r: 'on' if r else 'off'",
+	    "get": "http://idiotic/api/item/Kitchen_Motion/command/{value}",
+	    "interval": 0.1,
+	    "state": 0
 	}
     }
 }

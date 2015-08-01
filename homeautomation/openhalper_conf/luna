@@ -42,6 +42,16 @@
 	    "validate": "lambda r: r >= 0",
 	    "interval": 300,
 	    "get": "http://idiotic/api/item/Brightness/command/set?val={value}"
-        }
+        },
+	"projector_off": {
+	    "exec": ["echo 'standby 0' | cec-client -s"],
+	    "shell": true,
+	    "parse": "lambda _:''"
+	},
+	"projector_on": {
+	    "exec": ["echo 'on 0' | cec-client -s"],
+	    "shell": true,
+	    "parse": "lambda _:''"
+	}
     }
 }

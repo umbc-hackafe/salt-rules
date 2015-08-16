@@ -14,6 +14,36 @@
 	    "get": "http://idiotic/api/item/Kitchen_Motion/command/{value}",
 	    "interval": 0.1,
 	    "state": 0
+	},
+	"entertainment_motion": {
+	    "gpio_in": 22,
+	    "parse": "lambda r: 'on' if r else 'off'",
+	    "get": "http://idiotic/api/item/Entertainment_Room_Motion/command/{value}",
+	    "interval": 0.1,
+	    "state": 0
+	},
+	"temp": {
+            "exec": ["temp", "24"],
+            "parse": "lambda r: float(r.split()[1])",
+            "validate": "lambda r: r > 0 and r < 40",
+            "interval": 60,
+            "lifetime": 15,
+            "get": "http://idiotic/api/item/Entertainment_Room_Temperature/command/set?val={value}"
+	},
+	"hum": {
+            "exec": ["temp",  "24"],
+            "parse": "lambda r: float(r.split()[0])",
+            "validate": "lambda r: r > 0 and r <= 100",
+            "interval": 60,
+            "lifetime": 15,
+	    "get": "http://idiotic/api/item/Entertainment_Room_Humidity/command/set?val={value}"
+	},
+        "entertainment_laundry_door": {
+	    "gpio_in": 15,
+	    "parse": "lambda r: 'off' if r else 'on'",
+	    "get": "http://idiotic/api/item/Entertainment_Room_Laundry_Room_Door/command/{value}",
+	    "interval": 0.1,
+	    "state": 0
 	}
     }
 }

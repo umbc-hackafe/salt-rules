@@ -1,7 +1,7 @@
 systemd-nspawn@.service:
   file.managed:
     - name: /etc/systemd/system/systemd-nspawn@.service
-    - source: salt:///containers/systemd-nspawn@.service
+    - source: salt://containers/systemd-nspawn@.service
     - require:
       - file: make-container@.service
     - watched_in:
@@ -10,7 +10,7 @@ systemd-nspawn@.service:
 make-container@.service:
   file.managed:
     - name: /etc/systemd/system/make-container@.service
-    - source: salt:///containers/make-container@.service
+    - source: salt://containers/make-container@.service
     - require:
       - file: make-container
     - watched_in:
@@ -19,7 +19,7 @@ make-container@.service:
 make-container:
   file.managed:
     - name: /usr/bin/make-container
-    - source: salt:///containers/make-container.sh
+    - source: salt://containers/make-container.sh
 
 /data:
   file.directory: []

@@ -7,7 +7,7 @@ base:
     - network.time
     - demo
 
-  'vegasix.xn--hackaf-gva.net':
+  'vegasix.hackafe.net':
     - httpd.nginx
     - homeautomation.openhab
     - containers
@@ -15,53 +15,53 @@ base:
     - voip
     - aur
 
-  'cheerilee.xn--hackaf-gva.net':
+  'cheerilee.hackafe.net':
     - audio
     - homeautomation.openhalper
     - music.pianobar
 
-  'luna.xn--hackaf-gva.net':
+  'luna.hackafe.net':
     - audio
     - audio.pulse
     - aur
     - homeautomation.openhalper
 
-  'scootaloo.xn--hackaf-gva.net':
+  'scootaloo.hackafe.net':
     - aur
     - homeautomation.openhalper
     - network.dhcp
     - network.wifi
     - network.wifi.rtl-8192
 
-  'vinyl.xn--hackaf-gva.net':
+  'vinyl.hackafe.net':
     - aur
     - homeautomation.openhalper
 
-  'fluttershy.xn--hackaf-gva.net':
+  'fluttershy.hackafe.net':
     - audio
     - network.wifi
     - network.wifi.rtl-8192
 
-  'spike.xn--hackaf-gva.net':
+  'spike.hackafe.net':
     - aur
     - network.wifi
     - network.wifi.rtl-8192
     - homeautomation.openhalper
 
-  'pinkie.xn--hackaf-gva.net':
+  'pinkie.hackafe.net':
     - aur
     - homeautomation.openhalper
 
-  'icinga.xn--hackaf-gva.net':
+  'icinga.hackafe.net':
     - aur
     - monitor.server
 
-  'rarity.xn--hackaf-gva.net':
+  'rarity.hackafe.net':
     - aur
     - audio
     - homeautomation.openhalper
 
-  'dash.xn--hackaf-gva.net':
+  'dash.hackafe.net':
     - aur
     - homeautomation.openhalper
 

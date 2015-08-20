@@ -17,6 +17,10 @@ salt-group:
       {% for admin in pillar.admins %}
       - {{admin}}
       {% endfor %}
+    - require:
+      {% for admin in pillar.admins %}
+      - user: {{admin}}
+      {% endfor %}
     {% endif %}
 
 highstate-schedule:

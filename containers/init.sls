@@ -20,6 +20,7 @@ make-container:
   file.managed:
     - name: /usr/bin/make-container
     - source: salt://containers/make-container.sh
+    - mode: 755
 
 /data:
   file.directory: []

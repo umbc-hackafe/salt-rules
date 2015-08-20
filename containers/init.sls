@@ -1,20 +1,39 @@
+systemd-nspawn@.service:
+  file.managed:
+    - name: /etc/systemd/system/systemd-nspawn@.service
+    - source: salt:///containers/systemd-nspawn@.service
+    - require:
+      - file: make-container@.service
+    - watched_in:
+      - cmd: daemon-reload
+
+make-container@.service:
+  file.managed:
+    - name: /etc/systemd/system/make-container@.service
+    - source: salt:///containers/make-container@.service
+    - require:
+      - file: make-container
+    - watched_in:
+      - cmd: daemon-reload
+
+make-container:
+  file.managed:
+    - name: /usr/bin/make-container
+    - source: salt:///containers/make-container.sh
+
+/data:
+  file.directory: []
+/data/overlay:
+  file.directory: []
+/data/work:
+  file.directory: []
+
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
 {% for container in pillar.containerhosts[grains['host']] %}
 {{container}}:
   service.running:
     - name: systemd-nspawn@{{container}}.service
     - enable: True
-    - require:
-      - file: /data/{{container}}
-      - file: /data/overlay/{{container}}
-      - file: /data/work/{{container}}
-
-/data/{{container}}:
-  file.directory: []
-/data/overlay/{{container}}:
-  file.directory: []
-/data/work/{{container}}:
-  file.directory: []
 
 {% endfor %}
 {% endif %}

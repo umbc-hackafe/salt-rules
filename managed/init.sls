@@ -24,3 +24,9 @@ highstate-schedule:
     - name: /etc/salt/minion.d/highstate
     - source:
       - salt://managed/scheduled-highstate
+
+daemon-reload:
+  cmd.wait:
+    - name: systemctl daemon-reload
+    - user: root
+    - group: root

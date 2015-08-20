@@ -1,0 +1,10 @@
+[Unit]
+Description=Prepare for Container %i
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/make-container %i
+
+[Install]
+WantedBy=multi-user.target
+

@@ -6,10 +6,10 @@
     {% for key, value in properties.items() %}
     - {{key}}: {{value}}
     {% endfor %}
-{% endfor %}
   ssh_auth.present:
     - user: {{ admin }}
     - source: salt://login/keys/{{ admin }}
+{% endfor %}
 {% endif %}
 
 sudo:

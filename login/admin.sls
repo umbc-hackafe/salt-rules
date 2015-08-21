@@ -1,11 +1,14 @@
 {% if pillar.admins %}
-{% for admin in pillar.admins %}
+{% for admin, properties in pillar.admins.items() %}
 {{ admin }}:
   user.present:
     - remove_groups: False
   ssh_auth.present:
     - user: {{ admin }}
     - source: salt://login/keys/{{ admin }}
+    {% for key, value in properties.items() %}
+    - {{key}}: {{value}}
+    {% endfor %}
 {% endfor %}
 {% endif %}
 

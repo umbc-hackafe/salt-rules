@@ -14,11 +14,11 @@ salt-group:
     - system: True
     {% if pillar.admins %}
     - members:
-      {% for admin in pillar.admins %}
+      {% for admin in pillar.admins.keys() %}
       - {{admin}}
       {% endfor %}
     - require:
-      {% for admin in pillar.admins %}
+      {% for admin in pillar.admins.keys() %}
       - user: {{admin}}
       {% endfor %}
     {% endif %}

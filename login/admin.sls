@@ -3,13 +3,13 @@
 {{ admin }}:
   user.present:
     - remove_groups: False
-  ssh_auth.present:
-    - user: {{ admin }}
-    - source: salt://login/keys/{{ admin }}
     {% for key, value in properties.items() %}
     - {{key}}: {{value}}
     {% endfor %}
 {% endfor %}
+  ssh_auth.present:
+    - user: {{ admin }}
+    - source: salt://login/keys/{{ admin }}
 {% endif %}
 
 sudo:

@@ -1,6 +1,7 @@
 base:
   '*':
     - managed
+    - managed.update
     - branding
     - login.admin
     - login.ssh

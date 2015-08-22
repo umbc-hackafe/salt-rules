@@ -8,7 +8,7 @@ salt-minion-config:
     - source:
       - salt://managed/minion.yaml
     - template: jinja
-    - watched_in:
+    - watch_in:
       - service: salt-minion
 
 puppet:

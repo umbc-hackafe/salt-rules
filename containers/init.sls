@@ -4,7 +4,7 @@ systemd-nspawn@.service:
     - source: salt://containers/systemd-nspawn@.service
     - require:
       - file: make-container@.service
-    - watched_in:
+    - watch_in:
       - cmd: daemon-reload
 
 make-container@.service:
@@ -13,7 +13,7 @@ make-container@.service:
     - source: salt://containers/make-container@.service
     - require:
       - file: make-container
-    - watched_in:
+    - watch_in:
       - cmd: daemon-reload
 
 make-container:

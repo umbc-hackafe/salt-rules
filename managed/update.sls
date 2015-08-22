@@ -3,5 +3,5 @@ highstate-schedule:
     - name: /etc/salt/minion.d/highstate.conf
     - source:
       - salt://managed/highstate.yaml
-    - watched_in:
+    - watch_in:
       - service: salt-minion

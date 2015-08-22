@@ -1,8 +1,15 @@
 salt-minion:
   service.running:
     - enable: True
-    - watch:
-      - file: highstate-schedule
+
+salt-minion-config:
+  file.managed:
+    - name: /etc/salt/minion
+    - source:
+      - salt://managed/minion.yaml
+    - template: jinja
+    - watched_in:
+      - service: salt-minion
 
 puppet:
   service.dead:
@@ -23,11 +30,6 @@ salt-group:
       {% endfor %}
     {% endif %}
 
-highstate-schedule:
-  file.managed:
-    - name: /etc/salt/minion.d/highstate
-    - source:
-      - salt://managed/scheduled-highstate
 
 daemon-reload:
   cmd.wait:

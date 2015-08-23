@@ -13,6 +13,17 @@ timesyncd:
   service.running:
     - name: systemd-timesyncd
     - enable: True
+    - require:
+      - file: timesyncd-allowvirtual
+
+# This is necessary in order to allow timesyncd to run on virtual machines.
+timesyncd-allowvirtual:
+  file.managed:
+    - name: /etc/systemd/system/systemd-timesyncd.service.d/allowvirtual.conf
+    - contents: "[Unit]\nConditionVirtualization="
+    - makedirs: True
+    - watch_in:
+      - cmd: daemon-reload
 
 timezone:
   cmd.run:

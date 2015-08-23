@@ -42,3 +42,6 @@ schedule:
     function: state.highstate
     minutes: 60
     splay: 15
+
+mine_functions:
+  network.ip_addrs: []

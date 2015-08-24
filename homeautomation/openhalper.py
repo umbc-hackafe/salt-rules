@@ -45,6 +45,9 @@ ACTIONS = {
         "parse": lambda r: "",
         "shell": True
     },
+    "ping": {
+        "func": lambda: "OK",
+    },
 }
 
 PORT = 8081

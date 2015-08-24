@@ -16,6 +16,13 @@ base:
     - voip
     - aur
 
+  'watson.hackafe.net':
+    - httpd.nginx
+    - containers
+    - network.bridge
+    - voip
+    - aur
+
   'cheerilee.hackafe.net':
     - audio
     - homeautomation.openhalper

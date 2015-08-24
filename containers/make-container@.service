@@ -2,7 +2,7 @@
 Description=Prepare for Container %i
 
 [Service]
-Type=simple
+Type=oneshot
 ExecStart=/usr/bin/make-container %i
 
 [Install]

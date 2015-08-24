@@ -10,7 +10,6 @@ base:
 
   'vegasix.hackafe.net':
     - httpd.nginx
-    - homeautomation.openhab
     - containers
     - network.bridge
     - voip

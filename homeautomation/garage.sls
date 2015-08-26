@@ -8,7 +8,7 @@ door_bin:
     - source:
       - salt://homeautomation/door.py
     - prereq;
-      - service.running: openhalper
+      - openhalper.openhalper_service
 
 projector_bin:
   file.managed:
@@ -17,4 +17,4 @@ projector_bin:
     - source:
       - salt://homeautomation/projector.py
     - prereq:
-      - service.running: openhalper
+      - openhalper.openhalper_service

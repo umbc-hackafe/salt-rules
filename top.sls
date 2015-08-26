@@ -74,8 +74,8 @@ base:
 
   'thegreatandpowerfultrixie.hackafe.net':
     - aur
-    - homeautomation.openhalper
     - homeautomation.garage
+    - homeautomation.openhalper
 
   'ci':
     - ci.jenkins

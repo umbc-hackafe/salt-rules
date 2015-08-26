@@ -1,5 +1,5 @@
 include:
-  - openhalper
+  - homeautomation.openhalper
 
 door_bin:
   file.managed:

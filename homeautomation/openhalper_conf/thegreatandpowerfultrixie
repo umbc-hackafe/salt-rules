@@ -1,0 +1,16 @@
+{
+    "port": 8081,
+    "actions": {
+        "door": {
+            "exec": "/usr/local/bin/door.py {action}",
+            "shell": true,
+            "put": "http://vegasix.xn--hackaf-gva.net:8081/rest/items/Garage_Door/state"
+        },
+        "screen": {
+            "exec": "/usr/local/bin/projector.py {action} > /tmp/halper 2>&1",
+            "parse": "lambda r: ''",
+            "shell": true
+        }
+    }
+}
+

@@ -7,8 +7,8 @@ door_bin:
     - mode: 755
     - source:
       - salt://homeautomation/door.py
-    - prereq;
-      - openhalper.openhalper_service
+    - require_in:
+      - service: openhalper
 
 projector_bin:
   file.managed:
@@ -16,5 +16,5 @@ projector_bin:
     - mode: 755
     - source:
       - salt://homeautomation/projector.py
-    - prereq:
-      - openhalper.openhalper_service
+    - require_in:
+      - service: openhalper

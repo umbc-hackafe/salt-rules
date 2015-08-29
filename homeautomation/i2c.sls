@@ -24,6 +24,6 @@ boot-conf:
     - changes:
       - set dtparam i2c1=on
       - set dtparam spi=on
-    - lens: avahi.lns
+    - lens: inifile.lns
     - require_in:
       - service: openhalper

@@ -13,11 +13,6 @@ i2c_bcm2708:
     - require_in:
       - service: openhalper
 
-lm_sensors:
-  pkg.installed:
-    - require_in:
-      - service: openhalper
-
 boot-conf:
   augeas.change:
     - context: /files/boot/config.txt
@@ -25,5 +20,13 @@ boot-conf:
       - set dtparam=i2c1 on
       - set dtparam=spi on
     - lens: inifile.lns
+    - require_in:
+      - service: openhalper
+
+install-python-smbus:
+  cmd.run:
+    - name: su makepkg -lc 'pacman -Qi python-smbus || /bin/bash <(curl hackafe.net/pkgs/aur.sh) --needed --noconfirm -si python-smbus'
+    - require:
+      - user: makepkg
     - require_in:
       - service: openhalper

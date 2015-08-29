@@ -1,26 +1,29 @@
 include:
   - homeautomation.openhalper
 
-modules:
+i2c_dev:
   kmod.present:
-    - name: i2c_dev
-    - require_in:
-      - service: openhalper
-  kmod.present:
-    - name: i2c_bcm2708
+    - persist: True
     - require_in:
       - service: openhalper
 
-devicetree:
+i2c_bcm2708:
+  kmod.present
+    - persist: True
+    - require_in:
+      - service: openhalper
+
+lm_sensors:
   pkg.installed:
-    - name: lm_sensors
     - require_in:
       - service: openhalper
 
+boot-conf:
   augeas.change:
-    - context: /boot/config.txt
+    - context: /files/boot/config.txt
     - changes:
-      - set dtparam=i2c1=on
-      - set dtparam=spi=on
+      - set dtparam i2c1=on
+      - set dtparam spi=on
+    - lens: avahi
     - require_in:
       - service: openhalper

@@ -17,7 +17,7 @@ i2c_bcm2708:
 boot-conf:
   cmd.run:
     - name: |
-        grep 'dtparam=i2c1=on' /boot/config.txt || echo 'dtparam=12c1=on' >> /boot/config.txt
+        grep 'dtparam=i2c1=on' /boot/config.txt || echo 'dtparam=i2c1=on' >> /boot/config.txt
         grep 'dtparam=spi=on' /boot/config.txt || echo 'dtparam=spi=on' >> /boot/config.txt
     - require_in:
       - service: openhalper

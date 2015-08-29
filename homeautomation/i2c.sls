@@ -15,12 +15,10 @@ i2c_bcm2708:
       - service: openhalper
 
 boot-conf:
-  augeas.change:
-    - context: /files/boot/config.txt
-    - changes:
-      - set dtparam=i2c1 on
-      - set dtparam=spi on
-    - lens: inifile.lns
+  cmd.run:
+    - name: |
+        grep 'dtparam=i2c1=on' /boot/config.txt || echo 'dtparam=12c1=on' >> /boot/config.txt
+	grep 'dtparam=spi=on' /boot/config.txt || echo 'dtparam=spi=on' >> /boot/config.txt
     - require_in:
       - service: openhalper
 

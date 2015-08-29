@@ -31,6 +31,7 @@ base:
     - audio
     - audio.pulse
     - aur
+    - homeautomation.i2c
     - homeautomation.openhalper
 
   'scootaloo.hackafe.net':

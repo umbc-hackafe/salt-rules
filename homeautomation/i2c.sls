@@ -8,7 +8,7 @@ i2c_dev:
       - service: openhalper
 
 i2c_bcm2708:
-  kmod.present
+  kmod.present:
     - persist: True
     - require_in:
       - service: openhalper

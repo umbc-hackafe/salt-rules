@@ -22,8 +22,8 @@ boot-conf:
   augeas.change:
     - context: /files/boot/config.txt
     - changes:
-      - set dtparam i2c1=on
-      - set dtparam spi=on
+      - set dtparam=i2c1 on
+      - set dtparam=spi on
     - lens: inifile.lns
     - require_in:
       - service: openhalper

@@ -19,3 +19,10 @@ cups:
     - enable: True
     - require:
       - pkg: cups
+
+cups-web:
+  service.running:
+    - name: cups-browsed
+    - enable: True
+    - require:
+      - pkg: cups

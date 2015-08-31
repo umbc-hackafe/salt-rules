@@ -30,6 +30,7 @@ base:
   'luna.hackafe.net':
     - audio
     - audio.pulse
+    - cups
     - aur
     - homeautomation.i2c
     - homeautomation.cec

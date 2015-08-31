@@ -26,3 +26,6 @@ cups-web:
     - enable: True
     - require:
       - pkg: cups
+
+ghostscript:
+  pkg.installed: []

@@ -34,7 +34,8 @@
 	    "parse": "lambda r: 'off' if r else 'on'",
 	    "get": "http://idiotic/api/item/Bathroom_Door/command/{value}",
 	    "interval": 0.1,
-	    "state": 0
+	    "state": 0,
+	    "pull": "up"
 	}
     }
 }

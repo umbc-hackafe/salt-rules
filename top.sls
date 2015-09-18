@@ -35,6 +35,7 @@ base:
     - homeautomation.i2c
     - homeautomation.cec
     - homeautomation.openhalper
+    - ci.slave
 
   'scootaloo.hackafe.net':
     - aur

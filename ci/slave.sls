@@ -6,3 +6,5 @@ slave:
   ssh_auth.present:
     - user: jenkins-slave
     - source: salt://ci/jenkins-slave.key
+  pkg.installed:
+    - jre8-openjdk-headless

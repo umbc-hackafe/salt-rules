@@ -7,4 +7,4 @@ slave:
     - user: jenkins-slave
     - source: salt://ci/jenkins-slave.key
   pkg.installed:
-    - jre8-openjdk-headless
+    - name: jre8-openjdk-headless

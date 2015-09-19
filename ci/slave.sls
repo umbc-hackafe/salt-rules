@@ -1,3 +1,6 @@
+include:
+  - aur
+
 slave:
   user.present:
     - name: jenkins-slave
@@ -8,3 +11,11 @@ slave:
     - source: salt://ci/jenkins-slave.key
   pkg.installed:
     - name: jre8-openjdk-headless
+
+ci_sudoers_d:
+  file.managed:
+    - name: /etc/sudoers.d/90makepkg
+    - mode: 0440
+    - source: salt://ci/ci-sudoers.d
+    - require:
+      - sls: aur

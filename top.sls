@@ -8,6 +8,7 @@ base:
     - network.time
     - demo
     - git
+    - repo
 
   'vegasix.hackafe.net':
     - httpd.nginx

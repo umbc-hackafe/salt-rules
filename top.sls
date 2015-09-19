@@ -24,6 +24,8 @@ base:
 
   'cheerilee.hackafe.net':
     - audio
+    - aur
+    - rpi.gpio
     - homeautomation.openhalper
     - music.pianobar
 
@@ -32,6 +34,7 @@ base:
     - audio.pulse
     - cups
     - aur
+    - rpi.gpio
     - homeautomation.i2c
     - homeautomation.cec
     - homeautomation.openhalper
@@ -39,6 +42,7 @@ base:
 
   'scootaloo.hackafe.net':
     - aur
+    - rpi.gpio
     - homeautomation.openhalper
     - network.dhcp
     - network.wifi
@@ -46,6 +50,7 @@ base:
 
   'vinyl.hackafe.net':
     - aur
+    - rpi.gpio
     - homeautomation.openhalper
 
   'fluttershy.hackafe.net':
@@ -55,12 +60,14 @@ base:
 
   'spike.hackafe.net':
     - aur
+    - rpi.gpio
     - network.wifi
     - network.wifi.rtl-8192
     - homeautomation.openhalper
 
   'pinkie.hackafe.net':
     - aur
+    - rpi.gpio
     - homeautomation.openhalper
 
   'icinga.hackafe.net':
@@ -69,15 +76,18 @@ base:
 
   'rarity.hackafe.net':
     - aur
+    - rpi.gpio
     - audio
     - homeautomation.openhalper
 
   'dash.hackafe.net':
     - aur
+    - rpi.gpio
     - homeautomation.openhalper
 
   'thegreatandpowerfultrixie.hackafe.net':
     - aur
+    - rpi.gpio
     - homeautomation.garage
     - homeautomation.openhalper
 

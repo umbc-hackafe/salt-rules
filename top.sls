@@ -63,8 +63,6 @@ base:
   'spike.hackafe.net':
     - aur
     - rpi.gpio
-    - network.wifi
-    - network.wifi.rtl-8192
     - homeautomation.openhalper
     - ci.slave
 

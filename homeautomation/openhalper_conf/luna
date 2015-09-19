@@ -59,6 +59,10 @@
 	    "parse": "lambda r: 'on' if r.startswith('on') else 'off'",
 	    "interval": 60,
 	    "get": "http://idiotic/api/item/Living_Room_Projector/command/set?val={value}"
+	},
+	"chromecast": {
+	    "exec": ["/usr/local/bin/youcast.py '{[search]}'"],
+	    "shell": true
 	}
     }
 }

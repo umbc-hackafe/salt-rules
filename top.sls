@@ -7,6 +7,7 @@ base:
     - login.ssh
     - network.time
     - demo
+    - git
 
   'vegasix.hackafe.net':
     - httpd.nginx

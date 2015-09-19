@@ -9,12 +9,13 @@ httpd:
   group.present:
     - name: http
     - system: True
-    {% if pillar['admins'] %}
     - members:
+      - http
+      {% if pillar['admins'] %}
       {% for admin in pillar['admins'] %}
       - {{admin}}
       {% endfor %}
-    {% endif %}
+      {% endif %}
   file.managed:
     - name: /etc/conf.d/mimetypes
   file.managed:

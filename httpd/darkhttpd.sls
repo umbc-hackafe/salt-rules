@@ -18,6 +18,8 @@ httpd:
       {% endif %}
   file.managed:
     - name: /etc/conf.d/mimetypes
+
+darkhttpd:
   file.managed:
     - name: /srv/http
     - user: root

@@ -14,7 +14,7 @@ slave:
 
 ci_sudoers_d:
   file.managed:
-    - name: /etc/sudoers.d/90makepkg
+    - name: /etc/sudoers.d/90ci
     - mode: 0440
     - source: salt://ci/ci-sudoers.d
     - require:

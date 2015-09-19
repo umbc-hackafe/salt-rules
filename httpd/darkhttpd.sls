@@ -19,9 +19,8 @@ httpd:
   file.managed:
     - name: /etc/conf.d/mimetypes
 
-darkhttpd:
-  file.managed:
-    - name: /srv/http
+/srv/http:
+  file.directory:
     - user: root
     - group: http
     - dir_mode: 775

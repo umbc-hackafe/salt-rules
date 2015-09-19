@@ -15,3 +15,5 @@ httpd:
       - {{admin}}
       {% endfor %}
     {% endif %}
+  file.managed:
+    - name: /etc/conf.d/mimetypes

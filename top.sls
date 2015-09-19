@@ -102,3 +102,4 @@ base:
 
   'repo.hackafe.net':
     - aur
+    - httpd.darkhttpd

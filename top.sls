@@ -86,3 +86,6 @@ base:
 
   'logs':
     - logging.server
+
+  'ldap':
+    - aur

@@ -87,5 +87,5 @@ base:
   'logs':
     - logging.server
 
-  'ldap':
+  'ldap.hackafe.net':
     - aur

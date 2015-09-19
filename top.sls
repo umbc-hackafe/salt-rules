@@ -99,3 +99,6 @@ base:
 
   'ldap.hackafe.net':
     - aur
+
+  'repo.hackafe.net':
+    - aur

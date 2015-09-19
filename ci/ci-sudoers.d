@@ -1,1 +1,1 @@
-ci ALL = (root) NOPASSWD: /usr/bin/pacman
+jenkins-slave ALL = (root) NOPASSWD: /usr/bin/pacman

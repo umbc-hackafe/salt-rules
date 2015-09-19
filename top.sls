@@ -39,6 +39,7 @@ base:
     - rpi.gpio
     - homeautomation.i2c
     - homeautomation.cec
+    - homeautomation.chromecast
     - homeautomation.openhalper
     - ci.slave
 

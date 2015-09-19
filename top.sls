@@ -94,6 +94,9 @@ base:
   'ci':
     - ci.jenkins
 
+  'ci-buildslave1.hackafe.net':
+    - ci.slave
+
   'logs':
     - logging.server
 

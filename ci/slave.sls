@@ -18,4 +18,4 @@ ci_sudoers_d:
     - mode: 0440
     - source: salt://ci/ci-sudoers.d
     - require:
-      - sls: aur.aur-prereqs
+      - sls: aur

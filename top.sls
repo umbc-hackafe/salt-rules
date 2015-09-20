@@ -81,6 +81,7 @@ base:
     - rpi.gpio
     - audio
     - homeautomation.openhalper
+    - ci.slave
 
   'dash.hackafe.net':
     - aur

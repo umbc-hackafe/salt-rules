@@ -6,7 +6,6 @@ base:
     - login.admin
     - login.ssh
     - network.time
-    - demo
     - git
     - repo
 

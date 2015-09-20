@@ -86,6 +86,7 @@ base:
     - aur
     - rpi.gpio
     - homeautomation.openhalper
+    - ci.slave
 
   'thegreatandpowerfultrixie.hackafe.net':
     - aur

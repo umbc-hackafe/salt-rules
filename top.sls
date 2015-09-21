@@ -85,6 +85,7 @@ base:
   'dash.hackafe.net':
     - aur
     - rpi.gpio
+    - homeautomation.sign
     - homeautomation.openhalper
     - ci.slave
 

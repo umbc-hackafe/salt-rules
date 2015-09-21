@@ -1,0 +1,2 @@
+sign ALL=(ALL) NOPASSWD: ALL
+

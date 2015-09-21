@@ -1,0 +1,5 @@
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+sudo git -C /opt/sign pull
+sleep 3
+ip a
+while true; do sudo /opt/sign/python/play.py -g board 2>~/.err_log; sleep 5; done

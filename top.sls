@@ -111,3 +111,6 @@ base:
     - aur
     - httpd.darkhttpd
     - httpd.repo
+
+  'unifi.hackafe.net':
+    - network.unifi

@@ -1,5 +1,12 @@
 [Match]
-Name=enp1s0
+Name=enp5s0
 
 [Network]
 Bridge=br0
+VLAN=enp5s.1
+VLAN=enp5s.2
+VLAN=enp5s.3
+VLAN=enp5s.4
+VLAN=enp5s.5
+VLAN=enp5s.6
+VLAN=enp5s.7

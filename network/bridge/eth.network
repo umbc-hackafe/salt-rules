@@ -2,10 +2,10 @@
 Name=enp5s0
 
 [Network]
-VLAN=enp5s.1
-VLAN=enp5s.2
-VLAN=enp5s.3
-VLAN=enp5s.4
-VLAN=enp5s.5
-VLAN=enp5s.6
-VLAN=enp5s.7
+VLAN=enp5s0.1
+VLAN=enp5s0.2
+VLAN=enp5s0.3
+VLAN=enp5s0.4
+VLAN=enp5s0.5
+VLAN=enp5s0.6
+VLAN=enp5s0.7

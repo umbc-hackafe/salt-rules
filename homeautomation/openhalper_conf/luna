@@ -11,7 +11,7 @@
 	"motion_room": {
 	    "gpio_in": 13,
 	    "parse": "lambda r: 'on' if r else 'off'",
-	    "get": "http://idiotic/api/item/Living_Room_Motion/command/{value}",
+	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Motion/command/{value}",
 	    "interval": 0.1,
 	    "state": 0
 	},
@@ -21,7 +21,7 @@
             "validate": "lambda r: r > 0 and r < 40",
             "interval": 60,
             "lifetime": 15,
-            "get": "http://idiotic/api/item/Living_Room_Temperature/command/set?val={value}"
+            "get": "http://idiotic.hackafe.net/api/item/Living_Room_Temperature/command/set?val={value}"
 	},
 	"hum": {
             "exec": ["temp",  "24"],
@@ -29,7 +29,7 @@
             "validate": "lambda r: r > 0 and r <= 100",
             "interval": 60,
             "lifetime": 15,
-	    "get": "http://idiotic/api/item/Living_Room_Humidity/command/set?val={value}"
+	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Humidity/command/set?val={value}"
 	},
 	"turret": {
 	    "exec": ["aplay", "/usr/local/share/sounds/turret-{[num]}.wav"]
@@ -41,7 +41,7 @@
 	    "parse": "lambda r: (r[1] + 256 * r[0]) / 1.2",
 	    "validate": "lambda r: r >= 0",
 	    "interval": 300,
-	    "get": "http://idiotic/api/item/Brightness/command/set?val={value}"
+	    "get": "http://idiotic.hackafe.net/api/item/Brightness/command/set?val={value}"
         },
 	"projector_off": {
 	    "exec": ["echo 'standby 0' | cec-client -s"],
@@ -58,7 +58,7 @@
 	    "shell": true,
 	    "parse": "lambda r: 'on' if r.startswith('on') else 'off'",
 	    "interval": 60,
-	    "get": "http://idiotic/api/item/Living_Room_Projector/command/set?val={value}"
+	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Projector/command/set?val={value}"
 	},
 	"chromecast": {
 	    "exec": ["/usr/local/bin/youcast.py '{[search]}'"],

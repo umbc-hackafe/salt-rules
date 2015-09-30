@@ -2,7 +2,6 @@
 Name=enp5s0
 
 [Network]
-Bridge=br0
 VLAN=enp5s.1
 VLAN=enp5s.2
 VLAN=enp5s.3

@@ -1,6 +1,6 @@
 {% set timezone = 'America/New_York' %}
 
-{% if grains['systemd:version'] >= 213 %}
+{% if salt['grains.get']('systemd:version') >= 213 %}
 timesyncd:
   file.managed:
     - name: /etc/systemd/timesyncd.conf

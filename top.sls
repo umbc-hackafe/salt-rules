@@ -9,6 +9,7 @@ base:
     - git
     - repo
     - containerchild
+    - logging.client
 
   'vegasix.hackafe.net':
     - httpd.nginx

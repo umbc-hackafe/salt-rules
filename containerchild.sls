@@ -1,6 +1,6 @@
 {% if pillar.containerhosts %}
-{% for container_list in pillar.containerhosts %}
-{% if grains['host'] in container_list %}
+{% for master in pillar.containerhosts %}
+{% if grains['host'] in pillar.containerhosts[master] %}
 is_container:
   grains.present:
     - value: True

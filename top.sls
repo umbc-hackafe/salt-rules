@@ -8,6 +8,7 @@ base:
     - network.time
     - git
     - repo
+    - containerchild
 
   'vegasix.hackafe.net':
     - httpd.nginx

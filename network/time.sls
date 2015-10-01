@@ -1,11 +1,6 @@
 {% set timezone = 'America/New_York' %}
 
-{% if grains['os_family'] == 'RedHat' %}
-ntpdate:
-  pkg.installed: []
-  service.running:
-    - enable: True
-{% else %}
+{% if grains['systemd:version'] >= 213 %}
 timesyncd:
   file.managed:
     - name: /etc/systemd/timesyncd.conf
@@ -30,6 +25,11 @@ timesyncd-allowvirtual:
     - makedirs: True
     - watch_in:
       - cmd: daemon-reload
+{% else %}
+ntpdate:
+  pkg.installed: []
+  service.running:
+    - enable: True
 {% endif %}
 
 timezone:

@@ -7,7 +7,8 @@ http:
 
 password_auth:
   augeas.change:
-    - context: /files/etc/ssh/sshd_config/Condition/User http
+    - context: /files/etc/ssh/sshd_config/
     - changes:
-      - set PasswordAuthentication no
-      - set PermitEmptyPasswords no
+      - set Match[1]/Condition/User "http"
+      - set Match[1]/Settings/PasswordAuthentication "yes"
+      - set Match[1]/Settings/PermitEmptyPasswords "no"

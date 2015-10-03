@@ -27,8 +27,6 @@ tftp:
     - system: True
     - groups:
       - tftp
-    - require:
-      - file: /srv/tftp
 
 tftpd:
   service.running:

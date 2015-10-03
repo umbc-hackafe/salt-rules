@@ -30,7 +30,7 @@ tftp:
 
 tftpd:
   service.running:
-    - enabled: True
+    - enable: True
     - require:
       - pkg: tftp-hpa
       - user: tftp

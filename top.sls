@@ -107,3 +107,6 @@ base:
 
   'unifi.hackafe.net':
     - network.unifi
+
+  'tftp.hackafe.net':
+    - tftp.server

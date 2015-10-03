@@ -1,0 +1,1 @@
+TFTP_ARGS="-c -s -u tftp -U 113 /srv/tftp"

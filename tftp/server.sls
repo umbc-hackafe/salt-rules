@@ -33,5 +33,6 @@ tftpd:
     - require:
       - pkg: tftp-hpa
       - user: tftp
-      - file: /etc/conf.d/tftpd
       - file: /srv/tftp
+    - watch:
+      - file: /etc/conf.d/tftpd

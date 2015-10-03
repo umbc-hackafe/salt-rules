@@ -9,7 +9,6 @@ tftp-hpa:
     - file_mode: 664
     - recurse:
       - group
-      - mode
     - makedirs: True
     - require:
       - group: tftp

@@ -5,7 +5,7 @@ tftp-hpa:
   file.directory:
     - user: root
     - group: tftp
-    - dir_mode: 775
+    - dir_mode: 777
     - file_mode: 664
     - recurse:
       - group

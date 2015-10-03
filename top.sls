@@ -15,7 +15,6 @@ base:
     - httpd.nginx
     - containers
     - network.bridge
-    - voip
     - aur
 
   'watson.hackafe.net':
@@ -110,3 +109,4 @@ base:
 
   'tftp.hackafe.net':
     - tftp.server
+    - voip

@@ -1,1 +1,1 @@
-TFTP_ARGS="-c -s -u tftp -U 113 /srv/tftp"
+TFTP_ARGS="-c -s -u tftp -U 113 -a '' /srv/tftp"

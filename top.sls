@@ -110,3 +110,6 @@ base:
   'tftp.hackafe.net':
     - tftp.server
     - voip
+
+  'print.hackafe.net':
+    - cups

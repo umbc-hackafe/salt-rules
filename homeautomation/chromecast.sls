@@ -5,7 +5,7 @@ chromecast_deps:
   pkg.installed:
     - pkgs:
       - python-google-api-python-client
-      - castnow
+      - castnow-git
 
 /usr/local/bin/youcast.py:
   file.managed:

@@ -11,7 +11,7 @@ chromecast_deps:
   file.managed:
     - mode: 755
     - source:
-      - salt:///homeautomation/youcast.py
+      - salt://homeautomation/youcast.py
     - require_in:
       - service: openhalper
     - require:

@@ -5,6 +5,7 @@ Description=Remote helper script for OpenHAB actions
 Type=simple
 ExecStart=/usr/local/bin/openhalper.py
 User=root
+Restart=always
 
 [Install]
 WantedBy=multi-user.target

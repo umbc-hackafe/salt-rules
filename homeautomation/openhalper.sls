@@ -43,7 +43,3 @@ openhalper_config:
     - source:
       - salt://homeautomation/openhalper_conf/{{ grains.host }}
       - salt://homeautomation/openhalper_conf/default
-
-systemctl restart openhalper:
-  cron.present:
-    - minute: '*/30'

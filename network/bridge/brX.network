@@ -1,5 +1,5 @@
 [Match]
-Name=br0
+Name=br{{ vlan }}
 
 [Network]
 DHCP=both

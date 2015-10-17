@@ -1,11 +1,11 @@
 [Match]
-Name=enp5s0
+Name={{ pillar.devname[grains['host']] }}
 
 [Network]
-VLAN=enp5s0.1
-VLAN=enp5s0.2
-VLAN=enp5s0.3
-VLAN=enp5s0.4
-VLAN=enp5s0.5
-VLAN=enp5s0.6
-VLAN=enp5s0.7
+VLAN={{ pillar.devname[grains['host']] }}.1
+VLAN={{ pillar.devname[grains['host']] }}.2
+VLAN={{ pillar.devname[grains['host']] }}.3
+VLAN={{ pillar.devname[grains['host']] }}.4
+VLAN={{ pillar.devname[grains['host']] }}.5
+VLAN={{ pillar.devname[grains['host']] }}.6
+VLAN={{ pillar.devname[grains['host']] }}.7

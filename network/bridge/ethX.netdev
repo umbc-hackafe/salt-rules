@@ -1,0 +1,6 @@
+[NetDev]
+Name={{ pillar.devname[grains['host']] }}.{{ vlan }}
+Kind=vlan
+
+[VLAN]
+Id={{ vlan }}

@@ -113,3 +113,7 @@ base:
 
   'print.hackafe.net':
     - cups
+
+  'vegafive.hackafe.net':
+    - aur
+    - ci.slave

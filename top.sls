@@ -115,5 +115,9 @@ base:
     - cups
 
   'vegafive.hackafe.net':
+    - containers
+    - network.bridge
+
+  'cibuildslave2.hackafe.net':
     - aur
     - ci.slave

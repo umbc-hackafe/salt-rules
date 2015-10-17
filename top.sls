@@ -117,6 +117,8 @@ base:
   'vegafive.hackafe.net':
     - containers
     - network.bridge
+    - aur
+    - ci.slave
 
   'cibuildslave2.hackafe.net':
     - aur

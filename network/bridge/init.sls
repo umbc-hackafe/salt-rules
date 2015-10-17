@@ -34,3 +34,4 @@ systemd-networkd:
 /etc/systemd/network/eth.network:
   file.managed:
     - source: salt://network/bridge/eth.network
+    - template: jinja

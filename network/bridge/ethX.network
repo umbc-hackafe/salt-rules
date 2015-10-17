@@ -1,5 +1,5 @@
 [Match]
-Name={{ pillars.devname[grains['host']] }}.{{ vlan }}
+Name={{ pillar.devname[grains['host']] }}.{{ vlan }}
 
 [Network]
 Bridge=br{{ vlan }}

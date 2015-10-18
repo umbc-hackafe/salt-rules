@@ -117,8 +117,6 @@ base:
   'vegafive.hackafe.net':
     - containers
     - network.bridge
-    - aur
-    - ci.slave
 
   'cloud.hackafe.net':
     - login.reversessh

@@ -45,15 +45,20 @@ add-minion-config:
   file.managed:
     - name: /data/baseroot/etc/salt/minion.yaml
     - source: salt://managed/minion.yaml
+    - require:
+      - file: /data/baseroot
 
 /data:
   file.directory: []
 /data/overlay:
-  file.directory: []
+  file.directory:
+    - makedirs: True
 /data/work:
-  file.directory: []
+  file.directory:
+    - makedirs: True
 /data/baseroot:
-  file.directory: []
+  file.directory:
+    - makedirs: True
 
 
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}

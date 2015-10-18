@@ -21,6 +21,22 @@ make-container:
     - name: /usr/bin/make-container
     - source: salt://containers/make-container.sh
     - mode: 755
+    - require:
+      - cmd: create-base
+
+arch-install-scripts:
+  pkg.installed
+
+create-base:
+  cmd.run:
+    - name: |
+        pacstrap -cd /data/baseroot base salt-zmq
+	ln -s /data/baseroot/usr/lib/systemd/salt-minion.service /etc/systemd/system/multi-user.target.wants/salt-minion.service
+	rm /data/baseroot/etc/machine-id
+    - unless: test "$(ls -A /data/baseroot)"
+    - require:
+      - pkg: arch-install-scripts
+      - file: /data/baseroot
 
 /data:
   file.directory: []
@@ -28,6 +44,9 @@ make-container:
   file.directory: []
 /data/work:
   file.directory: []
+/data/baseroot:
+  file.directory: []
+
 
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
 {% for container in pillar.containerhosts[grains['host']] %}

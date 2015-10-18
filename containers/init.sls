@@ -23,6 +23,7 @@ make-container:
     - mode: 755
     - require:
       - cmd: create-base
+      - file: add-minion-config
 
 arch-install-scripts:
   pkg.installed
@@ -32,11 +33,18 @@ create-base:
     - name: |
         pacstrap -cd /data/baseroot base salt-zmq
         ln -s /data/baseroot/usr/lib/systemd/salt-minion.service /etc/systemd/system/multi-user.target.wants/salt-minion.service
+	ln -s /data/baseroot/usr/lib/systemd/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
         rm /data/baseroot/etc/machine-id
+	grep 'pts/0' /data/baseroot/etc/securetty || echo 'pts/0' >> /data/baseroot/etc/securetty
     - unless: test "$(ls -A /data/baseroot)"
     - require:
       - pkg: arch-install-scripts
       - file: /data/baseroot
+
+add-minion-config:
+  file.managed:
+    - name: /data/baseroot/etc/salt/minion.yaml
+    - source: salt://managed/minion.yaml
 
 /data:
   file.directory: []

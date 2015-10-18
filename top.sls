@@ -133,3 +133,6 @@ base:
   'cibuildslave3.hackafe.net':
     - aur
     - ci.slave
+
+  'discord.hackafe.net':
+    - homeautomation.openhalper

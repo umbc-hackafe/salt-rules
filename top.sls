@@ -129,3 +129,6 @@ base:
 
   'sql.hackafe.net':
     - sql.server
+
+  'backup.hackafe.net':
+    - backup.server

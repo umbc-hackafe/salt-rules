@@ -117,6 +117,7 @@ base:
   'vegafive.hackafe.net':
     - containers
     - network.bridge
+    - backup.server
 
   'cloud.hackafe.net':
     - login.reversessh
@@ -127,6 +128,3 @@ base:
 
   'sql.hackafe.net':
     - sql.server
-
-  'backup.hackafe.net':
-    - backup.server

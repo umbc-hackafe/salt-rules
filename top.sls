@@ -120,6 +120,9 @@ base:
     - aur
     - ci.slave
 
+  'cloud.hackafe.net':
+    - login.reversessh
+
   'cibuildslave2.hackafe.net':
     - aur
     - ci.slave

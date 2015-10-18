@@ -83,6 +83,7 @@ base:
     - aur
     - homeautomation.garage
     - homeautomation.openhalper
+    - ci.slave
 
   'ci':
     - ci.jenkins

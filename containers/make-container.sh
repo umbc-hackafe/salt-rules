@@ -15,5 +15,5 @@ else
 
   systemd-machine-id-setup --root=/data/$1
   
-  ln -s /data/$1 /var/lib/container/$1
+  ln -s /data/$1 /var/lib/machines/$1
 fi

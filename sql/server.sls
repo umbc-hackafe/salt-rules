@@ -1,7 +1,7 @@
 postgresql:
   pkg.installed: []
   service.running:
-    - enabled: True
+    - enable: True
     - require:
       - cmd: initdb
       - file: /var/lib/postgres/data/pg_hba.conf

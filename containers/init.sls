@@ -32,8 +32,8 @@ create-base:
   cmd.run:
     - name: |
         pacstrap -cd /data/baseroot base salt-zmq
-        ln -s /data/baseroot/usr/lib/systemd/salt-minion.service /etc/systemd/system/multi-user.target.wants/salt-minion.service
-        ln -s /data/baseroot/usr/lib/systemd/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
+        ln -s /data/baseroot/usr/lib/systemd/system/salt-minion.service /etc/systemd/system/multi-user.target.wants/salt-minion.service
+        ln -s /data/baseroot/usr/lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
         rm /data/baseroot/etc/machine-id
         grep 'pts/0' /data/baseroot/etc/securetty || echo 'pts/0' >> /data/baseroot/etc/securetty
     - unless: test "$(ls -A /data/baseroot)"

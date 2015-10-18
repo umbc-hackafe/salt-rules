@@ -19,3 +19,7 @@ ci_sudoers_d:
     - source: salt://ci/ci-sudoers.d
     - require:
       - sls: aur
+
+is_slave:
+  grains.present:
+    - value: True

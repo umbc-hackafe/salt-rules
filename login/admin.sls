@@ -26,3 +26,9 @@ sudo:
   file.managed:
     - name: /etc/sudoers
     - source: salt://login/sudoers
+
+{% if pillar.rootpw %}
+root:
+  user.present:
+    - password: {{ pillar.rootpw }}
+{% endif %}

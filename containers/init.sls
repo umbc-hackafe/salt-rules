@@ -31,8 +31,8 @@ create-base:
   cmd.run:
     - name: |
         pacstrap -cd /data/baseroot base salt-zmq
-	ln -s /data/baseroot/usr/lib/systemd/salt-minion.service /etc/systemd/system/multi-user.target.wants/salt-minion.service
-	rm /data/baseroot/etc/machine-id
+        ln -s /data/baseroot/usr/lib/systemd/salt-minion.service /etc/systemd/system/multi-user.target.wants/salt-minion.service
+        rm /data/baseroot/etc/machine-id
     - unless: test "$(ls -A /data/baseroot)"
     - require:
       - pkg: arch-install-scripts

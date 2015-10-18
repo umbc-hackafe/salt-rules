@@ -126,3 +126,6 @@ base:
   'cibuildslave2.hackafe.net':
     - aur
     - ci.slave
+
+  'sql.hackafe.net':
+    - sql.server

@@ -1,6 +1,15 @@
 systemd-networkd:
   service.enabled: []
 
+
+dhcpcd@{{ pillar.devname[grains['host']] }}:
+  service.dead:
+    - enable: False
+
+dhcpcd:
+  service.dead:
+    - enable: False
+
 {% for vlan in [1, 2, 3, 4, 5, 6, 7] %}
 /etc/systemd/network/br{{ vlan }}.netdev:
   file.managed:

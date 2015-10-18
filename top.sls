@@ -18,11 +18,8 @@ base:
     - aur
 
   'watson.hackafe.net':
-    - httpd.nginx
     - containers
     - network.bridge
-    - voip
-    - aur
 
   'cheerilee.hackafe.net':
     - audio
@@ -131,3 +128,7 @@ base:
 
   'backup.hackafe.net':
     - backup.server
+
+  'cibuildslave3.hackafe.net':
+    - aur
+    - ci.slave

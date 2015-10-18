@@ -14,7 +14,7 @@ Requires=make-container@%i.service
 
 [Service]
 Restart=always
-ExecStart=/usr/bin/systemd-nspawn --quiet --network-bridge=br2 --keep-unit --boot --link-journal=try-guest --directory=/var/lib/container/%i
+ExecStart=/usr/bin/systemd-nspawn --quiet --network-bridge=br3 --keep-unit --boot --link-journal=try-guest --directory=/var/lib/container/%i
 KillMode=mixed
 Type=notify
 RestartForceExitStatus=133

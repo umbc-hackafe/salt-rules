@@ -1,5 +1,5 @@
 add-repo:
-{% if grains['os'] == 'Arch' %}
+{% if grains['os_family'] == 'Arch' %}
   cmd.run:
     - name: echo -e "[hackafe]\nSigLevel = Optional TrustAll\nServer = http://repo.hackafe.net/\$arch" >> /etc/pacman.conf
     - unless: grep 'hackafe' /etc/pacman.conf

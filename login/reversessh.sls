@@ -10,9 +10,5 @@ reversessh_{{ username }}:
   ssh_auth.present:
     - user: {{ username }}
     - source: salt://login/keys/{{ username }}
-    - options:
-      - no-pty
-      - no-X11-forwarding
-      - command="/bin/echo Connected, commands disallowed."
 {% endfor %}
 {% endif %}

@@ -20,6 +20,6 @@ elif len(sys.argv) > 1 and sys.argv[1] == "close":
 elif len(sys.argv) > 1 and sys.argv[1] == "get":
     pass
 
-print("OPEN" if gpio.input(13) else "CLOSED")
+print("False" if gpio.input(13) else "True")
 
 gpio.cleanup(12)

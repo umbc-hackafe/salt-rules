@@ -27,16 +27,14 @@
             "parse": "lambda r: float(r.split()[1])",
             "validate": "lambda r: r > 0 and r < 40",
             "interval": 60,
-            "lifetime": 15,
-            "get": "http://idiotic.hackafe.net/api/item/Entertainment_Room_Temperature/command/set?val={value}"
+            "lifetime": 15
 	},
 	"hum": {
             "exec": ["temp",  "24"],
             "parse": "lambda r: float(r.split()[0])",
             "validate": "lambda r: r > 0 and r <= 100",
             "interval": 60,
-            "lifetime": 15,
-	    "get": "http://idiotic.hackafe.net/api/item/Entertainment_Room_Humidity/command/set?val={value}"
+            "lifetime": 15
 	},
         "entertainment_laundry_door": {
 	    "gpio_in": 15,

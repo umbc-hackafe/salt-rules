@@ -76,7 +76,6 @@ base:
   'dash.hackafe.net':
     - aur
     - homeautomation.sign
-    - homeautomation.openhalper
     - ci.slave
 
   'thegreatandpowerfultrixie.hackafe.net':

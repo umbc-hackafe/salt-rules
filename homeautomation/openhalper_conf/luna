@@ -43,19 +43,22 @@
 	"projector_off": {
 	    "exec": ["echo 'standby 0' | cec-client -s"],
 	    "shell": true,
-	    "parse": "lambda _:''"
+	    "parse": "lambda _:''",
+	    "timeout": null
 	},
 	"projector_on": {
 	    "exec": ["echo 'on 0' | cec-client -s"],
 	    "shell": true,
-	    "parse": "lambda _:''"
+	    "parse": "lambda _:''",
+	    "timeout": null
 	},
 	"projector_status": {
 	    "exec": ["echo 'pow 0' | cec-client -s -d 1 | grep 'power status' | awk '{{print $3}}'"],
 	    "shell": true,
 	    "parse": "lambda r: 'on' if r.startswith('on') else 'off'",
 	    "interval": 60,
-	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Projector/command/set?val={value}"
+	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Projector/command/set?val={value}",
+	    "timeout": null
 	},
 	"chromecast": {
 	    "exec": ["/usr/local/bin/youcast.py '{[search]}'"],

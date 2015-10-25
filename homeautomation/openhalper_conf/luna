@@ -57,7 +57,7 @@
 	    "shell": true,
 	    "parse": "lambda r: 'on' if r.startswith('on') else 'off'",
 	    "interval": 60,
-	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Projector/command/set?val={value}",
+	    "post": "http://idiotic.hackafe.net/api/item/living_room_projector/state",
 	    "timeout": null
 	},
 	"chromecast": {

@@ -143,7 +143,7 @@ def do_action(name, **kwargs):
                 except:
                     args = item["exec"].format(**{k: v[0] for k,v in kwargs.items()})
 
-                result = subprocess.check_output(args, timeout=10, shell=(item["shell"] if "shell" in item else False)).decode('ascii')
+                result = subprocess.check_output(args, timeout=item.get("timeout", 10), shell=(item["shell"] if "shell" in item else False)).decode('ascii')
             except subprocess.CalledProcessError as e:
                 return "Error: {0}".format(e.returncode)
             except subprocess.TimeoutExpired:

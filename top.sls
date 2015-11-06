@@ -135,3 +135,6 @@ base:
 
   'discord.hackafe.net':
     - homeautomation.openhalper
+
+  'brain*.hackafe.net':
+    - brains

@@ -30,5 +30,6 @@ sudo:
 {% if pillar.rootpw %}
 root:
   user.present:
+    - remove_groups: False
     - password: {{ pillar.rootpw }}
 {% endif %}

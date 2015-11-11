@@ -118,6 +118,9 @@ base:
 
   'cloud.hackafe.net':
     - login.reversessh
+    - location.prgmr
+    - containers
+    - network.bridge
 
   'cibuildslave2.hackafe.net':
     - aur

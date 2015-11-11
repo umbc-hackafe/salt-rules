@@ -1,11 +1,9 @@
 [Match]
 Name={{ pillar.devname[grains['host']] }}
 
+{% if use_vlans %}
 [Network]
-VLAN={{ pillar.devname[grains['host']] }}.1
-VLAN={{ pillar.devname[grains['host']] }}.2
-VLAN={{ pillar.devname[grains['host']] }}.3
-VLAN={{ pillar.devname[grains['host']] }}.4
-VLAN={{ pillar.devname[grains['host']] }}.5
-VLAN={{ pillar.devname[grains['host']] }}.6
-VLAN={{ pillar.devname[grains['host']] }}.7
+{% for vlan in vlans %}
+VLAN={{ pillar.devname[grains['host']] }}.{{ vlan }}
+{% endfor %}
+{% endif %}

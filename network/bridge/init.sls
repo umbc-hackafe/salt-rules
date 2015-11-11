@@ -1,6 +1,6 @@
 systemd-networkd:
-  service.enabled: []
-
+  service.running:
+    - enable: True
 
 dhcpcd@{{ pillar.devname[grains['host']] }}:
   service.dead:

@@ -74,9 +74,9 @@ create-base:
     - require_in: create-base
 
 {% for service in ["salt-minion", "systemd-networkd", "systemd-resolved"] %}
-/data/baseroot/usr/lib/systemd/system/{{ service }}.service:
+/etc/systemd/system/multi-user.target.wants/{{ service }}.service:
   file.symlink:
-    - target: /etc/systemd/system/multi-user.target.wants/{{ service }}.service
+    - target: /data/baseroot/usr/lib/systemd/system/{{ service }}.service
     - require_in: create-base
 {% endfor %}
 

@@ -1,3 +1,6 @@
 [Exec]
 Boot=yes
-Parameters=--network-bridge=br{{vlan}}
+
+[Network]
+VirtualEthernet=yes
+Bridge=br{{vlan}}

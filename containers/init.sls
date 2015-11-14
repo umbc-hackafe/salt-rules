@@ -28,9 +28,6 @@ make-container:
       - cmd: create-base
       - file: add-minion-config
 
-arch-install-scripts:
-  pkg.installed
-
 {% set baseroot_install = salt['grains.filter_by']({
   'Arch': 'pacstrap -cd /data/baseroot base salt-zmq',
   'RedHat': 'yum --installroot=/data/baseroot -y install salt-minion'
@@ -45,20 +42,43 @@ arch-install-scripts:
       - cmd: create-base
     - require-in:
       - file: make-container
+{% else %}
+arch-install-scripts:
+  pkg.installed
 {% endif %}
+
+install-baseroot:
+  cmd.run:
+    - name: {{ baseroot_install }}
+    - unless: test "$(ls -A /data/baseroot)"
+    - require:
+{% if grains['os_family'] == 'Arch' %}
+      - pkg: arch-install-scripts
+{% endif %}
+      - file: /data/baseroot
 
 create-base:
   cmd.run:
-    - name: |
-        {{ baseroot_install }}
-        ln -s /data/baseroot/usr/lib/systemd/system/salt-minion.service /etc/systemd/system/multi-user.target.wants/salt-minion.service
-        ln -s /data/baseroot/usr/lib/systemd/system/systemd-networkd.service /etc/systemd/system/multi-user.target.wants/systemd-networkd.service
-        rm /data/baseroot/etc/machine-id
-        grep 'pts/0' /data/baseroot/etc/securetty || echo 'pts/0' >> /data/baseroot/etc/securetty
-    - unless: test "$(ls -A /data/baseroot)"
+    - name: true
+    - unless: true
     - require:
-      - pkg: arch-install-scripts
-      - file: /data/baseroot
+      - cmd: install-baseroot
+
+/data/baseroot/etc/machine-id:
+  file.absent:
+    - require_in: create-base
+
+/data/baseroot/etc/securetty:
+  file.append:
+    - text: pts/0
+    - require_in: create-base
+
+{% for service in ["salt-minion", "systemd-networkd", "systemd-resolved"] %}
+/data/baseroot/usr/lib/systemd/system/{{ service }}.service:
+  file.symlink:
+    - target: /etc/systemd/system/multi-user.target.wants/{{ service }}.service
+    - require_in: create-base
+{% endfor %}
 
 add-minion-config:
   file.managed:

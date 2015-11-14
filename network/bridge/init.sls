@@ -57,5 +57,5 @@ dhcpcd:
     - source: salt://network/bridge/eth.network
     - template: jinja
     - context:
-      vlans: vlan_conf['vlans']
-      use_vlans: vlan_conf['use_vlans']
+      vlans: {{ vlan_conf['vlans'] }}
+      use_vlans: {{ vlan_conf['use_vlans'] }}

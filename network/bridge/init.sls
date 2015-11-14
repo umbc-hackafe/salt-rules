@@ -49,7 +49,8 @@ dhcpcd:
     - template: jinja
     - context:
       vlan: {{ vlan }}
- {% endfor %}
+{% endif %}
+{% endfor %}
 
 /etc/systemd/network/eth.network:
   file.managed:

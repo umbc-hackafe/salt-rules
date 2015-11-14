@@ -2,5 +2,9 @@
 Boot=yes
 
 [Network]
+{% if private_net %}
 VirtualEthernet=yes
 Bridge=br{{vlan}}
+{% else %}
+Private=false
+{% endif %} 

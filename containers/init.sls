@@ -99,6 +99,7 @@ make-{{container}}:
     - template: jinja
     - context:
       vlan: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'vlan']), 3) }}
+      private_net: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'private_net']), True) }}
     - require:
       - file: /etc/systemd/nspawn
       - cmd: make-{{container}}

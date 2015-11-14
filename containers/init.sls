@@ -31,7 +31,7 @@ arch-install-scripts:
 {% set baseroot_install = salt['grains.filter_by']({
   'Arch': 'pacstrap -cd /data/baseroot base salt-zmq',
   'RedHat': 'yum --installroot=/data/baseroot -y install salt-minion'
-  }, grain='os_family', default='arch')
+  }, grain='os_family', default='Arch')
 %}
 
 {% if grains['os_family'] == 'RedHat' %}

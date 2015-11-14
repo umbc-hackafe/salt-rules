@@ -1,0 +1,25 @@
+#!/bin/bash
+if [ "$#" -lt 3 ]; then
+    echo "Usage: $0 <extension> <command> <data> [wait]"
+    exit 1
+fi
+
+echo "$0 $1 $2 $3"
+
+if [ -z "$4" ]; then
+    WAIT=0
+else
+    WAIT="$4"
+fi
+
+{
+    sleep $WAIT
+    cat <<EOF | sed "s%_DEST_%$1%" | sed "s%_COMMAND_%$2%" | sed "s%_DATA_%$3%" > /var/spool/asterisk/outgoing/call-$$
+Channel: SIP/_DEST_
+Application: _COMMAND_
+Data: _DATA_
+SetVar: CHANNEL(language)=en
+SetVar: CALLERID(num)=2408982516
+SetVar: CALLERID(name)=Hackafe
+EOF
+} &

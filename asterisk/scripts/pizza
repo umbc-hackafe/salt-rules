@@ -1,0 +1,57 @@
+#!/bin/bash
+
+ORDER="$2"
+
+function get_nth_pizza() {
+    grep 'PIZZA;' "/tmp/pizza_${ORDER}" | head -n $1 | tail -n 1
+}
+
+if [[ "$1" == "add-topping" ]]; then
+    SIDE="$3"
+    NAME="$4"
+
+    if [[ "$SIDE" != "both" ]]; then
+	echo -n "${NAME} on the ${SIDE} side," >> "/tmp/pizza_${ORDER}"
+    else
+	echo -n "${NAME}," >> "/tmp/pizza_${ORDER}"
+    fi
+elif [[ "$1" == "add-pizza" ]]; then
+    SIZE="$3"
+    echo -en "\nPIZZA;${SIZE}; " >> "/tmp/pizza_${ORDER}"
+elif [[ "$1" == "set-payment" ]]; then
+    METHOD="$3"
+    echo -en "\nPAYMENT;$3" >> "/tmp/pizza_${ORDER}"
+    if [[ "$METHOD" == "credit card" ]]; then
+	echo -en "\nCARD;4100 0000 0000 0005" >> "/tmp/pizza_${ORDER}"
+    fi
+elif [[ "$1" == "set-delivery" ]]; then
+    echo -en "\nDELIVERY;$3" >> "/tmp/pizza_${ORDER}"
+elif [[ "$1" == "set-tip" ]]; then
+    TIP="$3"
+    if [[ "$TIP" != "cash" ]]; then
+	TIP="$TIP dollars"
+    fi
+    echo -en "\nTIP;$TIP" >> "/tmp/pizza_${ORDER}"
+elif [[ "$1" == "pizza-count" ]]; then
+    grep 'PIZZA;' "/tmp/pizza_${ORDER}" | wc -l
+elif [[ "$1" == "pizza-size" ]]; then
+    get_nth_pizza $3 | awk -F ';' '{print $2}'
+elif [[ "$1" == "pizza-toppings" ]]; then
+    get_nth_pizza $3 | awk -F ';' '{print $3}'
+elif [[ "$1" == "payment-method" ]]; then
+    METHOD=$(grep 'PAYMENT' "/tmp/pizza_${ORDER}" | awk -F ';' '{print $2}')
+    TYPE=$(grep 'DELIVERY' "/tmp/pizza_${ORDER}" | awk -F ';' '{print $2}')
+    TIP=$(grep 'TIP' "/tmp/pizza_${ORDER}" | awk -F ';' '{print $2}')
+    TIP="${TIP} dollars"
+    if [[ "$METHOD" == "credit" ]]; then
+	if [[ "$TYPE" == "delivery" ]]; then
+	    echo "${METHOD} with a tip of ${TIP}"
+	else
+	    echo ${METHOD}
+	fi
+    else
+	echo ${METHOD}
+    fi
+elif [[ "$1" == "order-type" ]]; then
+    grep 'DELIVERY' "/tmp/pizza_${ORDER}" | awk -F ';' '{print $2}'
+fi

@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+import sys
+import time
+import subprocess
+CALL_EXEC = "channel originate SIP/intercom-{} extension 468@bridge_listen_entry"
+DESTS = ['garage', 'den', 'den2', 'mark']
+
+src = sys.argv[1].lower()
+
+dest = None
+if len(sys.argv) > 2:
+    dest = sys.argv[2].lower()
+
+procs = []
+for n in DESTS:
+    if n not in src and n in dest:
+        subprocess.Popen(['/usr/bin/asterisk', '-rx', CALL_EXEC.format(n)]).wait()
+        time.sleep(.05)

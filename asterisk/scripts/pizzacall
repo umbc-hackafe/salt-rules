@@ -1,0 +1,24 @@
+#!/bin/bash
+if [ "$#" -lt 2 ]; then
+    echo "Usage: $0 <destination> <order-id>"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo "Invalid order ID"
+    exit 1
+fi
+
+VAL="$2"
+
+{
+    cat <<EOF | sed "s/_DEST_/$1/" | sed "s%_VARVAL_%$VAL%" > /var/spool/asterisk/outgoing/call-$$
+Channel: SIP/voipo/_DEST_
+CallerID: "Hackafe" <2408982516>
+Context: pizza-order-send
+Extension: start
+Priority: 1
+SetVar: CHANNEL(language)=en
+SetVar: ORDER_ID=_VARVAL_
+EOF
+} &

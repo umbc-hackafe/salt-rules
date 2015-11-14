@@ -1,0 +1,26 @@
+#!/bin/bash
+if [ "$#" -lt 3 ]; then
+    echo "Usage: $0 <destination> <context> <extension> [varname] [varval]"
+    exit 1
+fi
+
+echo "$0 $1 $2 $3"
+
+if [ -z "$4" ]; then
+    VAR="HACKAFENOOP"
+    VAL="NONE"
+else
+    VAR="$4"
+    VAL="$5"
+fi
+
+{
+    cat <<EOF | sed "s/_DEST_/$1/" | sed "s%_CONTEXT_%$2%" | sed "s%_EXTENSION_%$3%" | sed "s%_VARNAME_%$VAR%" | sed "s%_VARVAL_%$VAL%" > /var/spool/asterisk/outgoing/call-$$
+Channel: SIP/_DEST_
+Context: _CONTEXT_
+Extension: _EXTENSION_
+Priority: 1
+SetVar: CHANNEL(language)=en
+SetVar: _VARNAME_=_VARVAL_
+EOF
+} &

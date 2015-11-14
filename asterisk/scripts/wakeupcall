@@ -1,0 +1,3 @@
+#!/bin/sh
+# usage is wakeupcall <extension> <song> <hour> <minute>
+echo "make-call-context $1 wakeup-target 1 SONG $2" | at $3:$4

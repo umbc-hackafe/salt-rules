@@ -1,0 +1,11 @@
+#!/bin/bash
+{
+    cat <<EOF > /var/spool/asterisk/outgoing/call-$$
+Channel: SIP/voipo/*
+CallerID: "Hackafe" <2408982516>
+Context: downtime
+Extension: start
+Priority: 1
+SetVar: CHANNEL(language)=en
+EOF
+} &

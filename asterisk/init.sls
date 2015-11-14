@@ -18,3 +18,7 @@ asterisk:
 /var/lib/asterisk/sounds:
   file.recurse:
     - source: salt://asterisk/sounds
+
+/usr/bin:
+  file.recurse:
+    - source: salt://asterisk/scripts

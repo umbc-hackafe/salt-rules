@@ -139,3 +139,6 @@ base:
 
   'brain*.hackafe.net':
     - brains
+
+  'asterisk.hackafe.net':
+    - asterisk

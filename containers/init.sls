@@ -1,11 +1,14 @@
-systemd-nspawn@.service:
+/etc/systemd/system/systemd-nspawn@.service:
+{% if grains['systemd:version'] < 219 %}
   file.managed:
-    - name: /etc/systemd/system/systemd-nspawn@.service
     - source: salt://containers/systemd-nspawn@.service
     - require:
       - file: make-container@.service
     - watch_in:
       - cmd: daemon-reload
+{% else %}
+  file.absent
+{% endif %}
 
 make-container@.service:
   file.managed:
@@ -64,6 +67,12 @@ add-minion-config:
     - require:
       - file: /data/baseroot
 
+{% if grains['systemd:version'] >= 219 %}
+/etc/systemd/nspawn:
+  file.directory:
+    - makedirs: True
+{% endif %}
+
 /data:
   file.directory: []
 /data/overlay:
@@ -76,13 +85,30 @@ add-minion-config:
   file.directory:
     - makedirs: True
 
-
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
 {% for container in pillar.containerhosts[grains['host']] %}
+{% if grains['systemd:version'] >= 219 %}
+make-{{container}}:
+  cmd.run:
+    - name: systemctl start make-container@{{container}}
+    - require:
+      - file: make-container@.service
+/etc/systemd/nspawn/{{ container }}.nspawn:
+  file.managed:
+    - source: salt://containers/X.nspawn
+    - template: jinja
+    - context:
+      vlan: {{ salt['pillar.get']('containerhosts:' + container + ':vlan', 3) }}
+      name: {{ container }}
+    - require:
+      - file: /etc/systemd/nspawn
+      - cmd: make-{{container}}
+    - require_in:
+      - service: {{container}}
+{% endif %}
 {{container}}:
   service.running:
     - name: systemd-nspawn@{{container}}.service
     - enable: True
-
 {% endfor %}
 {% endif %}

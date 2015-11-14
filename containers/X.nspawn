@@ -3,3 +3,4 @@ Boot=yes
 
 [Network]
 Bridge=br{{vlan}}
+Private=no

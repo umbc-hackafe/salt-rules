@@ -98,7 +98,7 @@ make-{{container}}:
     - source: salt://containers/X.nspawn
     - template: jinja
     - context:
-      vlan: {{ salt['pillar.get']('containerhosts:' + container + ':vlan', 3) }}
+      vlan: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, vlan]), 3) }}
     - require:
       - file: /etc/systemd/nspawn
       - cmd: make-{{container}}

@@ -7,4 +7,5 @@ VirtualEthernet=yes
 Bridge=br{{vlan}}
 {% else %}
 Private=false
+VirtualEthernet=false
 {% endif %} 

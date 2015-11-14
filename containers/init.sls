@@ -1,5 +1,5 @@
 /etc/systemd/system/systemd-nspawn@.service:
-{% if grains['systemd:version'] < 219 %}
+{% if salt['grains.get']('systemd:version') < 219 %}
   file.managed:
     - source: salt://containers/systemd-nspawn@.service
     - require:
@@ -67,7 +67,7 @@ add-minion-config:
     - require:
       - file: /data/baseroot
 
-{% if grains['systemd:version'] >= 219 %}
+{% if salt['grains.get']('systemd:version') >= 219 %}
 /etc/systemd/nspawn:
   file.directory:
     - makedirs: True
@@ -87,7 +87,7 @@ add-minion-config:
 
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
 {% for container in pillar.containerhosts[grains['host']] %}
-{% if grains['systemd:version'] >= 219 %}
+{% if salt['grains.get']('systemd:version') >= 219 %}
 make-{{container}}:
   cmd.run:
     - name: systemctl start make-container@{{container}}

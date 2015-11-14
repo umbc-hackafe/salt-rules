@@ -77,6 +77,7 @@ create-base:
 /data/baseroot/etc/systemd/system/multi-user.target.wants/{{ service }}.service:
   file.symlink:
     - target: /usr/lib/systemd/system/{{ service }}.service
+    - force: True
     - require_in: create-base
 {% endfor %}
 

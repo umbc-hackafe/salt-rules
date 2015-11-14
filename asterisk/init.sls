@@ -19,6 +19,10 @@ asterisk:
   file.recurse:
     - source: salt://asterisk/sounds
 
+/var/lib/asterisk/moh:
+  file.recurse:
+    - source: salt://asterisk/moh
+
 /usr/bin:
   file.recurse:
     - source: salt://asterisk/scripts

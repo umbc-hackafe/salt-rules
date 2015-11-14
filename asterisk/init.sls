@@ -6,6 +6,7 @@ asterisk:
     - require:
       - pkg: asterisk
       - file: /etc/asterisk
+      - file: /var/lib/asterisk/sounds
 
 /etc/asterisk:
   file.recurse:
@@ -13,3 +14,7 @@ asterisk:
     - template: jinja
     - watch_in:
       - service: asterisk
+
+/var/lib/asterisk/sounds:
+  file.recurse:
+    - source: salt://asterisk/sounds

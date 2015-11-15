@@ -124,7 +124,7 @@ add-minion-config:
 /var/lib/machines/{{container}}:
   mount.mounted:
     - fstype: overlay
-    - opts: rw,relatime,lowerdir=/data/baseroot,upperdir=/data/overlay/{{container},workdir=/data/work/{{container}
+    - opts: rw,relatime,lowerdir=/data/baseroot,upperdir=/data/overlay/{{container},workdir=/data/work/{{container}}
     - device: /var/lib/machines/{{container}}
     - persist: True
     - require:

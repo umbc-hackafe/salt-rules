@@ -143,5 +143,5 @@ base:
   'asterisk.hackafe.net':
     - asterisk
 
-  'torrent.hackfae.net':
+  'torrent.hackafe.net':
     - torrent

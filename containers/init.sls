@@ -10,10 +10,10 @@
   file.absent
 {% endif %}
 
-make-container@.service:
+/etc/systemd/system/make-container@.service:
   file.absent
 
-make-container:
+/usr/bin/make-container:
   file.absent
 
 {% set baseroot_install = salt['grains.filter_by']({

@@ -121,9 +121,10 @@ add-minion-config:
   file.directory:
     - makedirs: True
 
-/var/lib/machines/{{container}}:
+overlay-mount-{{container}}:
   mount.mounted:
     - fstype: overlay
+    - name: /var/lib/machines/{{container}}
     - opts: rw,relatime,lowerdir=/data/baseroot,upperdir=/data/overlay/{{container}},workdir=/data/work/{{container}}
     - device: /var/lib/machines/{{container}}
     - persist: True
@@ -137,14 +138,14 @@ create-machine-id-{{container}}:
     - name: systemd-machine-id-setup --root=/var/lib/machines/{{container}}
     - unless: test -f /var/lib/machines/{{container}}/etc/machine-id
     - require:
-      - mount: /var/lib/machines/{{container}}
+      - mount: overlay-mount-{{container}}
 
 {{container}}:
   service.running:
     - name: systemd-nspawn@{{container}}.service
     - enable: True
     - require:
-      - mount: /var/lib/machines/{{container}}
+      - mount: overlay-mount-{{container}}
       - cmd: create-machine-id-{{container}}
 {% endfor %}
 {% endif %}

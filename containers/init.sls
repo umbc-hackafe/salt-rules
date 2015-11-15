@@ -133,6 +133,13 @@ overlay-mount-{{container}}:
       - file: /data/overlay/{{container}}
       - file: /data/work/{{container}}
 
+create-minion-id-{{container}}:
+  file.managed:
+    - name: /var/lib/machines/{{container}}/etc/salt/minion_id
+    - contents: {{container}}.{{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'domain']), 'hackafe.net') }}
+    - require_in:
+      - service: {{container}}
+
 create-machine-id-{{container}}:
   cmd.run:
     - name: systemd-machine-id-setup --root=/var/lib/machines/{{container}}

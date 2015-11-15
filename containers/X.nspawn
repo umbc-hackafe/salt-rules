@@ -1,6 +1,13 @@
 [Exec]
 Boot=yes
 
+{% if bind_mounts %}
+[Files]
+{% for host_dir, child_dir in bind_mounts.items() %}
+Bind={{ host_dir }}:{{ child_dir }}
+{% endfor %}
+{% endif %}
+
 [Network]
 {% if private_net %}
 VirtualEthernet=yes

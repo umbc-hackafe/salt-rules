@@ -121,6 +121,7 @@ make-{{container}}:
     - context:
       vlan: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'vlan']), 3) }}
       private_net: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'private_net']), True) }}
+      bind_mounts: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'bind_mounts']), {}) }}
     - require:
       - file: /etc/systemd/nspawn
       - cmd: make-{{container}}

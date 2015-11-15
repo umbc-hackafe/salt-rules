@@ -9,8 +9,6 @@
 Description=Container %i
 Documentation=man:systemd-nspawn(1)
 After=systemd-network.service
-After=make-container@%i.service
-Requires=make-container@%i.service
 
 [Service]
 Restart=always

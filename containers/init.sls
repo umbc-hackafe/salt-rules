@@ -11,22 +11,10 @@
 {% endif %}
 
 make-container@.service:
-  file.managed:
-    - name: /etc/systemd/system/make-container@.service
-    - source: salt://containers/make-container@.service
-    - require:
-      - file: make-container
-    - watch_in:
-      - cmd: daemon-reload
+  file.absent
 
 make-container:
-  file.managed:
-    - name: /usr/bin/make-container
-    - source: salt://containers/make-container.sh
-    - mode: 755
-    - require:
-      - cmd: create-base
-      - file: add-minion-config
+  file.absent
 
 {% set baseroot_install = salt['grains.filter_by']({
   'Arch': 'pacstrap -cd /data/baseroot base salt-zmq',
@@ -40,8 +28,6 @@ make-container:
     - source: salt://containers/saltstack.repo
     - require:
       - cmd: create-base
-    - require-in:
-      - file: make-container
 {% else %}
 arch-install-scripts:
   pkg.installed
@@ -109,11 +95,6 @@ add-minion-config:
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
 {% for container in pillar.containerhosts[grains['host']] %}
 {% if salt['grains.get']('systemd:version') >= 219 %}
-make-{{container}}:
-  cmd.run:
-    - name: systemctl start make-container@{{container}}
-    - require:
-      - file: make-container@.service
 /etc/systemd/nspawn/{{ container }}.nspawn:
   file.managed:
     - source: salt://containers/X.nspawn
@@ -124,13 +105,46 @@ make-{{container}}:
       bind_mounts: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'bind_mounts']), {}) }}
     - require:
       - file: /etc/systemd/nspawn
-      - cmd: make-{{container}}
     - require_in:
       - service: {{container}}
 {% endif %}
+
+/var/lib/machines/{{container}}:
+  file.directory:
+    - makedirs: True
+
+/data/overlay/{{container}:
+  file.directory:
+    - makedirs: True
+
+/data/work/{{container}}:
+  file.directory:
+    - makedirs: True
+
+/var/lib/machines/{{container}}:
+  mount.mounted:
+    - fstype: overlay
+    - opts: rw,relatime,lowerdir=/data/baseroot,upperdir=/data/overlay/{{container},workdir=/data/work/{{container}
+    - device: /var/lib/machines/{{container}}
+    - persist: True
+    - require:
+      - file: /var/lib/machines/{{container}}
+      - file: /data/overlay/{{container}}
+      - file: /data/work/{{container}}
+
+create-machine-id-{{container}}:
+  cmd.run:
+    - name: systemd-machine-id-setup --root=/var/lib/machines/{{container}}
+    - unless: test -f /var/lib/machines/{{container}}/etc/machine-id
+    - require:
+      - mount: /var/lib/machines/{{container}}
+
 {{container}}:
   service.running:
     - name: systemd-nspawn@{{container}}.service
     - enable: True
+    - require:
+      - mount: /var/lib/machines/{{container}}
+      - cmd: create-machine-id-{{container}}
 {% endfor %}
 {% endif %}

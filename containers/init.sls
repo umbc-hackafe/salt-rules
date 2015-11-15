@@ -113,7 +113,7 @@ add-minion-config:
   file.directory:
     - makedirs: True
 
-/data/overlay/{{container}:
+/data/overlay/{{container}}:
   file.directory:
     - makedirs: True
 

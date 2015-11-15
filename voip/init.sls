@@ -26,3 +26,11 @@ voip_sip_{{ phone.MAC }}:
       intercom: {{ pillar.phone_intercom }}
 {% endfor %}
 {% endif %}
+
+/srv/tftp/RINGLIST.DAT:
+  file.managed:
+    - source: salt://voip/RINGLIST.DAT
+
+/srv/tftp/CTU24raw.raw:
+  file.managed:
+    - source: salt://voip/CTU24raw.raw

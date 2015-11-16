@@ -19,3 +19,9 @@ hackafe-ledger:
     - require:
       - pkg: git
       - ssh_known_hosts: github.com
+  cmd.wait:
+    - name: 'git verify-commit HEAD --raw 2>&1 | grep -E "VALIDSIG \b({{ pillar['trusted_signers'].values() | join('|') | upper }})\b"'
+    - require:
+      - pkg: git
+    - watch:
+      - git: hackafe-ledger

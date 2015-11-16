@@ -12,7 +12,7 @@ aur-prereqs:
       - findutils
       - flex
       - gawk
-      - {{ salt['grains.filter_by']({
+      #- {{ salt['grains.filter_by']({
         'x86_64': 'gcc-multilib',
         'i686': 'gcc'}, grain='osarch', default='i686') }}
       - gettext
@@ -42,3 +42,17 @@ makepkg:
     - shell: /bin/bash
     - home: /tmp
     - system: True
+    - require:
+      - file: makepkg_sudoers_d
+
+cower:
+  pkg.installed: []
+  cmd.script:
+    - source: salt://aur/aur.sh
+    - user: makepkg
+    - args: 'cower'
+    - require:
+      - pkg: aur-prereqs
+      - user: makepkg
+    - onfail:
+      - pkg: cower

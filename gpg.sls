@@ -1,4 +1,4 @@
-gpg:
+gnupg:
   pkg.installed: []
 
 {% for name, fingerprint in pillar['trusted_signers'].items() %}
@@ -10,5 +10,5 @@ gpg:
     - unless:
       - gpg --list-keys {{ fingerprint_stripped }}
     - require:
-      - pkg: gpg
+      - pkg: gnupg
 {% endfor %}

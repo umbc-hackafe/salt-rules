@@ -1,8 +1,11 @@
 ssmtp:
   pkg.installed: []
 
-ledger:
-  pkg.installed: []
+ledger-packages:
+  pkg.installed:
+    - pkgs:
+      - ledger
+      - python
 
 github.com:
   ssh_known_hosts.present:

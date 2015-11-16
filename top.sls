@@ -21,6 +21,9 @@ base:
     - containers
     - network.bridge
 
+  'salt.hackafe.net':
+    - managed.master
+
   'cheerilee.hackafe.net':
     - audio
     - aur

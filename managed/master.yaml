@@ -1,0 +1,23 @@
+interface: '::'
+
+ipv6: True
+
+autosign_file: /etc/salt/autosign.conf
+
+file_roots:
+  base:
+    - /srv/salt/
+
+pillar_roots:
+  base:
+    - /srv/salt/pillar
+
+file_ignore_regex:
+  - '/\.git($|/)'
+
+postgres:
+  - host: sql.hackafe.net
+  - port: 5432
+  - user: postgres
+  - pass: ''
+  - maintainence_db: postgres

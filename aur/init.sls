@@ -56,3 +56,15 @@ cower:
       - user: makepkg
     - onfail:
       - pkg: cower
+
+pacaur:
+  pkg.installed: []
+  cmd.script:
+    - source: salt://aur/aur.sh
+    - user: makepkg
+    - args: 'pacaur'
+    - require:
+      - pkg: aur-prereqs
+      - user: makepkg
+    - onfail:
+      - pkg: pacaur

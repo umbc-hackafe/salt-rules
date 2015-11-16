@@ -4,10 +4,13 @@
   grain='os_family', default='Arch')
 %}
 
-{{ cron_pkg }}:
-  pkg.installed
+cron-package:
+  pkg.installed:
+  - name: {{ cron_pkg }}
 
-{{ cron_svc }}:
+
+cron-service:
   service.running:
+    - name: {{ cron_svc }}
     - enable: True
-    - require: {{ cron_pkg }}
+    - require: cron-package

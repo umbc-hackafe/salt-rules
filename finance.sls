@@ -4,8 +4,19 @@ ssmtp:
 ledger-packages:
   pkg.installed:
     - pkgs:
-      - ledger
       - python
+
+ledger-package-aur:
+  pkg.installed:
+    - name: ledger
+  cmd.run:
+    - name: pacaur -S "--noprogressbar" "--noconfirm" "--noedit" "--needed" "ledger" 
+    - user: makepkg
+    - require:
+      - pkg: pacaur
+      - user: makepkg
+    - onfail:
+      - pkg: ledger-package-aur
 
 github.com:
   ssh_known_hosts.present:

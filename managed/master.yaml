@@ -6,11 +6,11 @@ autosign_file: /etc/salt/autosign.conf
 
 file_roots:
   base:
-    - /srv/salt/
+    - /var/git/saltmaster
 
 pillar_roots:
   base:
-    - /srv/salt/pillar
+    - /var/git/saltmaster/pillar
 
 file_ignore_regex:
   - '/\.git($|/)'

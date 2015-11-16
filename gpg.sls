@@ -1,8 +1,14 @@
+gpg:
+  pkg.installed: []
+
 {% for name, fingerprint in pillar['trusted_signers'].items() %}
+{% set fingerprint_stripped = fingerprint | replace(' ', '') %}
 {{name}}_gpg:
-  module.run:
-    - name: gpg.receive_keys
-    - keys: {{ fingerprint | replace(' ', '') }}
+  cmd.run:
+    - name: gpg --recv-key {{ fingerprint_stripped }}
+    - keys: {{ fingerprint_stripped }}
     - unless:
-      - gpg --list-keys {{ fingerprint | replace(' ', '')}}
+      - gpg --list-keys {{ fingerprint_stripped }}
+    - require:
+      - pkg: gpg
 {% endfor %}

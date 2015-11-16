@@ -94,13 +94,16 @@ add-minion-config:
 
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
 {% for container in pillar.containerhosts[grains['host']] %}
+{% set vlan_id = salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'vlan']), 3) %}
+{% set network_num = vlan_id - 1 %}
+
 {% if salt['grains.get']('systemd:version') >= 219 %}
 /etc/systemd/nspawn/{{ container }}.nspawn:
   file.managed:
     - source: salt://containers/X.nspawn
     - template: jinja
     - context:
-      vlan: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'vlan']), 3) }}
+      vlan: {{ vlan_id }}
       private_net: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'private_net']), True) }}
       bind_mounts: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'bind_mounts']), {}) }}
     - require:
@@ -132,6 +135,16 @@ overlay-mount-{{container}}:
       - file: /var/lib/machines/{{container}}
       - file: /data/overlay/{{container}}
       - file: /data/work/{{container}}
+
+/var/lib/machines/{{container}}/etc/resolv.conf:
+  file.managed:
+    - contents: |
+      domain hackafe.net
+      search hackafe.net.
+      nameserver 2001:470:e591:{{ network_num }}::1
+      nameserver 192.168.{{ network_num }}.1
+    - require_in:
+      - service: {{container}}
 
 create-minion-id-{{container}}:
   file.managed:

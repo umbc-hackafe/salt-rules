@@ -132,3 +132,6 @@ base:
 
   'torrent.hackafe.net':
     - torrent
+
+  'finance.hackafe.net':
+    - finance

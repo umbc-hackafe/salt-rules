@@ -135,4 +135,5 @@ base:
 
   'finance.hackafe.net':
     - aur
+    - gpg
     - finance

@@ -10,6 +10,7 @@ base:
     - repo
     - containerchild
     - logging.client
+    - cron
 
   'vegasix.hackafe.net':
     - httpd.nginx

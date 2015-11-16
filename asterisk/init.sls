@@ -8,6 +8,14 @@ asterisk:
       - file: /etc/asterisk
       - file: /var/lib/asterisk/sounds
 
+at:
+  pkg.installed
+
+atd:
+  service.running:
+    - require:
+      - pkg: at
+
 /etc/asterisk:
   file.recurse:
     - source: salt://asterisk/conf

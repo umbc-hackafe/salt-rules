@@ -1,4 +1,4 @@
-{% for name, fingerprint in pillar['trusted_signers'] %}
+{% for name, fingerprint in pillar['trusted_signers'].items() %}
 {{name}}_gpg:
   module.wait:
     - name: gpg.receive_keys

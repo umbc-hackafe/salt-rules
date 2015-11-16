@@ -10,7 +10,6 @@ base:
     - repo
     - containerchild
     - logging.client
-    - cron
 
   'vegasix.hackafe.net':
     - httpd.nginx
@@ -129,6 +128,7 @@ base:
 
   'asterisk.hackafe.net':
     - asterisk
+    - cron
 
   'torrent.hackafe.net':
     - torrent

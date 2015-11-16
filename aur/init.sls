@@ -12,9 +12,9 @@ aur-prereqs:
       - findutils
       - flex
       - gawk
-      - {% salt['grains.filter_by']({
+      - {{ salt['grains.filter_by']({
         'x86_64': 'gcc-multilib',
-        'i686': 'gcc'}, grain='osarch', default='i686') %}
+        'i686': 'gcc'}, grain='osarch', default='i686') }}
       - gettext
       - grep
       - groff

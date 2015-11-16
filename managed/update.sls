@@ -1,7 +1,15 @@
-highstate-schedule:
+/usr/lib/systemd/system/highstate.timer:
   file.managed:
-    - name: /etc/salt/minion.d/highstate.conf
     - source:
-      - salt://managed/highstate.yaml
-    - watch_in:
-      - service: salt-minion
+      - salt://managed/highstate.timer
+    - require_in:
+      - service: highstate.timer
+
+/usr/lib/systemd/system/highstate.service:
+  file.managed:
+    - source:
+      - salt://managed/highstate.service
+
+highstate.timer:
+  service.running:
+    - enable: True

@@ -1,0 +1,6 @@
+[Unit]
+Description=Run salt on this host
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/salt-call state.highstate

@@ -1,6 +1,5 @@
 include:
   - homeautomation.openhalper
-  - aur
 
 i2c_dev:
   kmod.present:

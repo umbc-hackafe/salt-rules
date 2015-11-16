@@ -16,7 +16,6 @@ base:
     - httpd.nginx
     - containers
     - network.bridge
-    - aur
 
   'watson.hackafe.net':
     - containers
@@ -27,7 +26,6 @@ base:
 
   'cheerilee.hackafe.net':
     - audio
-    - aur
     - homeautomation.openhalper
     - music.pianobar
 
@@ -35,7 +33,6 @@ base:
     - audio
     - audio.pulse
     - cups
-    - aur
     - homeautomation.i2c
     - homeautomation.cec
     - homeautomation.chromecast
@@ -43,14 +40,12 @@ base:
     - ci.slave
 
   'scootaloo.hackafe.net':
-    - aur
     - homeautomation.openhalper
     - network.dhcp
     - network.wifi
     - network.wifi.rtl-8192
 
   'vinyl.hackafe.net':
-    - aur
     - homeautomation.openhalper
 
   'fluttershy.hackafe.net':
@@ -59,31 +54,25 @@ base:
     - network.wifi.rtl-8192
 
   'spike.hackafe.net':
-    - aur
     - homeautomation.openhalper
     - ci.slave
 
   'pinkie.hackafe.net':
-    - aur
     - homeautomation.openhalper
 
   'icinga.hackafe.net':
-    - aur
     - monitor.server
 
   'rarity.hackafe.net':
-    - aur
     - audio
     - homeautomation.openhalper
     - ci.slave
 
   'dash.hackafe.net':
-    - aur
     - homeautomation.sign
     - ci.slave
 
   'thegreatandpowerfultrixie.hackafe.net':
-    - aur
     - homeautomation.garage
     - homeautomation.openhalper
     - ci.slave
@@ -97,11 +86,7 @@ base:
   'logs':
     - logging.server
 
-  'ldap.hackafe.net':
-    - aur
-
   'repo.hackafe.net':
-    - aur
     - httpd.darkhttpd
     - httpd.repo
 
@@ -125,7 +110,6 @@ base:
     - location.prgmr
 
   'cibuildslave2.hackafe.net':
-    - aur
     - ci.slave
 
   'sql.hackafe.net':
@@ -135,7 +119,6 @@ base:
     - backup.server
 
   'cibuildslave3.hackafe.net':
-    - aur
     - ci.slave
 
   'discord.hackafe.net':

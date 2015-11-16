@@ -13,4 +13,5 @@ cron-service:
   service.running:
     - name: {{ cron_svc }}
     - enable: True
-    - require: cron-package
+    - require:
+      - pkg: cron-package

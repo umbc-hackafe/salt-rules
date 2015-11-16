@@ -36,8 +36,6 @@ makepkg_sudoers_d:
     - name: /etc/sudoers.d/90makepkg
     - mode: 0440
     - source: salt://aur/makepkg-sudoers.d
-    - require:
-      - pkg: aur-prereqs
 
 makepkg:
   user.present:

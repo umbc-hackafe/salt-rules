@@ -138,11 +138,11 @@ overlay-mount-{{container}}:
 
 /var/lib/machines/{{container}}/etc/resolv.conf:
   file.managed:
-    - contents: |
-      domain hackafe.net
-      search hackafe.net.
-      nameserver 2001:470:e591:{{ network_num }}::1
-      nameserver 192.168.{{ network_num }}.1
+    - contents:
+      - domain hackafe.net
+      - search hackafe.net.
+      - nameserver 2001:470:e591:{{ network_num }}::1
+      - nameserver 192.168.{{ network_num }}.1
     - require_in:
       - service: {{container}}
 

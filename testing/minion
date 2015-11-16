@@ -1,0 +1,8 @@
+# Per default the minion will automatically include all config files
+# from minion.d/*.conf (minion.d is a directory in the same directory
+# as the main minion config file).
+include: ../managed/minion.yaml
+
+root_dir: /
+cachedir: /tmp/cache/salt-local
+id: testing

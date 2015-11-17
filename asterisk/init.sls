@@ -1,5 +1,8 @@
 asterisk:
-  pkg.installed: []
+  pkg.installed:
+    - require:
+      - pkg: asterisk-espeak
+
   service.running:
     - enable: True
     - reload: True
@@ -7,6 +10,9 @@ asterisk:
       - pkg: asterisk
       - file: /etc/asterisk
       - file: /var/lib/asterisk/sounds
+
+asterisk-espeak:
+  pkg.installed
 
 at:
   pkg.installed

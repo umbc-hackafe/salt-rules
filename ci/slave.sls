@@ -12,6 +12,13 @@ slave:
   pkg.installed:
     - name: jre8-openjdk-headless
 
+{% if 'num_cpus' in grains %}
+add-makeopts:
+  file.append:
+    - name: /etc/makepkg.conf
+    - text: "MAKEOPTS=-j{{ grains['num_cpus'] }}"
+{% endif %}
+
 ci_sudoers_d:
   file.managed:
     - name: /etc/sudoers.d/90ci

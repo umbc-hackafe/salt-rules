@@ -2,6 +2,8 @@ interface: '::'
 
 ipv6: True
 
+worker_threads: 8
+
 autosign_file: /etc/salt/autosign.conf
 
 file_roots:

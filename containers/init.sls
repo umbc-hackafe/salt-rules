@@ -144,6 +144,8 @@ overlay-mount-{{container}}:
       - search hackafe.net.
       - nameserver 2001:470:e591:{{ network_num }}::1
       - nameserver 192.168.{{ network_num }}.1
+    - require:
+      - overlay-mount-{{container}}
     - require_in:
       - service: {{container}}
 
@@ -151,6 +153,8 @@ create-minion-id-{{container}}:
   file.managed:
     - name: /var/lib/machines/{{container}}/etc/salt/minion_id
     - contents: {{container}}.{{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'domain']), 'hackafe.net') }}
+    - require:
+      - overlay-mount-{{container}}
     - require_in:
       - service: {{container}}
 

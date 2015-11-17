@@ -8,7 +8,7 @@ if len(sys.argv) <= 1:
     print("Usage: {} {} {}".format(sys.argv[0], "<start|finish>", "<extension>"))
     sys.exit()
 
-display = sign.Sign("192.168.4.105", 8800)
+display = sign.Sign("dash", 8800)
 
 if sys.argv[1] == "start":
     code = str(random.randrange(10000, 50000))

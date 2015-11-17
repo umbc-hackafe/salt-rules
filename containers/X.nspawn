@@ -1,5 +1,10 @@
 [Exec]
 Boot=yes
+{% if exec_options %}
+{% for opt, val in exec_options.items() %}
+{{ opt }}={{ val }}
+{% endfor %}
+{% endif %}
 
 {% if bind_mounts %}
 [Files]

@@ -106,6 +106,7 @@ add-minion-config:
       vlan: {{ vlan_id }}
       private_net: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'private_net']), True) }}
       bind_mounts: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'bind_mounts']), {}) }}
+      exec_options: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'exec_options']), {}) }}
     - require:
       - file: /etc/systemd/nspawn
     - require_in:

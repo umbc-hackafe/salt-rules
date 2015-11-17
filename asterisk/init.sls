@@ -40,3 +40,4 @@ atd:
 /usr/bin:
   file.recurse:
     - source: salt://asterisk/scripts
+    - file_mode: '755'

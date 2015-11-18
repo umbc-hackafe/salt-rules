@@ -18,3 +18,16 @@ salt-master-autosign:
       - salt://managed/autosign.conf
     - watch_in:
       - service: salt-master
+
+/var/git/saltmaster:
+  file.directory:
+    - user: root
+    - group: salt
+    - dir_mode: 2775
+    - file_mode: 664
+    - recurse:
+      -	group
+      - mode
+    - makedirs: True
+    - require:
+      - group: salt-group

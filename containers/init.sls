@@ -53,7 +53,6 @@ create-base:
 /data/baseroot/etc/machine-id:
   file.absent:
     - require_in: create-base
-    - makedirs: True
 
 /data/baseroot/etc/securetty:
   file.append:

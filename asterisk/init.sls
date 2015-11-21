@@ -22,6 +22,9 @@ atd:
     - require:
       - pkg: at
 
+python3:
+  pkg.installed
+
 /etc/asterisk:
   file.recurse:
     - source: salt://asterisk/conf

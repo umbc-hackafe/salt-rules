@@ -22,7 +22,7 @@ atd:
     - require:
       - pkg: at
 
-python3:
+python:
   pkg.installed
 
 /etc/asterisk:

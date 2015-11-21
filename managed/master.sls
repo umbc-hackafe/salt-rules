@@ -27,7 +27,7 @@ salt-master-autosign:
     - file_mode: 664
     - recurse:
       - group
-      - mode
+      - dir_mode
     - makedirs: True
     - require:
       - group: salt-group

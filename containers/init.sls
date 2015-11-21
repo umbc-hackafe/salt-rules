@@ -53,11 +53,13 @@ create-base:
 /data/baseroot/etc/machine-id:
   file.absent:
     - require_in: create-base
+    - makedirs: True
 
 /data/baseroot/etc/securetty:
   file.append:
     - text: pts/0
     - require_in: create-base
+    - makedirs: True
 
 {% for service in ["salt-minion", "systemd-networkd", "systemd-resolved"] %}
 /data/baseroot/etc/systemd/system/multi-user.target.wants/{{ service }}.service:
@@ -65,12 +67,14 @@ create-base:
     - target: /usr/lib/systemd/system/{{ service }}.service
     - force: True
     - require_in: create-base
+    - makedirs: True
 {% endfor %}
 
 add-minion-config:
   file.managed:
     - name: /data/baseroot/etc/salt/minion.yaml
     - source: salt://managed/minion.yaml
+    - makedirs: True
     - require:
       - file: /data/baseroot
 
@@ -153,6 +157,7 @@ create-minion-id-{{container}}:
   file.managed:
     - name: /var/lib/machines/{{container}}/etc/salt/minion_id
     - contents: {{container}}.{{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'domain']), 'hackafe.net') }}
+    - makedirs: True
     - require:
       - mount: overlay-mount-{{container}}
     - require_in:

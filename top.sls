@@ -74,6 +74,7 @@ base:
   'thegreatandpowerfultrixie.hackafe.net':
     - homeautomation.garage
     - homeautomation.openhalper
+    - homeaetomation.lights
     - ci.slave
 
   'ci':
@@ -137,3 +138,9 @@ base:
     - aur
     - gpg
     - finance
+
+  'celestia.hackafe.net':
+    - homeautomation.lights
+
+  'twilight.hackafe.net':
+    - homeautomation.lights

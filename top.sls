@@ -145,3 +145,7 @@ base:
 
   'twilight.hackafe.net':
     - homeautomation.lights
+
+  'isumbcopen.hackafe.net':
+    - isumbcopen
+    - web

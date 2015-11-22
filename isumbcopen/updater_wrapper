@@ -1,0 +1,2 @@
+#!/bin/bash
+OUT=$(/usr/local/bin/updater.py) && echo "$OUT" | tr '\n' ' ' > /srv/http/isumbcopen.com/state.txt

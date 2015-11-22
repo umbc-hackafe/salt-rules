@@ -1,0 +1,10 @@
+[Unit]
+Description=Update isumbcopen.com regularly
+
+[Timer]
+OnBootSec=1m
+OnActiveSec=3m
+Unit=isumbcopenupdater.service
+
+[Install]
+WantedBy=timers.target

@@ -79,7 +79,7 @@ base:
   'ci':
     - ci.jenkins
 
-  'ci-buildslave1.hackafe.net':
+  'cibuildslave1.hackafe.net':
     - ci.slave
 
   'logs':

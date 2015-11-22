@@ -20,7 +20,7 @@ nginx:
       - pkg: nginx
 
 {% for hostname in pillar.websites[grains['host']] %}
-{% set path = ':'.join(['websites', grains['host'], hostname])
+{% set path = ':'.join(['websites', grains['host'], hostname]) %}
 {% set host_type = salt['pillar.get'](path + ':type', 'pass') %}
 {% set ssl_type = salt['pillar.get'](path + ':ssl', 'star') %}
 {% set locations = salt['pillar.get'](path + ':locations', {'/': salt['pillar.get'](path)}) %}

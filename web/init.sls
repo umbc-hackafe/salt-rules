@@ -77,4 +77,5 @@ nginx:
       - service: nginx
     - watch_in:
       - service: nginx
+{% endif %}
 {% endfor %}

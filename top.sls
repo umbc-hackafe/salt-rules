@@ -136,7 +136,6 @@ base:
     - torrent
 
   'finance.hackafe.net':
-    - aur
     - gpg
     - finance
 

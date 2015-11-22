@@ -152,3 +152,6 @@ base:
 
   'alexa.hackafe.net':
     - web
+
+  'web.hackafe.net':
+    - web

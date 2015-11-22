@@ -4,9 +4,6 @@ python-pyserial:
 python-flask:
   pkg.installed: []
 
-git:
-  pkg.installed: []
-
 /opt/lights:
   file.directory:
     - makedirs: True

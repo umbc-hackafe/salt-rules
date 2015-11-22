@@ -51,6 +51,7 @@ nginx:
     - require:
       - file: /srv/http/{{ hostname }}
 {% endif %}
+{% endif %}
 
 /etc/nginx/sites-available/{{ hostname }}:
   file.managed:
@@ -77,5 +78,5 @@ nginx:
       - service: nginx
     - watch_in:
       - service: nginx
-{% endif %}
 {% endfor %}
+{% endif %}

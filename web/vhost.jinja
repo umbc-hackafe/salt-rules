@@ -1,0 +1,49 @@
+# hostname
+# host_type = vhost
+# host
+# locations
+# ssl_type
+
+{% if ssl_type %}
+server {
+  listen 80;
+  listen [::]:80;
+  server_name {{ hostname }};
+
+  return 301 https://{{ hostname }}$request_uri;
+}
+
+server {
+  listen 443;
+  listen [::]:443;
+  server_name {{ hostname }};
+
+  access-log /var/log/nginx/{{ hostname }}-ssl;
+
+  ssl on;
+  {% if ssl_type == "star" %}
+  ssl_certificate /etc/nginx/ssl/wildcard.hackafe.net.cert;
+  ssl_certificate_key /etc/nginx/ssl/wildcard.hackafe.net.key;
+  {% elif ssl_type in ("manual", "letsencrypt") %}
+  ssl_certificate /etc/nginx/ssl/{{ hostname }}.cert;
+  ssl_certificate_key /etc/nginx/ssl/{{ hostname }}.key;
+  {% endif %}
+{% else %}
+server {
+  listen 80
+  listen [::]:80;
+  server_name {{ hostname }};
+
+  access-log /var/log/nginx/{{hostname}};
+{% endif %}
+
+{% for path, loc in locations.items() %}
+  location {{ path }} {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://{{ loc.get('host', 'localhost') }}:{{ loc.get('port', '80') }}{{ loc.get('path', '/') }};
+  }
+{% endfor %}
+}

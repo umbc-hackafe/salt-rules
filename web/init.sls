@@ -25,7 +25,7 @@ nginx:
 {% set ssl_type = salt['pillar.get'](path + ':ssl', 'star') %}
 {% set locations = salt['pillar.get'](path + ':locations', {'/': salt['pillar.get'](path)}) %}
 {% set aliases = salt['pillar.get'](path + ':aliases', []) %}
-{% set host = salt['pilllar.get'](path + ':host', 'localhost') %}
+{% set host = salt['pillar.get'](path + ':host', 'localhost') %}
 {% set rewrite = salt['pillar.get'](path + ':rewrite', []) %}
 
 {% if host_type == 'pass' %}

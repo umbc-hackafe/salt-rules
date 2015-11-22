@@ -149,3 +149,6 @@ base:
   'isumbcopen.hackafe.net':
     - isumbcopen
     - web
+
+  'alexa.hackafe.net':
+    - web

@@ -1,8 +1,12 @@
-aur-prereqs:
 {% if grains['osarch'] == 'x86_64' %}
+rm-gcc:
   pkg.removed:
     - name: gcc
+    - require_in:
+      - pkg: aur-prereqs
 {% endif %}
+
+aur-prereqs:
   pkg.installed:
     - pkgs:
       - expac

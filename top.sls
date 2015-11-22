@@ -43,6 +43,7 @@ base:
     - network.dhcp
     - network.wifi
     - network.wifi.rtl-8192
+    - ci.slave
 
   'vinyl.hackafe.net':
     - homeautomation.openhalper
@@ -141,6 +142,7 @@ base:
 
   'celestia.hackafe.net':
     - homeautomation.lights
+    - ci.slave
 
   'twilight.hackafe.net':
     - homeautomation.lights

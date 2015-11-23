@@ -45,7 +45,7 @@ nginx:
   file.directory:
     - makedirs: True
 
-/srv/http/{{ hostname }}:
+download-git-{{ hostname }}:
   git.latest:
     - source: {{ salt['pillar.get'](path + ':source:location', 'https://github.com/umbc-hackafe/' + hostname) }}
     - require:

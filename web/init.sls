@@ -56,6 +56,7 @@ nginx:
 /etc/nginx/sites-available/{{ hostname }}:
   file.managed:
     - source: {% if host_type == "custom" %}salt://web/custom/{{ hostname }}{% else %}salt://web/{{ host_type }}.jinja{% endif %}
+    - makedirs: True
     - template: jinja
     - context:
       hostname: {{ hostname }}
@@ -64,6 +65,8 @@ nginx:
       locations: {{ locations }}
       ssl_type: {{ ssl_type }}
       rewrite: {{ rewrite }}
+    - require:
+      - pkg: nginx
     - require_in:
       - service: nginx
     - watch_in:
@@ -72,8 +75,10 @@ nginx:
 /etc/nginx/sites-enabled/{{ hostname }}:
   file.symlink:
     - target: /etc/nginx/sites-available/{{ hostname }}
+    - makedirs: True
     - require:
       - file: /etc/nginx/sites-available/{{ hostname }}
+      - pkg: nginx
     - require_in:
       - service: nginx
     - watch_in:

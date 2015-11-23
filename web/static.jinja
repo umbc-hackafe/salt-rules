@@ -66,8 +66,8 @@ server {
     {% for code, err_loc in v.items() %}
     error_page {{ code }} = {{ err_loc }};
     {% endfor %}
-    {% else %}
-    {{ k }} {{ v }};
+#    {% else %}
+#    {{ k }} {{ v }};
     {% endif %}
     {% endfor %}
   }

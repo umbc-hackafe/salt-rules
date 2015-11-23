@@ -4,6 +4,18 @@ nginx:
   pkg.installed: []
   service.running:
     - enable: True
+    - require:
+      - pkg: nginx
+      - file: /etc/nginx/nginx.conf
+
+/etc/nginx/nginx.conf:
+  file.managed:
+    - source: salt://web/nginx.conf
+    - makedirs: True
+    - require:
+      - pkg: nginx
+    - watch_in:
+      - service: nginx
 
 /etc/nginx/ssl:
   file.directory:

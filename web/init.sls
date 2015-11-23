@@ -65,6 +65,7 @@ nginx:
       locations: {{ locations }}
       ssl_type: {{ ssl_type }}
       rewrite: {{ rewrite }}
+      aliases: {{ aliases }}
     - require:
       - pkg: nginx
     - require_in:

@@ -49,6 +49,8 @@ server {
   access_log /var/log/nginx/{{hostname}};
 {% endif %}
 
+  root /srv/http/{{ hostname }};
+
 {% if rewrite %}
 {% for rule in rewrite %}
   rewrite {{ ' '.join(rule) }};

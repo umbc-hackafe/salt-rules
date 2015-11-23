@@ -24,7 +24,7 @@ server {
   {% endfor %}
   {% endif %}
 
-  access-log /var/log/nginx/{{ hostname }}-ssl;
+  access_log /var/log/nginx/{{ hostname }}-ssl;
 
   ssl on;
   {% if ssl_type == "star" %}
@@ -45,7 +45,7 @@ server {
   {% endfor %}
   {% endif %}
 
-  access-log /var/log/nginx/{{hostname}};
+  access_log /var/log/nginx/{{hostname}};
 {% endif %}
 
 {% if rewrite %}

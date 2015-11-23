@@ -18,7 +18,7 @@ server {
   listen [::]:443;
   server_name {{ hostname }};
 
-  access-log /var/log/nginx/{{ hostname }}-ssl;
+  access_log /var/log/nginx/{{ hostname }}-ssl;
 
   ssl on;
   {% if ssl_type == "star" %}
@@ -34,7 +34,7 @@ server {
   listen [::]:80;
   server_name {{ hostname }};
 
-  access-log /var/log/nginx/{{hostname}};
+  access_log /var/log/nginx/{{hostname}};
 {% endif %}
 
 {% for path, loc in locations.items() %}

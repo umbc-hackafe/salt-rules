@@ -17,14 +17,6 @@ server {
 server {
   listen 443;
   listen [::]:443;
-  server_name {{ hostname }};
-  {% if aliases %}
-  {% for alias in aliases %}
-  server_name {{ alias }};
-  {% endfor %}
-  {% endif %}
-
-  access_log /var/log/nginx/{{ hostname }}-ssl;
 
   ssl on;
   {% if ssl_type == "star" %}
@@ -34,6 +26,15 @@ server {
   ssl_certificate /etc/nginx/ssl/{{ hostname }}.cert;
   ssl_certificate_key /etc/nginx/ssl/{{ hostname }}.key;
   {% endif %}
+
+  server_name {{ hostname }};
+  {% if aliases %}
+  {% for alias in aliases %}
+  server_name {{ alias }};
+  {% endfor %}
+  {% endif %}
+
+  access_log /var/log/nginx/{{ hostname }}-ssl;
 {% else %}
 server {
   listen 80

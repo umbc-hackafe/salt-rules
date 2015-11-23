@@ -47,7 +47,8 @@ nginx:
 
 download-git-{{ hostname }}:
   git.latest:
-    - source: {{ salt['pillar.get'](path + ':source:location', 'https://github.com/umbc-hackafe/' + hostname) }}
+    - name: {{ salt['pillar.get'](path + ':source:location', 'https://github.com/umbc-hackafe/' + hostname) }}
+    - target: /srv/http/{{ hostname }}
     - require:
       - file: /srv/http/{{ hostname }}
 {% endif %}

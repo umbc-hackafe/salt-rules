@@ -9,7 +9,7 @@ python-requests:
 
 updater-service:
   file.managed:
-    - name: /usr/lib/systemd/isumbcopenupdater.service
+    - name: /usr/lib/systemd/system/isumbcopenupdater.service
     - source: salt://isumbcopen/updater.service
     - require_in:
       - service: isumbcopenupdater.timer

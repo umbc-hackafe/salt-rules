@@ -57,7 +57,7 @@ download-git-{{ hostname }}:
 {% if ssl_type == 'letsencrypt' %}
 {% if letsencrypt_hosts.append(hostname) %} {% endif %}
 /etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
-  file.present:
+  file.exists:
     - prereq_in:
       - cmd: run-letsencrypt
 

@@ -80,7 +80,11 @@ server {
     {% for code, err_loc in v.items() %}
     error_page {{ code }} = {{ err_loc }};
     {% endfor %}
-#    {% else %}
+    {% elif k == 'ssi' %}
+    ssi {{ 'on' if v else 'off' }};
+    {% elif k == 'return' %}
+    return {{ v }};
+    {% else %}
 #    {{ k }} {{ v }};
     {% endif %}
     {% endfor %}

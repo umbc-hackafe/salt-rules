@@ -11,6 +11,13 @@ server {
   {% endfor %}
   {% endif %}
 
+  {% if ssl_type == "letsencrypt" %}
+  location /.well-known {
+    default_type text/plain;
+    root /srv/http/letsencrypt;
+  }
+  {% endif %}
+
   return 301 https://{{ hostname }}$request_uri;
 }
 
@@ -35,6 +42,13 @@ server {
   {% endif %}
 
   access_log /var/log/nginx/{{ hostname }}-ssl;
+
+  {% if ssl_type == "letsencrypt" %}
+  location /.well-known {
+    default_type text/plain;
+    root /srv/http/letsencrypt;
+  }
+  {% endif %}
 {% else %}
 server {
   listen 80

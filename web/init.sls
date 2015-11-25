@@ -17,19 +17,23 @@ nginx:
     - watch_in:
       - service: nginx
 
-/etc/nginx/ssl:
+{% set letsencrypt_hosts = [h for h,v in salt['pillar.get']('websites:' + grains['host'], {}) if v and 'ssl' in v and v['ssl'] == 'letsencrypt'] %}
+{% if letsencrypt_hosts %}
+/srv/http/letsencrypt/.well-known/acme-challenge:
   file.directory:
-    - user: root
-    - group: root
-    - dir_mode: 700
-    - file_mode: 600
-    - recurse:
-      - user
-      - group
-      - mode
     - makedirs: True
+
+run-letsencrypt:
+  cmd.run:
+    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}--standalone{% endif %} -m mark25@hackafe.net --rsa-key-size 4096 -d {{ ','.join(letsencrypt_hosts) }}
+    - watch_in:
+      - service: nginx
+    - require_in:
+      - service: nginx
     - require:
-      - pkg: nginx
+      - file: /srv/http/letsencrypt/.well-known/acme-challenge
+      - sls: letsencrypt
+{% endif %}
 
 {% for hostname in pillar.websites[grains['host']] %}
 {% set path = ':'.join(['websites', grains['host'], hostname]) %}
@@ -64,6 +68,29 @@ download-git-{{ hostname }}:
     - require:
       - file: /srv/http/{{ hostname }}
 {% endif %}
+{% endif %}
+
+{% if ssl_type == 'letsencrypt' %}
+/etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
+  file.present:
+    - prereq:
+      - cmd: run-letsencrypt
+
+/etc/nginx/ssl/{{ hostname }}.cert:
+  file.symlink:
+    - target: /etc/letsencrypt/live/{{ hostname }}/fullchain.pem
+    - require:
+      - sls: letsencrypt
+    - require_in:
+      - service: nginx
+
+/etc/nginx/ssl/{{ hostname }}.cert:
+  file.symlink:
+    - target: /etc/letsencrypt/live/{{ hostname }}/privkey.pem
+    - require:
+      - sls: letsencrypt
+    - require_in:
+      - service: nginx
 {% endif %}
 
 /etc/nginx/sites-available/{{ hostname }}:

@@ -10,6 +10,13 @@ server {
   listen [::]:80;
   server_name {{ hostname }};
 
+  {% if ssl_type == "letsencrypt" %}
+  location /.well-known {
+    default_type text/plain;
+    root /srv/http/letsencrypt;
+  }
+  {% endif %}
+
   return 301 https://{{ hostname }}$request_uri;
 }
 
@@ -38,6 +45,12 @@ server {
 {% endif %}
 
 {% for path, loc in locations.items() %}
+{% if ssl_type == "letsencrypt" %}
+  location /.well-known {
+    default_type text/plain;
+    root /srv/http/letsencrypt;
+  }
+{% endif %}
   location {{ path }} {
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;

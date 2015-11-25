@@ -80,7 +80,7 @@ download-git-{{ hostname }}:
 
 run-letsencrypt-{{ hostname }}:
   cmd.run:
-    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}-a standalone{% endif %} -m mark25@hackafe.net --server https://acme-v01.api.letsencrypt.org/directory --rsa-key-size 4096 -d {{ hostname }}
+    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}-a standalone{% endif %} -m mark25@hackafe.net --server https://acme-v01.api.letsencrypt.org/directory --rsa-key-size 4096 -d {{ ",".join([hostname] + aliases) }}
     - watch_in:
       - service: nginx
     - prereq:

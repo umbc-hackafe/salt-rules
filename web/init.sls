@@ -55,7 +55,7 @@ download-git-{{ hostname }}:
 {% endif %}
 
 {% if ssl_type == 'letsencrypt' %}
-{{ letsencrypt_hosts.append(hostname) }}
+{% if letsencrypt_hosts.append(hostname) %} {% endif %}
 /etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
   file.present:
     - prereq_in:
@@ -115,8 +115,6 @@ download-git-{{ hostname }}:
 /srv/http/letsencrypt/.well-known/acme-challenge:
   file.directory:
     - makedirs: True
-
-# {{ letsencrypt_hosts }}
 
 run-letsencrypt:
   cmd.run:

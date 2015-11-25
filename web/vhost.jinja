@@ -17,7 +17,19 @@ server {
   }
   {% endif %}
 
+  {% if ssl_type == "pass" %}
+  {% for path, loc in locations.items() %}
+  location {{ path }} {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://{{ loc.get('host', 'localhost') }}:{{ loc.get('port', '80') }}{{ loc.get('path', '/') }};
+  }
+  {% endfor %}
+  {% else %}
   return 301 https://{{ hostname }}$request_uri;
+  {% endif %}
 }
 
 server {
@@ -27,6 +39,7 @@ server {
 
   access_log /var/log/nginx/{{ hostname }}-ssl;
 
+  {% if ssl_type != "pass" %}
   ssl on;
   {% if ssl_type == "star" %}
   ssl_certificate /etc/nginx/ssl/wildcard.hackafe.net.cert;
@@ -34,6 +47,7 @@ server {
   {% elif ssl_type in ("manual", "letsencrypt") %}
   ssl_certificate /etc/nginx/ssl/{{ hostname }}.cert;
   ssl_certificate_key /etc/nginx/ssl/{{ hostname }}.key;
+  {% endif %}
   {% endif %}
 {% else %}
 server {
@@ -44,13 +58,13 @@ server {
   access_log /var/log/nginx/{{hostname}};
 {% endif %}
 
-{% for path, loc in locations.items() %}
 {% if ssl_type == "letsencrypt" %}
   location /.well-known {
     default_type text/plain;
     root /srv/http/letsencrypt;
   }
 {% endif %}
+{% for path, loc in locations.items() %}
   location {{ path }} {
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;

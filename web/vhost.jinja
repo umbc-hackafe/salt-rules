@@ -4,8 +4,13 @@
 # locations
 # ssl_type
 
+{% set otherport = '80' %}
+
 {% if ssl_type %}
+{% if ssl_type == "pass" %}
 {% set otherport = '443' %}
+{% endif %}
+
 server {
   listen 80;
   listen [::]:80;
@@ -51,7 +56,6 @@ server {
   {% endif %}
   {% endif %}
 {% else %}
-{% set otherport = '80' %}
 server {
   listen 80;
   listen [::]:80;

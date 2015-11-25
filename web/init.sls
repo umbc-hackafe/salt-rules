@@ -30,7 +30,7 @@ nginx:
 
 {% if host_type == 'pass' %}
   {% set host_type = 'vhost' %}
-  {% set locations['/']['host'] = hostname %}
+  {% set locations = {'/': {'host': hostname}} %}
 {% endif %}
 
 {% if host_type == 'static' %}

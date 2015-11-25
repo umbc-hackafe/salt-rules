@@ -38,7 +38,7 @@ run-letsencrypt:
 {% for hostname in pillar.websites[grains['host']] %}
 {% set path = ':'.join(['websites', grains['host'], hostname]) %}
 {% set host_type = salt['pillar.get'](path + ':type', 'pass') %}
-{% set ssl_type = salt['pillar.get'](path + ':ssl', 'star') %}
+{% set ssl_type = salt['pillar.get'](path + ':ssl', 'letsencrypt') %}
 {% set locations = salt['pillar.get'](path + ':locations', {'/': salt['pillar.get'](path)}) %}
 {% set aliases = salt['pillar.get'](path + ':aliases', []) %}
 {% set host = salt['pillar.get'](path + ':host', 'localhost') %}

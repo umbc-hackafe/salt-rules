@@ -15,6 +15,9 @@ server {
   listen 80;
   listen [::]:80;
   server_name {{ hostname }};
+  {% for alias in aliases %}
+  server_name {{ alias }};
+  {% endfor %}
 
   {% if ssl_type == "letsencrypt" %}
   location /.well-known {
@@ -42,6 +45,9 @@ server {
   listen 443;
   listen [::]:443;
   server_name {{ hostname }};
+  {% for alias in aliases %}
+  server_name {{ alias }};
+  {% endfor %}
 
   access_log /var/log/nginx/{{ hostname }}-ssl;
 

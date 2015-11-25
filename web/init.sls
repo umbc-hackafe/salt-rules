@@ -55,7 +55,7 @@ download-git-{{ hostname }}:
 {% endif %}
 
 {% if ssl_type == 'letsencrypt' %}
-{% set letsencrypt_hosts = letsencrypt_hosts + [hostname] %}
+{{ letsencrypt_hosts.append(hostname) }}
 /etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
   file.present:
     - prereq_in:

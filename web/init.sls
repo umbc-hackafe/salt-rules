@@ -58,7 +58,7 @@ download-git-{{ hostname }}:
 {% set letsencrypt_hosts = letsencrypt_hosts + [hostname] %}
 /etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
   file.present:
-    - prereq:
+    - prereq_in:
       - cmd: run-letsencrypt
 
 /etc/nginx/ssl/{{ hostname }}.cert:

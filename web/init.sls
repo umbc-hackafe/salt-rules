@@ -69,7 +69,7 @@ download-git-{{ hostname }}:
     - require_in:
       - service: nginx
 
-/etc/nginx/ssl/{{ hostname }}.cert:
+/etc/nginx/ssl/{{ hostname }}.key:
   file.symlink:
     - target: /etc/letsencrypt/live/{{ hostname }}/privkey.pem
     - require:

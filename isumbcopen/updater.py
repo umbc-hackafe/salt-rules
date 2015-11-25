@@ -52,7 +52,7 @@ else:
         exit(1)
 
     myumbc = req.text
-    soup = BeautifulSoup(myumbc)
+    soup = BeautifulSoup(myumbc, "html.parser")
     banners_normal = [item.text for item in soup.select(".stop.banner")]
     banners = [b.lower() for b in banners_normal]
 

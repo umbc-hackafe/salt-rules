@@ -65,7 +65,7 @@ download-git-{{ hostname }}:
   file.symlink:
     - target: /etc/letsencrypt/live/{{ hostname }}/fullchain.pem
     - require:
-      - sls: letsencrypt
+      - sls: web.letsencrypt
     - require_in:
       - service: nginx
 
@@ -73,7 +73,7 @@ download-git-{{ hostname }}:
   file.symlink:
     - target: /etc/letsencrypt/live/{{ hostname }}/privkey.pem
     - require:
-      - sls: letsencrypt
+      - sls: web.letsencrypt
     - require_in:
       - service: nginx
 {% endif %}
@@ -125,7 +125,7 @@ run-letsencrypt:
       - service: nginx
     - require:
       - file: /srv/http/letsencrypt/.well-known/acme-challenge
-      - sls: letsencrypt
+      - sls: web.letsencrypt
 {% endif %}
 
 {% endif %}

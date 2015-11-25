@@ -59,7 +59,7 @@ download-git-{{ hostname }}:
 /etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
   file.exists:
     - prereq_in:
-      - cmd: run-letsencrypt
+      - cmd: run-letsencrypt-{{ hostname }}
 
 /etc/nginx/ssl/{{ hostname }}.cert:
   file.symlink:

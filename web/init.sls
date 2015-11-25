@@ -17,23 +17,7 @@ nginx:
     - watch_in:
       - service: nginx
 
-{% set letsencrypt_hosts = [h for h,v in salt['pillar.get']('websites:' + grains['host'], {}).items() if v and 'ssl' in v and v['ssl'] == 'letsencrypt'] %}
-{% if letsencrypt_hosts %}
-/srv/http/letsencrypt/.well-known/acme-challenge:
-  file.directory:
-    - makedirs: True
-
-run-letsencrypt:
-  cmd.run:
-    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}--standalone{% endif %} -m mark25@hackafe.net --rsa-key-size 4096 -d {{ ','.join(letsencrypt_hosts) }}
-    - watch_in:
-      - service: nginx
-    - require_in:
-      - service: nginx
-    - require:
-      - file: /srv/http/letsencrypt/.well-known/acme-challenge
-      - sls: letsencrypt
-{% endif %}
+{% set letsencrypt_hosts = [] %}
 
 {% for hostname in pillar.websites[grains['host']] %}
 {% set path = ':'.join(['websites', grains['host'], hostname]) %}
@@ -71,6 +55,7 @@ download-git-{{ hostname }}:
 {% endif %}
 
 {% if ssl_type == 'letsencrypt' %}
+{% set letsencrypt_hosts = letsencrypt_hosts + [hostname] %}
 /etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
   file.present:
     - prereq:
@@ -125,4 +110,22 @@ download-git-{{ hostname }}:
     - watch_in:
       - service: nginx
 {% endfor %}
+
+{% if letsencrypt_hosts %}
+/srv/http/letsencrypt/.well-known/acme-challenge:
+  file.directory:
+    - makedirs: True
+
+run-letsencrypt:
+  cmd.run:
+    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}--standalone{% endif %} -m mark25@hackafe.net --rsa-key-size 4096 -d {{ ','.join(letsencrypt_hosts) }}
+    - watch_in:
+      - service: nginx
+    - require_in:
+      - service: nginx
+    - require:
+      - file: /srv/http/letsencrypt/.well-known/acme-challenge
+      - sls: letsencrypt
+{% endif %}
+
 {% endif %}

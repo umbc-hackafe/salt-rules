@@ -76,6 +76,16 @@ download-git-{{ hostname }}:
       - pkg: letsencrypt
     - require_in:
       - service: nginx
+
+run-letsencrypt-{{ hostname }}:
+  cmd.run:
+    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}-a standalone{% endif %} -m mark25@hackafe.net --rsa-key-size 4096 -d {{ hostname }}
+    - watch_in:
+      - service: nginx
+    - require:
+      - file: /srv/http/letsencrypt/.well-known/acme-challenge
+      - pkg: letsencrypt
+
 {% endif %}
 
 /etc/nginx/sites-available/{{ hostname }}:
@@ -118,17 +128,6 @@ letsencrypt:
 /srv/http/letsencrypt/.well-known/acme-challenge:
   file.directory:
     - makedirs: True
-
-run-letsencrypt:
-  cmd.run:
-    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}-a standalone{% endif %} -m mark25@hackafe.net --rsa-key-size 4096 -d {{ ','.join(letsencrypt_hosts) }}
-    - watch_in:
-      - service: nginx
-    - require_in:
-      - service: nginx
-    - require:
-      - file: /srv/http/letsencrypt/.well-known/acme-challenge
-      - pkg: letsencrypt
 {% endif %}
 
 {% endif %}

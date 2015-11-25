@@ -83,7 +83,7 @@ server {
     {% else %}
     {% if v in (True, False) %}
     {{ k }} {{ 'on' if v else 'off' }};
-    {% else %}
+    {% elif k not in ('source', 'ssl', 'type', 'locations', 'rewrite', 'host') %}
     {{ k }} {{ v }};
     {% endif %}
     {% endif %}

@@ -25,11 +25,12 @@ nginx:
 {% set ssl_type = salt['pillar.get'](path + ':ssl', 'letsencrypt') %}
 {% set locations = salt['pillar.get'](path + ':locations', {'/': salt['pillar.get'](path)}) %}
 {% set aliases = salt['pillar.get'](path + ':aliases', []) %}
-{% set host = salt['pillar.get'](path + ':host', hostname if host_type == 'pass' else 'localhost') %}
+{% set host = salt['pillar.get'](path + ':host', 'localhost') %}
 {% set rewrite = salt['pillar.get'](path + ':rewrite', []) %}
 
 {% if host_type == 'pass' %}
   {% set host_type = 'vhost' %}
+  {% set locations['/']['host'] = hostname %}
 {% endif %}
 
 {% if host_type == 'static' %}

@@ -57,7 +57,8 @@ download-git-{{ hostname }}:
 {% if ssl_type == 'letsencrypt' %}
 {% if letsencrypt_hosts.append(hostname) %} {% endif %}
 /etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
-  file.managed
+  file.managed:
+    - replace: False
 
 /etc/nginx/ssl/{{ hostname }}.cert:
   file.symlink:

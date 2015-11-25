@@ -17,7 +17,7 @@ nginx:
     - watch_in:
       - service: nginx
 
-{% set letsencrypt_hosts = [h for h,v in salt['pillar.get']('websites:' + grains['host'], {}) if v and 'ssl' in v and v['ssl'] == 'letsencrypt'] %}
+{% set letsencrypt_hosts = [h for h,v in salt['pillar.get']('websites:' + grains['host'], {}).items() if v and 'ssl' in v and v['ssl'] == 'letsencrypt'] %}
 {% if letsencrypt_hosts %}
 /srv/http/letsencrypt/.well-known/acme-challenge:
   file.directory:

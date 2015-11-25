@@ -121,7 +121,7 @@ letsencrypt:
 
 run-letsencrypt:
   cmd.run:
-    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}--standalone{% endif %} -m mark25@hackafe.net --rsa-key-size 4096 -d {{ ','.join(letsencrypt_hosts) }}
+    - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}-a standalone{% endif %} -m mark25@hackafe.net --rsa-key-size 4096 -d {{ ','.join(letsencrypt_hosts) }}
     - watch_in:
       - service: nginx
     - require_in:

@@ -63,6 +63,7 @@ download-git-{{ hostname }}:
 /etc/nginx/ssl/{{ hostname }}.cert:
   file.symlink:
     - target: /etc/letsencrypt/live/{{ hostname }}/fullchain.pem
+    - makedirs: True
     - require:
       - pkg: letsencrypt
     - require_in:
@@ -71,6 +72,7 @@ download-git-{{ hostname }}:
 /etc/nginx/ssl/{{ hostname }}.key:
   file.symlink:
     - target: /etc/letsencrypt/live/{{ hostname }}/privkey.pem
+    - makedirs: True
     - require:
       - pkg: letsencrypt
     - require_in:

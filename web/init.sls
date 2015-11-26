@@ -89,6 +89,15 @@ run-letsencrypt-{{ hostname }}:
       - file: /srv/http/letsencrypt/.well-known/acme-challenge
       - pkg: letsencrypt
 
+check-letsencrypt-cert-{{ hostname }}:
+  cmd.run:
+    - name: openssl x509 -noout -checkend 2592000 -in /etc/nginx/ssl/{{ hostname }}.cert && echo 'changed=no' || echo 'changed=yes'
+    - stateful: True
+    - watch_in:
+      - cmd: run-letsencrypt-{{ hostname }}
+    - require:
+      - file: /etc/letsencrypt/live/{{ hostname }}/fullchain.pem
+      - file: /etc/nginx/ssl/{{ hostname }}.cert
 {% endif %}
 
 /etc/nginx/sites-available/{{ hostname }}:

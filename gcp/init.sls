@@ -13,7 +13,7 @@ gcp-cups-connector-systemd:
 
 gcp-cups-connector-override:
   file.managed:
-    - name: /etc/systemd/system/gcp-cups-connector.d/override.conf
+    - name: /etc/systemd/system/gcp-cups-connector.service.d/override.conf
     - makedirs: True
     - source: salt://gcp/gcp-cups-connector.override
     - watch_in:

@@ -95,9 +95,6 @@ check-letsencrypt-cert-{{ hostname }}:
   cmd.run:
     - name: openssl x509 -noout -checkend 2592000 -in /etc/nginx/ssl/{{ hostname }}.cert && echo 'changed=no' || echo 'changed=yes'
     - stateful: True
-    - require:
-      - file: /etc/letsencrypt/live/{{ hostname }}/fullchain.pem
-      - file: /etc/nginx/ssl/{{ hostname }}.cert
 {% endif %}
 
 /etc/nginx/sites-available/{{ hostname }}:

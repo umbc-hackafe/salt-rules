@@ -9,7 +9,7 @@
   "gcp_xmpp_ping_timeout": "5s",
   "gcp_xmpp_ping_interval_default": "2m",
   "gcp_base_url": "https://www.google.com/cloudprint/",
-  "gcp_oauth_client_id": "{{ gcp.gcp_oauth-client_id }}",
+  "gcp_oauth_client_id": "{{ gcp.gcp_oauth_client_id }}",
   "gcp_oauth_client_secret": "{{ gcp.gcp_oauth_client_secret }}",
   "gcp_oauth_auth_url": "https://accounts.google.com/o/oauth2/auth",
   "gcp_oauth_token_url": "https://accounts.google.com/o/oauth2/token",

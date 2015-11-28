@@ -32,6 +32,7 @@ base:
     - audio
     - audio.pulse
     - cups
+    - gcp
     - homeautomation.i2c
     - homeautomation.cec
     - homeautomation.chromecast

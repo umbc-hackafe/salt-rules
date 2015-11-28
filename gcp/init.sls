@@ -15,7 +15,7 @@ gcp-cups-connector-override:
   file.managed:
     - name: /etc/systemd/system/gcp-cups-connector.d/override.conf
     - makedirs: True
-    - source: salt://print/gcp-cups-connector.override
+    - source: salt://gcp/gcp-cups-connector.override
     - watch_in:
       - cmd: daemon-reload
     - require:
@@ -23,7 +23,7 @@ gcp-cups-connector-override:
 
 /etc/gcp-cups-connector.config.json:
   file.managed:
-    - source: salt://print/gcp-cc-conf.json
+    - source: salt://gcp/gcp-cc-conf.json
     - template: jinja
     - context:
       gcp: grains['gcp']

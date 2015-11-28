@@ -25,5 +25,3 @@ gcp-cups-connector-override:
   file.managed:
     - source: salt://gcp/gcp-cc-conf.json
     - template: jinja
-    - context:
-      gcp: {{ grains['gcp'] }}

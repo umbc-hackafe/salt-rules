@@ -60,8 +60,6 @@ base:
 
   'pinkie.hackafe.net':
     - homeautomation.openhalper
-    - network.wifi
-    - network.wifi.rtl-8192
 
   'icinga.hackafe.net':
     - monitor.server

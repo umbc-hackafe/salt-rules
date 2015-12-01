@@ -1,6 +1,7 @@
-/opt/idiotic:
+idiotic-repo:
   git.latest:
-    - source: https://github.com/umbc-hackafe/idiotic.git
+    - name: https://github.com/umbc-hackafe/idiotic.git
+    - target: /opt/idiotic
     - require:
       - file: /opt/idiotic
     - watch_in:
@@ -14,14 +15,15 @@
     - force: True
     - makedirs: True
     - require:
-      - git: /opt/idiotic
+      - git: idiotic-repo
     - watch_in:
       - cmd: daemon-reload
       - service: idiotic
 
-/etc/idiotic:
+idiotic-config-repo:
   git.latest:
-    - source: https://github.com/umbc-hackafe/idiotic-config.git
+    - name: https://github.com/umbc-hackafe/idiotic-config.git
+    - target: /etc/idiotic
     - require:
       - file: /etc/idiotic
     - watch_in:
@@ -42,6 +44,6 @@ idiotic:
   service.running:
     - enable: True
     - require:
-      - git: /etc/idiotic
-      - git: /opt/idiotic
+      - git: idiotic-repo
+      - git: idiotic-config-repo
       - file: /etc/idiotic/conf.json

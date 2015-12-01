@@ -29,6 +29,7 @@ idiotic-repo:
 idiotic-config-repo:
   git.latest:
     - name: https://github.com/umbc-hackafe/idiotic-config.git
+    - force_clone: True
     - target: /etc/idiotic
     - require:
       - file: /etc/idiotic
@@ -41,6 +42,7 @@ idiotic-config-repo:
     - template: jinja
     - require:
       - file: /etc/idiotic
+      - git: idiotic-config-repo
     - watch_in:
       - service: /etc/idiotic
 

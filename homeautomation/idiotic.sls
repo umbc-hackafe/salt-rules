@@ -29,7 +29,7 @@ idiotic-repo:
     - force: True
     - makedirs: True
     - require:
-      - git: idioitc-repo
+      - git: idiotic-repo
     - watch_in:
       - service: idiotic
 

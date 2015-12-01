@@ -23,15 +23,9 @@ idiotic-repo:
       - service: idiotic
 
 /usr/bin/idiotic:
-  file.copy:
-    - source: /opt/idiotic/src/idiotic.py
-    - mode: 755
-    - force: True
+  file.symlink:
+    - target: /opt/idiotic/src/idiotic.py
     - makedirs: True
-    - require:
-      - git: idiotic-repo
-    - watch_in:
-      - service: idiotic
 
 /etc/idiotic:
   file.directory:

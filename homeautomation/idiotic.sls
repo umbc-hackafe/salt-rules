@@ -1,3 +1,7 @@
+/opt/idiotic:
+  file.directory:
+    - makedirs: True
+
 idiotic-repo:
   git.latest:
     - name: https://github.com/umbc-hackafe/idiotic.git
@@ -6,8 +10,6 @@ idiotic-repo:
       - file: /opt/idiotic
     - watch_in:
       - service: idiotic
-  file.directory:
-    - makedirs: True
 
 /usr/lib/systemd/system/idiotic.service:
   file.copy:
@@ -20,6 +22,10 @@ idiotic-repo:
       - cmd: daemon-reload
       - service: idiotic
 
+/etc/idiotic:
+  file.directory:
+    - makedirs: True
+
 idiotic-config-repo:
   git.latest:
     - name: https://github.com/umbc-hackafe/idiotic-config.git
@@ -28,8 +34,6 @@ idiotic-config-repo:
       - file: /etc/idiotic
     - watch_in:
       - service: idiotic
-  file.directory:
-    - makedirs: True
 
 /etc/idiotic/conf.json:
   file.managed:

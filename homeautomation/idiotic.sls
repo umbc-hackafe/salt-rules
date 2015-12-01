@@ -21,7 +21,7 @@
 
 /etc/idiotic:
   git.latest:
-    - source; https://github.com/umbc-hackafe/idiotic-config.git
+    - source: https://github.com/umbc-hackafe/idiotic-config.git
     - require:
       - file: /etc/idiotic
     - watch_in:

@@ -22,6 +22,17 @@ idiotic-repo:
       - cmd: daemon-reload
       - service: idiotic
 
+/usr/bin/idiotic:
+  file.copy:
+    - source: /opt/idiotic/src/idiotic.py
+    - mode: 755
+    - force: True
+    - makedirs: True
+    - require:
+      - git: idioitc-repo
+    - watch_in:
+      - service: idiotic
+
 /etc/idiotic:
   file.directory:
     - makedirs: True
@@ -53,3 +64,4 @@ idiotic:
       - git: idiotic-repo
       - git: idiotic-config-repo
       - file: /etc/idiotic/conf.json
+      - file: /usr/bin/idiotic

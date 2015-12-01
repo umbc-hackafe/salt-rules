@@ -156,3 +156,6 @@ base:
 
   'web.hackafe.net':
     - web
+
+  'idiotic.hackafe.net':
+    - homeautomation.idiotic

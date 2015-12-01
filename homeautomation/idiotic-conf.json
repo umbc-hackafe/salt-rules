@@ -1,0 +1,84 @@
+{
+    "api": {
+	"port": 80
+    },
+    "modules": {
+	"x10": {
+	    "host": "vinyl:5000"
+	},
+	"weather": {
+	    "latitude": {{ pillar.idiotic['weather']['latitude'] }},
+	    "longitude": {{ pillar.idiotic['weather']['longitude'] }}
+	},
+        "openhab_compat": {
+            "api_base": "/"
+        },
+        "webui": {
+            "api_base": "/",
+            "enable_graph": true,
+            "sections": [
+                {"title": "Scenes",
+                 "include_tags": ["_scene"]},
+                {"title": "Garage",
+                 "include_tags": ["garage"],
+                 "exclude_tags": ["nyi"]},
+                {"title": "Food",
+                 "include_tags": ["food"],
+                 "exclude_tags": ["nyi"]},
+                {"title": "Buttons",
+                 "include_tags": ["interaction"],
+                 "exclude_tags": ["nyi"]},
+                {"title": "Displays",
+                 "include_tags": ["display"],
+                 "exclude_tags": ["nyi"]},
+                {"title": "Lights",
+                 "include_tags": ["light"],
+                 "exclude_tags": ["nyi"]},
+                {"title": "Heat",
+                 "include_tags": ["heat"],
+                 "exclude_tags": ["nyi"]},
+                {"title": "ACs",
+                 "include_tags": ["ac"],
+                 "exclude_tags": ["nyi"]},
+                {"title": "Climate Stats",
+                 "include_tags": ["temperature", "humidity"],
+                 "include_items": ["brightness"],
+                 "exclude_tags": ["nyi"]}
+            ]
+        },
+        "modlet": {
+            "user": "{{ pillar.idiotic['modlet']['user'] }}",
+            "password": "{{ pillar.idiotic['modlet']['user'] }}",
+            "devices": {
+                "living": 1562,
+                "entertainment": 1573,
+                "bedroom": 1194,
+                "garage": 1640
+            },
+            "units": "C"
+        },
+        "sign": {
+            "host": "sign",
+            "port": 8800
+        },
+        "wink": {
+            "base_url": "https://winkapi.quirky.com",
+            "client_id": "quirky_wink_android_app",
+            "client_secret": "{{ pillar.idiotic['wink']['client_secret'] }}",
+            "username": "{{ pillar.idiotic['wink']['username'] }}",
+            "password": "{{ pillar.idiotic['wink']['password'] }}"
+        },
+        "alexa": {
+            "app_id": "{{ pillar.idiotic['alexa']['app_id'] }}"
+        }
+    },
+    "distribution": {
+	"port": 28300,
+	"connect": [{"host": "vegasix", "name": "vegasix", "port": 28300}]
+    },
+    "persistence": {
+        "method": "sql",
+        "old_engine": "postgresql://idiotic@sql:5432/idiotic",
+        "engine": "sqlite:///var/db/idiotic_state"
+    }
+}

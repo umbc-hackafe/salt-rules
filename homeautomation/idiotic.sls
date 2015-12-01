@@ -57,6 +57,22 @@ idiotic-config-repo:
     - watch_in:
       - service: /etc/idiotic
 
+idiotic-dependencies:
+  pkg.installed:
+    - pkgs:
+      - python
+      - python-aiohttp
+      - python-dateutil
+      - python-docopt
+      - python-flask
+      - python-psycopg2
+      - python-py-wink-git
+      - python-pygal
+      - python-pyalexa
+      - python-requests
+      - python-schedule
+      - python-sqlalchemy
+
 idiotic:
   service.running:
     - enable: True
@@ -65,3 +81,4 @@ idiotic:
       - git: idiotic-config-repo
       - file: /etc/idiotic/conf.json
       - file: /usr/bin/idiotic
+      - pkg: idiotic-dependencies

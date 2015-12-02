@@ -37,7 +37,9 @@ server {
   }
   {% endfor %}
   {% else %}
-  return 301 https://{{ hostname }}$request_uri;
+  location / {
+    return 301 https://{{ hostname }}$request_uri;
+  }
   {% endif %}
 }
 

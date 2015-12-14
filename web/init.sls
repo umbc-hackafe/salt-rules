@@ -28,6 +28,7 @@ nginx:
 {% set aliases = salt['pillar.get'](path + ':aliases', []) %}
 {% set host = salt['pillar.get'](path + ':host', 'localhost') %}
 {% set rewrite = salt['pillar.get'](path + ':rewrite', []) %}
+{% set default = salt['pillar.git'](path + ':default', False) %}
 
 {% if host_type == 'pass' %}
   {% set host_type = 'vhost' %}
@@ -111,6 +112,7 @@ check-letsencrypt-cert-{{ hostname }}:
       ssl_type: {{ ssl_type }}
       rewrite: {{ rewrite }}
       aliases: {{ aliases }}
+      default: {{ default }}
     - require:
       - pkg: nginx
     - require_in:

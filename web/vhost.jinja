@@ -12,8 +12,8 @@
 {% endif %}
 
 server {
-  listen 80;
-  listen [::]:80;
+  listen 80{% if default == True %} default{% endif %};
+  listen [::]:80{% if default == True %} default{% endif %};
   server_name {{ hostname }};
   {% for alias in aliases %}
   server_name {{ alias }};
@@ -44,8 +44,8 @@ server {
 }
 
 server {
-  listen 443;
-  listen [::]:443;
+  listen 443{% if default == True %} default{% endif %};
+  listen [::]:443{% if default == True %} default{% endif %};
   server_name {{ hostname }};
   {% for alias in aliases %}
   server_name {{ alias }};
@@ -65,8 +65,8 @@ server {
   {% endif %}
 {% else %}
 server {
-  listen 80;
-  listen [::]:80;
+  listen 80{% if default == True %} default{% endif %};
+  listen [::]:80{% if default == True %} default{% endif %};
   server_name {{ hostname }};
 
   access_log /var/log/nginx/{{hostname}};

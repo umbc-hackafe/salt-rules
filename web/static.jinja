@@ -2,8 +2,8 @@
 
 {% if ssl_type %}
 server {
-  listen 80;
-  listen [::]:80;
+  listen 80{% if default == True %} default{% endif %};
+  listen [::]:80{% if default == True %} default{% endif %};
   server_name {{ hostname }};
   {% if aliases %}
   {% for alias in aliases %}
@@ -24,8 +24,8 @@ server {
 }
 
 server {
-  listen 443;
-  listen [::]:443;
+  listen 443{% if default == True %} default{% endif %};
+  listen [::]:443{% if default == True %} default{% endif %};
 
   ssl on;
   {% if ssl_type == "star" %}
@@ -53,8 +53,8 @@ server {
   {% endif %}
 {% else %}
 server {
-  listen 80;
-  listen [::]:80;
+  listen 80{% if default == True %} default{% endif %};
+  listen [::]:80{% if default == True %} default{% endif %};
   server_name {{ hostname }};
   {% if aliases %}
   {% for alias in aliases %}

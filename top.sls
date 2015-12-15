@@ -159,3 +159,6 @@ base:
 
   'idiotic.hackafe.net':
     - homeautomation.idiotic
+
+  'deschedule.hackafe.net':
+    - deschedule

@@ -1,9 +1,10 @@
 [Match]
 Name={{ pillar.devname[grains['host']] }}
 
-{% if use_vlans %}
 [Network]
+{% if use_vlans %}
 {% for vlan in vlans %}
 VLAN={{ pillar.devname[grains['host']] }}.{{ vlan }}
 {% endfor %}
 {% endif %}
+DHCP=no

@@ -5,5 +5,7 @@ Name=br{{ vlan }}
 {% if vlan in pillar.dhcpnetworks[grains['host']] %}
 [Network]
 DHCP=ipv4
+{% else %}
+DHCP=no
 {% endif %}
 {% endif %}

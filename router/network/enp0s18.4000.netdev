@@ -1,0 +1,7 @@
+# WAN interface
+[NetDev]
+Name=enp0s18.4000
+Kind=vlan
+
+[VLAN]
+Id=4000

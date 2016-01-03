@@ -1,0 +1,8 @@
+[Match]
+Name=enp0s18
+
+[Network]
+VLAN=enp0s18.1
+VLAN=enp0s18.4000
+DHCP=no
+IPForward=yes

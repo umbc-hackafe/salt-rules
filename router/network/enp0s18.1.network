@@ -1,0 +1,16 @@
+[Match]
+Name=enp0s18.1
+
+[Network]
+Address=192.168.0.1/24
+DNS=8.8.8.8
+DNS=8.8.4.4
+IPForward=yes
+DHCP=no
+IPv6AcceptRouterAdvertisements=no
+
+[Route]
+Gateway=192.168.0.4
+Destination=192.168.0.0/16
+
+

@@ -1,0 +1,10 @@
+[Unit]
+Description=Enable ipv4 masquerading
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/enableforwarding
+
+[Install]
+WantedBy=multi-user.target

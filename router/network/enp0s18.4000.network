@@ -1,0 +1,8 @@
+# WAN interface
+[Match]
+Name=enp0s18.4000
+
+[Network]
+DHCP=yes
+IPForward=yes
+IPMasquerade=yes

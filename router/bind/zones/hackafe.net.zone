@@ -1,7 +1,7 @@
 $TTL 3600
 ; hackafe.net
 @ IN SOA vegafive.hackafe.net. mark.hackafe.net. (
-	2016010309  ; Serial
+	2016010310  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
@@ -35,10 +35,10 @@ vault		IN	CNAME	ghs.googlehosted.com.
 google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC/fTOEJdChhNCIWJ/BCUzqbDvOx1VhuhyftD/FgqShdzbfeEuzzVb9pYYr8QMFcs8CUABUhQRttC9j7CeFwalyXWQW1/4Cr7xcjYSTxJ4IKJJ9Cbfb0ZE+tK8Ob/WZodkKkxjimxjkdwsTzFiuli1LAwy4Uf7GA5uBsl9n/bju0wIDAQAB"
 
 salt		IN	A	192.168.0.9
-{% for server, ips in salt['mine.get']('*', 'network.ip_addrs').items() %}
-{% for ip in ips %}
-{% if ip != '127.0.0.1' and not ip.startswith('169.254') %}
+{%- for server, ips in salt['mine.get']('*', 'network.ip_addrs').items() -%}
+{%- for ip in ips -%}
+{%- if ip != '127.0.0.1' and not ip.startswith('169.254') -%}
 {{ server|replace('.hackafe.net','') }}	IN	A	{{ ip }}
-{% endif %}
-{% endfor %}
-{% endfor %}
+{%- endif -%}
+{%- endfor -%}
+{%- endfor -%}

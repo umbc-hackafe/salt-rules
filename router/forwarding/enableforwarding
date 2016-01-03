@@ -1,3 +1,5 @@
 #!/usr/bin/bash
 /usr/bin/iptables -t nat -A POSTROUTING -o enp0s18.4000 -j MASQUERADE
 /usr/bin/echo 1 > /proc/sys/net/ipv4/ip_forward
+/usr/bin/iptables -A PREROUTING -t nat -i enp0s18.4000 -p tcp --dport 80 -j DNAT --to 192.168.2.42:80
+

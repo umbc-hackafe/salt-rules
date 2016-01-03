@@ -1,0 +1,22 @@
+## Static
+#IPV4="192.168.0.2"
+#IPV6="2001:db8::dead:beaf"
+## Or dynamic:
+IPV4=$(curl -s "http://v4.ipv6-test.com/api/myip.php")
+IPV6=$(curl -s 'http://v6.ipv6-test.com/api/myip.php')
+
+KEY=/var/named/Khackafe.net.+165+20679.key
+NS=vegafive.hackafe.net
+DOMAIN=hackafe.net.
+ZONE=external-hackafe.net.
+
+nsupdate -k $KEY -v << EOF
+server $NS
+zone $ZONE
+update delete $DOMAIN A
+update delete $DOMAIN AAAA
+update add $DOMAIN 30 A $IPV4
+update add $DOMAIN 30 AAAA $IPV6
+show
+send
+EOF

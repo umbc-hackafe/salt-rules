@@ -1,0 +1,6 @@
+[Unit]
+Description=Update DNS
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/dyndns

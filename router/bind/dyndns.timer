@@ -2,7 +2,7 @@
 Description=Run nsupdate on a schedule
 
 [Timer]
-OnCaledar=minutely
+OnCalendar=minutely
 Persistent=true
 
 [Install]

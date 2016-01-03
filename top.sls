@@ -104,7 +104,7 @@ base:
 
   'vegafive.hackafe.net':
     - router.dhcp
-    - router.systemd-networkd
+    - router.systemd_networkd
     - router.bind
     - backup.storage
 

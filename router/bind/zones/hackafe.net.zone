@@ -1,6 +1,6 @@
 $TTL 3600
 ; hackafe.net
-@ IN SOA vegafive.hackafe.net. mail.hackafe.net. (
+@ IN SOA vegafive.hackafe.net. mark.hackafe.net. (
 	2015010201  ; Serial
 	28800      ; Refresh
 	1800       ; Retry

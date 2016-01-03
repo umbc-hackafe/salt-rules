@@ -103,8 +103,7 @@ base:
     - cups
 
   'vegafive.hackafe.net':
-    - containers
-    - network.bridge
+    - router
     - backup.storage
 
   'cloud.hackafe.net':

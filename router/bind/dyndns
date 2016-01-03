@@ -8,7 +8,7 @@ IPV6=$(curl -s 'http://v6.ipv6-test.com/api/myip.php')
 KEY=+m1tZ3f0QoByOOnRDLTy20muCyNlMZMhIBIuKsd4eQm03xgFVbaFhLQmDBXU3+iTj+e5gqcEXULo4nz6Ifv2AQ==
 NS=vegafive.hackafe.net
 DOMAIN=hackafe.net.
-ZONE=external-hackafe.net
+ZONE=hackafe.net
 
 nsupdate -y hmac-sha512:dyndns:$KEY -v << EOF
 server $NS

@@ -1,0 +1,9 @@
+$TTL 3600
+; hackafe.net
+@ IN SOA vegafive.hackafe.net. mail.hackafe.net. (
+	20150102 ; Serial
+	28800    ; Refresh
+	1800     ; Retry
+	604800   ; Expire - 1 week
+	86400 )  ; Minimum
+salt		IN	A	192.168.0.9

@@ -12,3 +12,11 @@ named:
   file.managed:
     - source: salt://router/bind/named.conf
     - template: jinja
+
+/var/named:
+  file.recurse:
+    - source: salt://router/bind/zones
+    - template: jinja
+    - watch_in:
+      - service: named
+

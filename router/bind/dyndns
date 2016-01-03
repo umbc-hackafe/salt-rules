@@ -1,4 +1,4 @@
-#!/usr/bin/dyndns
+#!/usr/bin/bash
 ## Static
 #IPV4="192.168.0.2"
 #IPV6="2001:db8::dead:beaf"

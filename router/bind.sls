@@ -15,7 +15,7 @@ named:
     - context:
       ignore_hosts:
         - vegasix.hackafe.net
-	- mail.hackafe.net
+        - mail.hackafe.net
 
 /var/named:
   file.recurse:

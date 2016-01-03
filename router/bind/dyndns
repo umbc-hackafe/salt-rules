@@ -5,18 +5,16 @@
 IPV4=$(curl -s "http://v4.ipv6-test.com/api/myip.php")
 IPV6=$(curl -s 'http://v6.ipv6-test.com/api/myip.php')
 
-KEY=/var/named/Khackafe.net.+165+20679.private
+KEY=+m1tZ3f0QoByOOnRDLTy20muCyNlMZMhIBIuKsd4eQm03xgFVbaFhLQmDBXU3+iTj+e5gqcEXULo4nz6Ifv2AQ==
 NS=vegafive.hackafe.net
 DOMAIN=hackafe.net.
-ZONE=external-hackafe.net.
+ZONE=external-hackafe.net
 
-nsupdate -k $KEY -v << EOF
+nsupdate -y hmac-sha512:dyndns:$KEY -v << EOF
 server $NS
 zone $ZONE
 update delete $DOMAIN A
-update delete $DOMAIN AAAA
 update add $DOMAIN 30 A $IPV4
-update add $DOMAIN 30 AAAA $IPV6
 show
 send
 EOF

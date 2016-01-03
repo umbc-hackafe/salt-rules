@@ -145,8 +145,8 @@ overlay-mount-{{container}}:
     - contents:
       - domain hackafe.net
       - search hackafe.net.
-      - nameserver 2001:470:e591:{{ network_num }}::1
-      - nameserver 192.168.{{ network_num }}.1
+      - nameserver 2001:470:e591:0::1
+      - nameserver 192.168.0.1
     - require:
       - mount: overlay-mount-{{container}}
     - require_in:

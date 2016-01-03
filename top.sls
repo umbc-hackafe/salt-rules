@@ -103,7 +103,7 @@ base:
     - cups
 
   'vegafive.hackafe.net':
-    - router
+    - router.dhcp
     - backup.storage
 
   'cloud.hackafe.net':

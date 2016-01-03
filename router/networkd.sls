@@ -22,11 +22,11 @@ enableforwarding:
 
 /etc/systemd/system/enableforwarding.service:
   file.managed:
-    - source: salt://forwarding/enableforwarding.service
+    - source: salt://router/forwarding/enableforwarding.service
     - template: jinja
 
 /usr/bin/enableforwarding:
   file.managed:
-    - source: salt://forwarding/enableforwarding
+    - source: salt://router/forwarding/enableforwarding
     - template: jinja
     - mode: 755

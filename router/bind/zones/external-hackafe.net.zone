@@ -38,7 +38,7 @@ google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQK
 {%- if server not in ignore_hosts -%}
 {%- for ip in ips -%}
 {%- if ip != '127.0.0.1' and not ip.startswith('169.254') %}
-{{ server|replace('.hackafe.net','') }}	IN	A	{{ ip }}
+{{ server|replace('.hackafe.net','') }}	IN	CNAME	hackafe.net.
 {%- endif -%}
 {%- endfor -%}
 {%- endif -%}

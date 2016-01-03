@@ -1,7 +1,7 @@
 dhcp:
   pkg.installed: []
 
-dhcpd:
+dhcpd4:
   service.running:
     - enable: True
     - require:

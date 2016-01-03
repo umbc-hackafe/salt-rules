@@ -21,5 +21,5 @@ named:
       - service: named
     - context:
       ignore_hosts:
-        - vegasix.hackafe.net
+        - vegafive.hackafe.net
         - mail.hackafe.net

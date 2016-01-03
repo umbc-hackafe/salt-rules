@@ -3,7 +3,7 @@ systemd-networkd:
   service.running:
     - enable: True
     - require:
-      - file: /etc/systemd/network/eth.network
+      - file: /etc/systemd/network
       - pkg: systemd-networkd
 
 enableforwarding:

@@ -12,10 +12,6 @@ named:
   file.managed:
     - source: salt://router/bind/named.conf
     - template: jinja
-    - context:
-      ignore_hosts:
-        - vegasix.hackafe.net
-        - mail.hackafe.net
 
 /var/named:
   file.recurse:
@@ -23,4 +19,7 @@ named:
     - template: jinja
     - watch_in:
       - service: named
-
+    - context:
+      ignore_hosts:
+        - vegasix.hackafe.net
+        - mail.hackafe.net

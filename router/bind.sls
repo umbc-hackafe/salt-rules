@@ -10,5 +10,5 @@ named:
 
 /etc/named.conf:
   file.managed:
-    - source: salt://router/bind/named.conf
+    - source: salt://bind/named.conf
     - template: jinja

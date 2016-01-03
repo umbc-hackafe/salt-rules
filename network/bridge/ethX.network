@@ -1,0 +1,6 @@
+[Match]
+Name={{ pillar.devname[grains['host']] }}.{{ vlan }}
+
+[Network]
+Bridge=br{{ vlan }}
+DHCP=no

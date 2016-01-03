@@ -1,0 +1,5 @@
+[NetDev]
+Description=Bridge for containers
+Name=br{{ vlan }}
+Kind=bridge
+

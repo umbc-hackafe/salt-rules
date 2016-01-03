@@ -1,5 +1,7 @@
 systemd-networkd:
   pkg.installed: []
+
+systemd-networkd:
   service.running:
     - enable: True
     - require:

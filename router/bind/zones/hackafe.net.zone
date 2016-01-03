@@ -1,7 +1,7 @@
 $TTL 3600
 ; hackafe.net
 @ IN SOA vegafive.hackafe.net. mark.hackafe.net. (
-	2016010304  ; Serial
+	2016010307  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
@@ -37,6 +37,6 @@ google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQK
 salt		IN	A	192.168.0.9
 {% for server, ip in salt['mine.get']('*', 'network.ip_addrs') %}
 {% if ip != '127.0.0.1' and not ip.startswith('169.254') %}
-{{ server|replace '.hackafe.net' '' }}	IN	A	{{ ip }}
+{{ server|replace('.hackafe.net','') }}	IN	A	{{ ip }}
 {% endif %}
 {% endfor %}

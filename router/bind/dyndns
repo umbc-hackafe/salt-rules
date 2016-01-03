@@ -5,7 +5,7 @@
 IPV4=$(curl -s "http://v4.ipv6-test.com/api/myip.php")
 IPV6=$(curl -s 'http://v6.ipv6-test.com/api/myip.php')
 
-KEY=/var/named/Khackafe.net.+165+20679.key
+KEY=/var/named/Khackafe.net.+165+20679.private
 NS=vegafive.hackafe.net
 DOMAIN=hackafe.net.
 ZONE=external-hackafe.net.

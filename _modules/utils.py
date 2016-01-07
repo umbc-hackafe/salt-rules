@@ -18,3 +18,6 @@ def grouped(iterable, n):
 
 def pairwise(l):
     return grouped(l, 2)
+
+def exclude_keys(dic, *keys):
+    return {k: v for k, v in dic.iteritems() if k not in keys}

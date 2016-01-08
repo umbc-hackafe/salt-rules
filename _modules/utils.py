@@ -1,4 +1,5 @@
 from itertools import izip
+from copy import deepcopy
 import re
 
 def is_list(obj):
@@ -21,3 +22,6 @@ def pairwise(l):
 
 def exclude_keys(dic, *keys):
     return {k: v for k, v in dic.iteritems() if k not in keys}
+
+def copy(dic):
+    return deepcopy(dic)

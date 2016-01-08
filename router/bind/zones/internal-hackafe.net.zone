@@ -2,7 +2,7 @@
 $TTL 3600
 ; hackafe.net
 @ IN SOA vegafive.hackafe.net. mark.hackafe.net. (
-	2016010806  ; Serial
+	2016010807  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
@@ -25,7 +25,6 @@ docs		IN	CNAME	ghs.googlehosted.com.
 drive		IN	CNAME	ghs.googlehosted.com.
 groups		IN	CNAME	ghs.googlehosted.com.
 hangouts	IN	CNAME	ghs.googlehosted.com.
-mail		IN	CNAME	ghs.googlehosted.com.
 plus		IN	CNAME	ghs.googlehosted.com.
 sheets		IN	CNAME	ghs.googlehosted.com.
 sites		IN	CNAME	ghs.googlehosted.com.

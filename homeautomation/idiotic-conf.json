@@ -48,7 +48,7 @@
         },
         "modlet": {
             "user": "{{ pillar.idiotic['modlet']['user'] }}",
-            "password": "{{ pillar.idiotic['modlet']['user'] }}",
+            "password": "{{ pillar.idiotic['modlet']['password'] }}",
             "devices": {
                 "living": 1562,
                 "entertainment": 1573,

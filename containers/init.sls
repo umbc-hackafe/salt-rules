@@ -60,6 +60,9 @@ create-base:
     - require_in: create-base
     - makedirs: True
 
+machines.target:
+  service.enabled: []
+
 {% for service in ["salt-minion", "systemd-networkd", "systemd-resolved"] %}
 /data/baseroot/etc/systemd/system/multi-user.target.wants/{{ service }}.service:
   file.symlink:

@@ -99,6 +99,8 @@ add-minion-config:
     - makedirs: True
 
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
+{% set extra_mount_opts = salt['pillar.get'](':'.join(['containerextras', grains['host'], 'mount-opts']), []) %}
+
 {% for container in pillar.containerhosts[grains['host']] %}
 {% set vlan_id = salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'vlan']), 3) %}
 {% set network_num = vlan_id - 1 %}
@@ -135,7 +137,7 @@ overlay-mount-{{container}}:
   mount.mounted:
     - fstype: overlay
     - name: /var/lib/machines/{{container}}
-    - opts: rw,relatime,lowerdir=/data/baseroot,upperdir=/data/overlay/{{container}},workdir=/data/work/{{container}}
+    - opts: rw,relatime,lowerdir=/data/baseroot,upperdir=/data/overlay/{{container}},workdir=/data/work/{{container}}{% if extra_mount_opts %},{{ ','.join(extra_mount_opts) }}{% endif %}
     - device: /var/lib/machines/{{container}}
     - persist: True
     - require:

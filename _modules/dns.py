@@ -26,7 +26,7 @@ def static_resolve(host):
         domain = network['options']['domain-name']
         if host.endswith('.' + domain):
             unqualified_host = host[:-len(domain)-1]
-            if unqualified_host in network['hosts']:
+            if unqualified_host in network.get('hosts', {}):
                 return network['hosts'][unqualified_host].get('ip', host)
 
     return host

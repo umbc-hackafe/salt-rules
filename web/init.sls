@@ -24,12 +24,6 @@ nginx:
     - watch_in:
       - service: nginx
 
-/etc/nginx/sites-enabled/default:
-  file.managed:
-    - source: salt://web/default
-    - watch_in:
-      - service: nginx
-
 {% set letsencrypt_hosts = [] %}
 
 {% for hostname in pillar.websites[grains['host']] %}

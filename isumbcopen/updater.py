@@ -73,7 +73,11 @@ def detail(t):
 if banners:
     for text in banners:
         debug("text: {}", text.replace("\n", ""))
-        datestring = " ".join([word for word in text.replace("noon", "12pm").split() if (re.match("[0-9]", word) and len(word) < 6) or word in days or any([word.startswith(d) for d in days]) or word in months])
+        text = text.replace("noon", "12pm")
+        text = text.replace("p.m.", "pm")
+        text = text.replace("a.m.", "am")
+        text = text.split(".")[0]
+        datestring = " ".join([word for word in text.split() if (re.match("[0-9]", word) and len(word) < 6) or word in days or any([word.startswith(d) for d in days]) or word in months or re.match("[0-9]* ?[pa]\\.? ?m\\.?", word)])
         debug("date: {}", datestring)
 
         if not datestring or not datestring.strip():

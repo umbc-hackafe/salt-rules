@@ -3,6 +3,7 @@ Name=enp0s18.1
 
 [Network]
 Address=192.168.0.1/24
+Address=2001:470:e591::1/64
 DNS=8.8.8.8
 DNS=8.8.4.4
 IPForward=yes
@@ -13,4 +14,7 @@ IPv6AcceptRouterAdvertisements=no
 Gateway=192.168.0.4
 Destination=192.168.0.0/16
 
+[Route]
+Gateway=2001:470:e591:0:6a78:4cff:fec8:5600
+Destination=2001:470:e591::/48
 

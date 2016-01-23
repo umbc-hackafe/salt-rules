@@ -6,3 +6,4 @@ Name=enp0s18.4000
 DHCP=yes
 IPForward=yes
 IPMasquerade=yes
+Tunnel=he-ipv6

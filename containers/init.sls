@@ -57,7 +57,7 @@ arch-install-scripts:
   file.managed:
     - source: salt://containers/saltstack.repo
     - require:
-      - cmd: create-base
+      - cmd: create-base-{{ arch }}
 {% endif %}
 
 install-baseroot-{{ arch }}:
@@ -79,7 +79,7 @@ create-base-{{ arch }}:
 
 {{ baseroot }}/etc/machine-id:
   file.absent:
-    - require_in: create-base
+    - require_in: create-base-{{ arch }}
 
 {{ baseroot }}/etc/securetty:
   file.append:
@@ -92,7 +92,7 @@ create-base-{{ arch }}:
   file.symlink:
     - target: /usr/lib/systemd/system/{{ service }}.service
     - force: True
-    - require_in: create-base
+    - require_in: create-base-{{ arch }}
     - makedirs: True
 {% endfor %}
 

@@ -122,6 +122,7 @@ add-minion-config:
 {{ baseroot }}:
   file.directory:
     - makedirs: True
+{% endfor %}
 
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
 {% set extra_mount_opts = salt['pillar.get'](':'.join(['containerextras', grains['host'], 'mount-opts']), []) %}

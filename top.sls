@@ -76,7 +76,7 @@ base:
   'thegreatandpowerfultrixie.hackafe.net':
     - homeautomation.garage
     - homeautomation.openhalper
-    - homeaetomation.lights
+    - homeautomation.lights
     - ci.slave
 
   'ci':

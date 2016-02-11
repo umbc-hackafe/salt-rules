@@ -17,13 +17,38 @@
   file.absent
 
 {% set baseroot_install = salt['grains.filter_by']({
-  'Arch': 'pacstrap -cd /data/baseroot base salt-zmq',
-  'RedHat': 'yum --installroot=/data/baseroot -y install salt-minion'
-  }, grain='os_family', default='Arch')
+  'Arch': {
+    'x86_64': 'pacstrap -cd /data/baseroot base salt-zmq',
+    'i686': 'pacstrap -cd /data/baseroot_i686 -C /usr/local/etc/pacman_x86.conf base salt-zmq'
+  },
+  'RedHat': {
+    'x86_64': 'yum --installroot=/data/baseroot -y install salt-minion',
+    'i686': 'yum --installroot=/data/baseroot_i686 -y install salt-minion'
+  },
+}, grain='os_family', default='Arch')
 %}
 
+
+{% if grains['osarch'] == 'x86_64' %}
+{% set arches = ['x86_64', 'i686'] %}
+{% set basedirs = {'x86_64': '/data/baseroot', 'i686': '/data/baseroot_i686' } %}
+{% if salt['grains.get']('os_family') == 'Arch' %}
+/usr/local/etc/pacman_x86.conf:
+  file.managed:
+    - source: salt://containers/pacman_x86.conf
+    - require_in:
+      - cmd: install-baseroot-i686
+{% endif %}
+{% else %}
+{% set arches = ['i686'] %}
+{% set basedirs = { 'i686': '/data/baseroot' } %}
+{% endif %}
+
+{% for arch in arches %}
+{% set baseroot = basedirs[arch] %}
 {% if grains['os_family'] == 'RedHat' %}
-/data/baseroot/etc/yum.repos.d/saltstack.repo:
+
+{{ baseroot }}/etc/yum.repos.d/saltstack.repo:
   file.managed:
     - source: salt://containers/saltstack.repo
     - require:
@@ -33,38 +58,38 @@ arch-install-scripts:
   pkg.installed
 {% endif %}
 
-install-baseroot:
+install-baseroot-{{ arch }}:
   cmd.run:
-    - name: {{ baseroot_install }}
-    - unless: test "$(ls -A /data/baseroot)"
+    - name: {{ baseroot_install[arch] }}
+    - unless: test "$(ls -A {{ baseroot }})"
     - require:
 {% if grains['os_family'] == 'Arch' %}
       - pkg: arch-install-scripts
 {% endif %}
-      - file: /data/baseroot
+      - file: {{ baseroot }}
 
-create-base:
+create-base-{{ arch }}:
   cmd.run:
     - name: true
     - unless: true
     - require:
-      - cmd: install-baseroot
+      - cmd: install-baseroot-{{ arch }}
 
-/data/baseroot/etc/machine-id:
+{{ baseroot }}/etc/machine-id:
   file.absent:
     - require_in: create-base
 
-/data/baseroot/etc/securetty:
+{{ baseroot }}/etc/securetty:
   file.append:
     - text: pts/0
-    - require_in: create-base
+    - require_in: create-base-{{ arch }}
     - makedirs: True
 
 machines.target:
   service.enabled: []
 
 {% for service in ["salt-minion", "systemd-networkd", "systemd-resolved"] %}
-/data/baseroot/etc/systemd/system/multi-user.target.wants/{{ service }}.service:
+{{ baseroot }}/etc/systemd/system/multi-user.target.wants/{{ service }}.service:
   file.symlink:
     - target: /usr/lib/systemd/system/{{ service }}.service
     - force: True
@@ -74,11 +99,11 @@ machines.target:
 
 add-minion-config:
   file.managed:
-    - name: /data/baseroot/etc/salt/minion.yaml
+    - name: {{ baseroot }}/etc/salt/minion.yaml
     - source: salt://managed/minion.yaml
     - makedirs: True
     - require:
-      - file: /data/baseroot
+      - file: {{ baseroot }}
 
 {% if salt['grains.get']('systemd:version') >= 219 %}
 /etc/systemd/nspawn:
@@ -94,7 +119,7 @@ add-minion-config:
 /data/work:
   file.directory:
     - makedirs: True
-/data/baseroot:
+{{ baseroot }}:
   file.directory:
     - makedirs: True
 
@@ -104,6 +129,9 @@ add-minion-config:
 {% for container in pillar.containerhosts[grains['host']] %}
 {% set vlan_id = salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'vlan']), 3) %}
 {% set network_num = vlan_id - 1 %}
+
+{% set container_arch = salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'arch']), salt['grains.get']('osarch')) %}
+{% set container_baseroot = basedirs[container_arch] %}
 
 {% if salt['grains.get']('systemd:version') >= 219 %}
 /etc/systemd/nspawn/{{ container }}.nspawn:
@@ -137,7 +165,7 @@ overlay-mount-{{container}}:
   mount.mounted:
     - fstype: overlay
     - name: /var/lib/machines/{{container}}
-    - opts: rw,relatime,lowerdir=/data/baseroot,upperdir=/data/overlay/{{container}},workdir=/data/work/{{container}}{% if extra_mount_opts %},{{ ','.join(extra_mount_opts) }}{% endif %}
+    - opts: rw,relatime,lowerdir={{ container_baseroot }},upperdir=/data/overlay/{{container}},workdir=/data/work/{{container}}{% if extra_mount_opts %},{{ ','.join(extra_mount_opts) }}{% endif %}
     - device: /var/lib/machines/{{container}}
     - persist: True
     - require:

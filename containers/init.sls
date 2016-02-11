@@ -44,18 +44,20 @@
 {% set basedirs = { 'i686': '/data/baseroot' } %}
 {% endif %}
 
+{% if grains['os_family'] == 'Arch' %}
+arch-install-scripts:
+  pkg.installed
+{% endif %}
+
 {% for arch in arches %}
 {% set baseroot = basedirs[arch] %}
-{% if grains['os_family'] == 'RedHat' %}
 
+{% if grains['os_family'] == 'RedHat' %}
 {{ baseroot }}/etc/yum.repos.d/saltstack.repo:
   file.managed:
     - source: salt://containers/saltstack.repo
     - require:
       - cmd: create-base
-{% else %}
-arch-install-scripts:
-  pkg.installed
 {% endif %}
 
 install-baseroot-{{ arch }}:
@@ -85,9 +87,6 @@ create-base-{{ arch }}:
     - require_in: create-base-{{ arch }}
     - makedirs: True
 
-machines.target:
-  service.enabled: []
-
 {% for service in ["salt-minion", "systemd-networkd", "systemd-resolved"] %}
 {{ baseroot }}/etc/systemd/system/multi-user.target.wants/{{ service }}.service:
   file.symlink:
@@ -97,13 +96,22 @@ machines.target:
     - makedirs: True
 {% endfor %}
 
-add-minion-config:
+add-minion-config-{{ arch }}:
   file.managed:
     - name: {{ baseroot }}/etc/salt/minion.yaml
     - source: salt://managed/minion.yaml
     - makedirs: True
     - require:
       - file: {{ baseroot }}
+
+{{ baseroot }}:
+  file.directory:
+    - makedirs: True
+
+{% endfor %}
+
+machines.target:
+  service.enabled: []
 
 {% if salt['grains.get']('systemd:version') >= 219 %}
 /etc/systemd/nspawn:
@@ -119,10 +127,6 @@ add-minion-config:
 /data/work:
   file.directory:
     - makedirs: True
-{{ baseroot }}:
-  file.directory:
-    - makedirs: True
-{% endfor %}
 
 {% if pillar.containerhosts and grains['host'] in pillar.containerhosts %}
 {% set extra_mount_opts = salt['pillar.get'](':'.join(['containerextras', grains['host'], 'mount-opts']), []) %}

@@ -19,7 +19,7 @@
 {% set baseroot_install = salt['grains.filter_by']({
   'Arch': {
     'x86_64': 'pacstrap -cd /data/baseroot base salt-zmq',
-    'i686': 'pacstrap -cd /data/baseroot_i686 -C /usr/local/etc/pacman_x86.conf base salt-zmq'
+    'i686': 'pacstrap -cdC /usr/local/etc/pacman_x86.conf /data/baseroot_i686 base salt-zmq'
   },
   'RedHat': {
     'x86_64': 'yum --installroot=/data/baseroot -y install salt-minion',

@@ -32,7 +32,7 @@ is_slave:
     - value: True
 
 crappy-ssh-config:
-  file.append:
+  file.line:
     - name: /etc/sshd/sshd_config
     - mode: Replace
     - match: ^KexAlgorithms.*

@@ -1,5 +1,8 @@
 {% if pillar.phone_cisco %}
 {% for phone_name, phone in pillar.phone_cisco.items() %}
+{% set model = phone.get('model', 'cisco_7960') %}
+
+{% if model == 'cisco_7960' %}
 voip_ctlsep_{{ phone.MAC }}:
   file.managed:
     - name: /srv/tftp/CTLSEP{{ phone.MAC | upper }}.tlv
@@ -24,6 +27,17 @@ voip_sip_{{ phone.MAC }}:
       phone_name: {{ phone_name }}
       phone: {{ phone }}
       intercom: {{ pillar.phone_intercom }}
+{% elif model == 'cisco_7904G' %}
+voip_7940_{{ phone.MAC }}:
+  file.managed:
+    - name: /srv/tftp/ff{{ phone.MAC | lower }}
+    - source: salt://voip/cisco_7904.cnf
+
+voip_sep7940_{{ phone.MAC }}:
+  file.managed:
+    - name: /srv/tftp/SEP{{ phone.MAC | upper }}.cnf.xml
+    - source: salt://voip/SEP_7904.cnf.xml
+{% endif %}
 {% endfor %}
 {% endif %}
 

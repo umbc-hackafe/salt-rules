@@ -113,7 +113,7 @@ base:
     - login.reversessh
     - location.prgmr
 
-  'cibuildslave2.hackafe.net':
+  'x86buildslave.hackafe.net':
     - ci.slave
 
   'sql.hackafe.net':

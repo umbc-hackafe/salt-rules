@@ -28,12 +28,12 @@ voip_sip_{{ phone.MAC }}:
       phone: {{ phone }}
       intercom: {{ pillar.phone_intercom }}
 {% elif model == 'cisco_7904G' %}
-voip_7940_{{ phone.MAC }}:
+voip_7904_{{ phone.MAC }}:
   file.managed:
     - name: /srv/tftp/ff{{ phone.MAC | lower }}
     - source: salt://voip/cisco_7904.cnf
 
-voip_sep7940_{{ phone.MAC }}:
+voip_sep7904_{{ phone.MAC }}:
   file.managed:
     - name: /srv/tftp/SEP{{ phone.MAC | upper }}.cnf.xml
     - source: salt://voip/SEP_7904.cnf.xml

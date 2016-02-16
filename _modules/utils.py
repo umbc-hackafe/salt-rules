@@ -14,6 +14,9 @@ def is_ip(obj):
 def is_str(obj):
     return isinstance(obj, str)
 
+def is_int(obj):
+    return isinstance(obj, int)
+
 def grouped(iterable, n):
     return izip(*[iter(iterable)]*n)
 

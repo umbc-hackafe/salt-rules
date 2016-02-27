@@ -148,6 +148,7 @@ base:
 
   'twilight.hackafe.net':
     - homeautomation.lights
+    - ci.slave
 
   'isumbcopen.hackafe.net':
     - isumbcopen

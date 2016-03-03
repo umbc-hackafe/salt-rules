@@ -67,6 +67,8 @@ download-git-{{ hostname }}:
 /etc/letsencrypt/live/{{ hostname }}/fullchain.pem:
   file.managed:
     - replace: False
+    - require:
+      - cmd: run-letsencrypt-{{ hostname }}
 
 /etc/nginx/ssl/{{ hostname }}.cert:
   file.symlink:
@@ -91,18 +93,10 @@ run-letsencrypt-{{ hostname }}:
     - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}-a standalone{% endif %} -m mark25@hackafe.net --server https://acme-v01.api.letsencrypt.org/directory --renew-by-default --rsa-key-size 4096 -d {{ ",".join([hostname] + aliases) }}
     - watch_in:
       - service: nginx
-    - onchanges:
-      - cmd: check-letsencrypt-cert-{{ hostname }}
-    - prereq:
-      - file: /etc/letsencrypt/live/{{ hostname }}/fullchain.pem
+    - unless: openssl x509 -noout -checkend 2592000 -in /etc/nginx/ssl/{{ hostname }}.cert
     - require:
       - file: /srv/http/letsencrypt/.well-known/acme-challenge
       - pkg: letsencrypt
-
-check-letsencrypt-cert-{{ hostname }}:
-  cmd.run:
-    - name: openssl x509 -noout -checkend 2592000 -in /etc/nginx/ssl/{{ hostname }}.cert && echo 'changed=no' || echo 'changed=yes'
-    - stateful: True
 {% endif %}
 
 /etc/nginx/sites-available/{{ hostname }}:

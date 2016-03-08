@@ -43,7 +43,6 @@ base:
     - homeautomation.openhalper
     - network.dhcp
     - network.wifi
-    - network.wifi.rtl-8192
     - ci.slave
 
   'vinyl.hackafe.net':

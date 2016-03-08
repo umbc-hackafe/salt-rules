@@ -4,15 +4,9 @@ wpa_supplicant_conf:
     - source: salt://network/wifi/hackafe-wpa_supplicant.conf
     - require:
       - pkg: wpa_supplicant
-wpa_supplicant_wext:
-  file.managed:
-    - name: /usr/lib/systemd/system/wpa_supplicant-wext@.service
-    - source: salt://network/wifi/hackafe-wpa_supplicant-wext@.service
-    - require:
-      - pkg: wpa_supplicant
 Daemon-Reload:
   cmd.wait:
     - name: systemctl daemon-reload
     - cwd: /
     - watch:
-      - file: wpa_supplicant_wext
+      - file: wpa_supplicant_conf

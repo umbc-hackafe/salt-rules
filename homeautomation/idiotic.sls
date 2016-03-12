@@ -31,6 +31,10 @@ idiotic-repo:
   file.directory:
     - makedirs: True
 
+/etc/idiotic/modules:
+  file.directory:
+    - makedirs: True
+
 idiotic-config-repo:
   git.latest:
     - name: https://github.com/umbc-hackafe/idiotic-config.git
@@ -38,6 +42,16 @@ idiotic-config-repo:
     - target: /etc/idiotic
     - require:
       - file: /etc/idiotic
+    - watch_in:
+      - service: idiotic
+
+idiotic-webui-repo:
+  git.latest:
+    - name: https://github.com/umbc-hackafe/idiotic-webui.git
+    - force_clone: True
+    - target: /etc/idiotic/modules/webui
+    - require:
+      - file: /etc/idiotic/modules
     - watch_in:
       - service: idiotic
 

@@ -16,6 +16,10 @@ base:
     - containers
     - network.bridge
 
+  'vista.hackafe.net':
+    - containers
+    - network.bridge
+
   'watson.hackafe.net':
     - containers
     - network.bridge

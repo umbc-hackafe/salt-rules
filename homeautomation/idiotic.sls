@@ -1,11 +1,6 @@
 /opt/idiotic:
   file.absent: []
 
-idiotic:
-  pkg.latest:
-    - watch_in:
-      - service: idiotic
-
 /etc/idiotic/modules:
   file.directory:
     - require:
@@ -54,6 +49,9 @@ idiotic-dependencies:
       - python-sqlalchemy
 
 idiotic:
+  pkg.latest:
+    - watch_in:
+      - service: idiotic
   service.running:
     - enable: True
     - require:

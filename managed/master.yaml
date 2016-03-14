@@ -12,7 +12,7 @@ file_roots:
 
 pillar_roots:
   base:
-    - /var/git/saltmaster/pillar
+    - /var/git/pillar
 
 file_ignore_regex:
   - '/\.git($|/)'

@@ -168,3 +168,6 @@ base:
 
   'deschedule.hackafe.net':
     - deschedule
+
+  'git.hackafe.net':
+    - gogs

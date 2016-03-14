@@ -151,7 +151,7 @@ machines.target:
     - require:
       - file: /etc/systemd/nspawn
     - require_in:
-      - service: {{container}}
+      - service: machine-service-{{container}}
 {% endif %}
 
 /var/lib/machines/{{container}}:
@@ -188,7 +188,7 @@ overlay-mount-{{container}}:
     - require:
       - mount: overlay-mount-{{container}}
     - require_in:
-      - service: {{container}}
+      - service: machine-service-{{container}}
 
 create-minion-id-{{container}}:
   file.managed:
@@ -198,7 +198,7 @@ create-minion-id-{{container}}:
     - require:
       - mount: overlay-mount-{{container}}
     - require_in:
-      - service: {{container}}
+      - service: machine-service-{{container}}
 
 create-machine-id-{{container}}:
   cmd.run:
@@ -207,7 +207,7 @@ create-machine-id-{{container}}:
     - require:
       - mount: overlay-mount-{{container}}
 
-{{container}}:
+machine-service-{{container}}:
   service.running:
     - name: systemd-nspawn@{{container}}.service
     - enable: True

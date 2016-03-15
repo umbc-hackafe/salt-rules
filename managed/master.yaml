@@ -23,3 +23,7 @@ postgres:
   - user: postgres
   - pass: ''
   - maintainence_db: postgres
+
+reactor:
+  - 'salt/fileserver/gitfs/update':
+    - /srv/reactor/update_fileserver.sls

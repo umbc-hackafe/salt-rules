@@ -32,3 +32,10 @@ salt-master-autosign:
     - makedirs: True
     - require:
       - group: salt-group
+
+/srv/reactor/update_fileserver.sls:
+  file.managed:
+    - makedirs: True
+    - contents: |
+      update_fileserver:
+        runner.fileserver.update

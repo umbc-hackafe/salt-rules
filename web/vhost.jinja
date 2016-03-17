@@ -55,15 +55,13 @@ server {
 
   access_log /var/log/nginx/{{ hostname }}-ssl;
 
-  {% if ssl_type != "pass" %}
   ssl on;
-  {% if ssl_type == "star" %}
+  {% if ssl_type in ("star", "pass") %}
   ssl_certificate /etc/nginx/ssl/wildcard.hackafe.net.cert;
   ssl_certificate_key /etc/nginx/ssl/wildcard.hackafe.net.key;
   {% elif ssl_type in ("manual", "letsencrypt") %}
   ssl_certificate /etc/nginx/ssl/{{ hostname }}.cert;
   ssl_certificate_key /etc/nginx/ssl/{{ hostname }}.key;
-  {% endif %}
   {% endif %}
 {% else %}
 server {

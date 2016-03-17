@@ -5,10 +5,12 @@
 # ssl_type
 
 {% set otherport = '80' %}
+{% set otherproto = 'http' %}
 
 {% if ssl_type %}
 {% if ssl_type == "pass" %}
 {% set otherport = '443' %}
+{% set otherproto = 'https' %}
 {% endif %}
 
 server {
@@ -84,7 +86,7 @@ server {
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_pass http://{{ salt['dns.static_resolve'](loc.get('host', 'localhost')) }}:{{ loc.get('port', otherport) }}{{ loc.get('path', '/') }};
+    proxy_pass {{ otherproto }}://{{ salt['dns.static_resolve'](loc.get('host', 'localhost')) }}:{{ loc.get('port', otherport) }}{{ loc.get('path', '/') }};
   }
 {% endfor %}
 }

@@ -50,6 +50,7 @@ idiotic-dependencies:
 
 idiotic:
   pkg.latest:
+    - name: idiotic-git
     - watch_in:
       - service: idiotic
   service.running:

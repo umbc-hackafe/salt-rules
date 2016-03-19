@@ -1,6 +1,11 @@
+python-pygit2:
+  pkg.installed: []
+
 salt-master:
   service.running:
     - enable: True
+    - require:
+      - pkg: python-pygit2
 
 salt-master-config:
   file.managed:
@@ -18,20 +23,6 @@ salt-master-autosign:
       - salt://managed/autosign.conf
     - watch_in:
       - service: salt-master
-
-/var/git/saltmaster:
-  file.directory:
-    - user: root
-    - group: salt
-    - dir_mode: 2775
-    - file_mode: 664
-    - recurse:
-      - group
-      - mode
-      - ignore_files
-    - makedirs: True
-    - require:
-      - group: salt-group
 
 /srv/reactor/update_fileserver.sls:
   file.managed:

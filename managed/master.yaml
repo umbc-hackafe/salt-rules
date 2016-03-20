@@ -12,7 +12,9 @@ fileserver_backend:
   - git
 
 gitfs_remotes:
-  - gogs@git.hackafe.net:hackafe/salt-rules.git
+  - gogs@git.hackafe.net:hackafe/salt-rules.git:
+    - privkey: /etc/salt/pki/master/salt_git_key
+    - pubkey: /etc/salt/pki/master/salt_git_key.pub
 
 ext_pillar:
   - git:

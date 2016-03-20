@@ -22,3 +22,9 @@ set-gogs-cap:
 
 sqlite:
   pkg.installed: []
+
+gogs-sudoers-d:
+  file.managed:
+    - name: /etc/sudoers.d/90gogs
+    - mode: 0440
+    - source: salt://gogs/gogs-sudoers.d

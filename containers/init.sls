@@ -132,6 +132,29 @@ machines.target:
 {% set extra_mount_opts = salt['pillar.get'](':'.join(['containerextras', grains['host'], 'mount-opts']), []) %}
 
 {% for container in pillar.containerhosts[grains['host']] %}
+{% if salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'destroy']), False) %}
+/var/lib/machines/{{container}}: file.absent
+/data/overlay/{{container}}: file.absent
+/data/work/{{container}}: file.absent
+/etc/systemd/nspawn/{{container}}.nspawn: file.absent
+
+overlay-mount-{{container}}:
+  mount.unmounted:
+    - name: /var/lib/machines/{{container}}
+    - device: /var/lib/machines/{{container}}
+    - persist: True
+    - require_in:
+      - file: /var/lib/machines/{{container}}
+      - file: /data/overlay/{{container}}
+      - file: /data/work/{{container}}
+
+machine-service-{{container}}:
+  service.dead:
+    - name: systemd-nspawn@{{container}}.service
+    - enable: False
+    - require_in:
+      - mount: overlay-mount-{{container}}
+{% else %}
 {% set vlan_id = salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'vlan']), 3) %}
 {% set network_num = vlan_id - 1 %}
 
@@ -208,11 +231,12 @@ create-machine-id-{{container}}:
       - mount: overlay-mount-{{container}}
 
 machine-service-{{container}}:
-  service.running:
+  service.{% if salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'stop']), False) %}dead{% else %}running{% endif %}:
     - name: systemd-nspawn@{{container}}.service
-    - enable: True
+    - enable: {{ salt['pillar.get'](':'.join(['containerhosts', grains['host'], container, 'enable']), True) }}
     - require:
       - mount: overlay-mount-{{container}}
       - cmd: create-machine-id-{{container}}
+{% endif %}
 {% endfor %}
 {% endif %}

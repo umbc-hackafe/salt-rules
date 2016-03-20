@@ -18,7 +18,7 @@ ext_pillar:
   - git:
     - master gogs@git.hackafe.net:hackafe/salt-pillars.git:
       - privkey: /etc/salt/pki/master/salt_git_key
-      - pubkey: /etc/salt/pki/salt_git_key.pub
+      - pubkey: /etc/salt/pki/master/salt_git_key.pub
 
 file_ignore_regex:
   - '/\.git($|/)'

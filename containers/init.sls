@@ -62,8 +62,8 @@ arch-install-scripts:
 
 install-baseroot-{{ arch }}:
   cmd.run:
-    - name: {{ baseroot_install[arch] }}
-    - unless: test "$(ls -A {{ baseroot }})"
+    - name: {{ baseroot_install[arch] }} && touch /data/.baseroot_{{ arch }}_made
+    - creates: /data/.baseroot_{{ arch }}_made
     - require:
 {% if grains['os_family'] == 'Arch' %}
       - pkg: arch-install-scripts

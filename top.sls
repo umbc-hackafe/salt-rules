@@ -171,3 +171,6 @@ base:
 
   'git.hackafe.net':
     - gogs
+
+  'cibuildslave2.hackafe.net':
+    - ci.slave

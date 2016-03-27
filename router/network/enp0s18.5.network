@@ -3,7 +3,7 @@ Name=enp0s18.5
 
 [Network]
 Address=192.168.4.1/24
-Address=2001:470:e591::4:1/64
+Address=2001:470:e591:4::1/64
 DNS=8.8.8.8
 DNS=8.8.4.4
 IPForward=yes

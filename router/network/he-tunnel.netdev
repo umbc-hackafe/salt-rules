@@ -6,6 +6,6 @@ Kind=sit
 MTUBytes=1480
 
 [Tunnel]
-Local=108.15.37.143
+Local=96.234.211.231
 Remote=216.66.22.2
 TTL=255

@@ -1,0 +1,6 @@
+[NetDev]
+Name=enp0s18.3
+Kind=vlan
+
+[VLAN]
+Id=3

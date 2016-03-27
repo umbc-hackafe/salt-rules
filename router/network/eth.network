@@ -3,6 +3,12 @@ Name=enp0s18
 
 [Network]
 VLAN=enp0s18.1
+VLAN=enp0s18.2
+VLAN=enp0s18.3
+VLAN=enp0s18.4
+VLAN=enp0s18.5
+VLAN=enp0s18.6
+VLAN=enp0s18.7
 VLAN=enp0s18.4000
 DHCP=no
 IPForward=yes

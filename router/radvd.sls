@@ -3,10 +3,8 @@
     - source: salt://router/radvd.conf
 
 radvd:
-  pkg.installed: []
-
-radvd:
-  service.running:
+  - pkg.installed: []
+  - service.running:
     - enable: True
     - require:
       - file: /etc/radvd.conf

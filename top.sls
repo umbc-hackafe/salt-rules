@@ -110,6 +110,7 @@ base:
     - router.networkd
     - router.bind
     - router.ddclient
+    - router.radvd
     - backup.storage
 
   'cloud.hackafe.net':

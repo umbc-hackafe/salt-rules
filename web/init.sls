@@ -93,7 +93,7 @@ run-letsencrypt-{{ hostname }}:
     - name: letsencrypt certonly --agree-dev-preview --agree-tos {% if salt['service.status']('nginx') %}-a webroot -t --webroot-path /srv/http/letsencrypt{% else %}-a standalone{% endif %} -m mark25@hackafe.net --server https://acme-v01.api.letsencrypt.org/directory --renew-by-default --rsa-key-size 4096 -d {{ ",".join([hostname] + aliases) }}
     - watch_in:
       - service: nginx
-    - unless: openssl x509 -noout -checkend 2592000 -in /etc/nginx/ssl/{{ hostname }}.cert || true
+    - unless: test $(($(echo '{{ hostname }}' | md5sum | awk '{print $1}' | tail -c 3 | awk '{print "16#" $1}') % 30)) -ne "$(date +%d)" || openssl x509 -noout -checkend 2592000 -in /etc/nginx/ssl/{{ hostname }}.cert
     - require:
       - file: /srv/http/letsencrypt/.well-known/acme-challenge
       - pkg: letsencrypt

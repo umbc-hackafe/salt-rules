@@ -124,6 +124,7 @@ def start_io():
             GPIO.add_event_detect(item['pin'] if 'pin' in item else item['gpio_in'], edge)
 
         if 'type' in item and item['type'] == "button" or "button" in item:
+            item['lifetime'] = 0
             GPIO.setup(item['pin'] if 'pin' in item else item['button'], GPIO.OUT)
             if 'edgetype' in item:
                 if item['edgetype'] == "falling":

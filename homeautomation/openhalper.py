@@ -235,7 +235,7 @@ def do_update():
 def handle_request(item, **args):
     if item in CACHE:
         if "cache" in ACTIONS[item]:
-            if CACHE[item]["time"] + ACTIONS[item]["lifetime"] < now():
+            if CACHE[item]["time"] + ACTIONS[item]["lifetime"] >= now():
                 return CACHE[item]["value"]
 
     res, valid = do_action(item, **args)

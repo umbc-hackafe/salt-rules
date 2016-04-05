@@ -42,6 +42,13 @@
 	    "get": "http://idiotic.hackafe.net/api/item/Entertainment_Room_Laundry_Room_Door/command/{value}",
 	    "interval": 0.1,
 	    "state": 0
+	},
+        "kitchen_door": {
+	    "gpio_in": 26,
+	    "parse": "lambda r: 'off' if r else 'on'",
+	    "get": "http://idiotic.hackafe.net/api/item/Kitchen_Door/command/{value}",
+	    "interval": 0.1,
+	    "state": 0
 	}
     }
 }

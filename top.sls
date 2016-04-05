@@ -163,6 +163,7 @@ base:
 
   'web.hackafe.net':
     - web
+    - web.video
 
   'idiotic.hackafe.net':
     - homeautomation.idiotic

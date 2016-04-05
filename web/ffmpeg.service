@@ -1,0 +1,11 @@
+[Unit]
+Wants=ffserver.service
+After=ffserver.service
+
+[Service]
+ExecStart=/usr/bin/ffmpeg -f mjpeg -i "http://livingroomcam.hackafe.net/videostream.cgi?user=admin&pwd=abc123" http://localhost:8090/livingroom.ffm
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

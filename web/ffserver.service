@@ -1,0 +1,7 @@
+[Service]
+ExecStart=/usr/bin/ffserver
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,22 @@
+
+{%- set zone_domain = 'hackafe.net' -%}
+$TTL 3600
+@ IN SOA vegafive.hackafe.net. mark.hackafe.net. (
+	2016010821  ; Serial
+	28800      ; Refresh
+	1800       ; Retry
+	604800     ; Expire - 1 week
+	86400 )    ; Minimum
+0.168.192.in-addr.arpa.		IN	NS	vegafive.hackafe.net.
+
+{%- set dns_defaults = salt['pillar.get']('dns:defaults') -%}
+{%- for name, network in salt['pillar.get']('dns:networks').items() %}
+; {{ name }}
+{%- set net_domain = salt['pillar.get']('dns:networks:' + name + ':options:domain-name', salt['pillar.get']('dns:defaults:options:domain-name')) %}
+; {{ net_domain }}
+{%- if net_domain == zone_domain -%}
+{%- for hostname, attrs in salt['pillar.get']('dns:networks:' + name + ':hosts', {}).items() %}
+{{ attrs['ip'].split(".")[-1] }}  	IN	PTR	{{ hostname }}.
+{%- endfor -%}
+{%- endif -%}
+{%- endfor -%}

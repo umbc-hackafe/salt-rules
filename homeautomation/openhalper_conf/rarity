@@ -33,6 +33,24 @@
             "get": "http://idiotic.hackafe.net/api/item/Bedroom_Door/command/{value}",
             "interval": 3600,
             "state": 0
+        },
+        "downlight": {
+            "button": 5
+        },
+        "low": {
+            "button": 8
+        },
+        "medium": {
+            "button": 10
+        },
+        "high": {
+            "button": 11
+        },
+        "reverse": {
+            "button": 3
+        },
+        "fanoff": {
+            "button": 7
         }
     }
 }

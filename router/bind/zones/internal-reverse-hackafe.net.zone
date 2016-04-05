@@ -7,7 +7,7 @@ $TTL 3600
 	1800       ; Retry
 	604800     ; Expire - 1 week
 	86400 )    ; Minimum
-0.168.192.in-addr.arpa.		IN	NS	vegafive.hackafe.net.
+168.192.in-addr.arpa.		IN	NS	vegafive.hackafe.net.
 
 {%- set dns_defaults = salt['pillar.get']('dns:defaults') -%}
 {%- for name, network in salt['pillar.get']('dns:networks').items() %}
@@ -16,7 +16,7 @@ $TTL 3600
 ; {{ net_domain }}
 {%- if net_domain == zone_domain -%}
 {%- for hostname, attrs in salt['pillar.get']('dns:networks:' + name + ':hosts', {}).items() %}
-{{ attrs['ip'].split(".")[-1] }}  	IN	PTR	{{ hostname }}.
+{{ ".".join(attrs['ip'].split(".")[:1:-1]) }}  	IN	PTR	{{ hostname }}.
 {%- endfor -%}
 {%- endif -%}
 {%- endfor -%}

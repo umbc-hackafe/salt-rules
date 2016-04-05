@@ -13,6 +13,9 @@
         "openhab_compat": {
             "api_base": "/"
         },
+        "camera": {
+            "credentials": {{ pillar.idiotic['camera'].credentials | json }}
+        },
         "webui": {
             "api_base": "/",
             "enable_graph": true,

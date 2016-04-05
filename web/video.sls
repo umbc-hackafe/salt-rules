@@ -1,14 +1,14 @@
 /etc/ffserver.conf:
   file.managed:
-    - source: salt:///web/ffserver.conf
+    - source: salt://web/ffserver.conf
 
 /etc/systemd/system/ffserver.service:
   file.managed:
-    - source: salt:///web/ffserver.service
+    - source: salt://web/ffserver.service
 
 /etc/systemd/system/ffmpeg.service:
   file.managed:
-    - source: salt:///web/ffmpeg.service
+    - source: salt://web/ffmpeg.service
 
 ffserver:
   service.running:

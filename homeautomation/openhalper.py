@@ -124,7 +124,7 @@ def start_io():
             GPIO.add_event_detect(item['pin'] if 'pin' in item else item['gpio_in'], edge)
 
         if 'type' in item and item['type'] == "button" or "button" in item:
-            item['lifetime'] = 0
+
             GPIO.setup(item['pin'] if 'pin' in item else item['button'], GPIO.OUT)
             if 'edgetype' in item:
                 if item['edgetype'] == "falling":
@@ -163,6 +163,20 @@ def do_action(name, **kwargs):
             result = item["func"](**kwargs)
         elif "gpio_in" in item or "type" in item and item['type'] == "gpio_in":
             result = GPIO.input(item['pin'] if 'pin' in item else item['gpio_in'])
+        elif "button" in item or "type" in item and item['type'] == "button":
+            if 'edgetype' in item:
+                edgetype = item['edgetype']
+            else:
+                edgetype = "falling"
+            if edgetype == "falling":
+                GPIO.output(item['pin'] if 'pin' in item else item['button'], False)
+                sleep(kwargs['holdtime'] if 'holdtime' in kwargs else 0.25)
+                GPIO.output(item['pin'] if 'pin' in item else item['button'], True)
+            else:
+                GPIO.output(item['pin'] if 'pin' in item else item['button'], True)
+                sleep(kwargs['holdtime'] if 'holdtime' in kwargs else 0.25)
+                GPIO.output(item['pin'] if 'pin' in item else item['button'], False)
+
         else:
             result = None
 
@@ -195,20 +209,6 @@ def do_action(name, **kwargs):
             else:
               result = item['default']
             break
-
-        if "button" in item or "type" in item and item['type'] == "button":
-            if 'edgetype' in item:
-                edgetype = item['edgetype']
-            else:
-                edgetype = "falling"
-            if edgetype == "falling":
-                GPIO.output(item['pin'] if 'pin' in item else item['button'], False)
-                sleep(kwargs['holdtime'] if 'holdtime' in kwargs else 0.25)
-                GPIO.output(item['pin'] if 'pin' in item else item['button'], True)
-            else:
-                GPIO.output(item['pin'] if 'pin' in item else item['button'], True)
-                sleep(kwargs['holdtime'] if 'holdtime' in kwargs else 0.25)
-                GPIO.output(item['pin'] if 'pin' in item else item['button'], False)
 
         # Don't keep trying if the result is valid
         if "validate" not in item or item["validate"](result):

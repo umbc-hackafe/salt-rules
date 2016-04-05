@@ -176,7 +176,7 @@ def do_action(name, **kwargs):
                 GPIO.output(item['pin'] if 'pin' in item else item['button'], True)
                 sleep(kwargs['holdtime'] if 'holdtime' in kwargs else 0.25)
                 GPIO.output(item['pin'] if 'pin' in item else item['button'], False)
-
+            result = None
         else:
             result = None
 

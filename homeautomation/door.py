@@ -5,7 +5,7 @@ import sys
 
 gpio.setmode(gpio.BOARD)
 gpio.setup(12, gpio.OUT, initial=1)
-gpio.setup(13, gpio.IN, pull_up_down=gpio.PUD_OFF)
+gpio.setup(13, gpio.IN, pull_up_down=gpio.PUD_UP)
 
 if len(sys.argv) > 1 and sys.argv[1] == "trigger":
     gpio.output(12, 0)
@@ -18,7 +18,7 @@ elif len(sys.argv) > 1 and sys.argv[1] == "close":
         gpio.output(12, 1)
         time.sleep(15)
 elif len(sys.argv) > 1 and sys.argv[1] == "get":
-    pass
+    time.sleep(0.1)
 
 print("False" if gpio.input(13) else "True")
 

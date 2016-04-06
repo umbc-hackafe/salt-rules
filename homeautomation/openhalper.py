@@ -9,6 +9,7 @@ import os.path
 import json
 import RPi.GPIO as GPIO
 import requests
+import functools
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -121,7 +122,7 @@ def start_io():
 
         if 'type' in item and item['type'] == "gpio_in" or 'gpio_in' in item:
             GPIO.setup(item['pin'] if 'pin' in item else item['gpio_in'], GPIO.IN, pull_up_down=pud)
-            GPIO.add_event_detect(item['pin'] if 'pin' in item else item['gpio_in'], edge)
+            GPIO.add_event_detect(item['pin'] if 'pin' in item else item['gpio_in'], edge, callback=functools.partial(do_action, name))
 
         if 'type' in item and item['type'] == "button" or "button" in item:
 

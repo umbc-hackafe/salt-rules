@@ -22,8 +22,8 @@
 	},
 	"motion": {
             "gpio_in": 7,
-            "parse": "lambda r: 'on' if r else 'off'",
-            "get": "http://idiotic.hackafe.net/api/item/Bedroom_Motion/command/{value}",
+	    "edge": "rising",
+            "get": "http://idiotic.hackafe.net/api/item/Bedroom_Motion/command/trigger",
             "interval": 0.1,
             "state": 0
 	},

@@ -140,7 +140,7 @@ def init_intervals():
         if "interval" in item:
             NEXT_UPDATES[name] = now()
 
-def do_action(name, **kwargs):
+def do_action(name, *_, **kwargs):
     item = ACTIONS[name]
     result = ""
     valid = True
@@ -164,12 +164,6 @@ def do_action(name, **kwargs):
             result = item["func"](**kwargs)
         elif "gpio_in" in item or "type" in item and item['type'] == "gpio_in":
             result = GPIO.input(item['pin'] if 'pin' in item else item['gpio_in'])
-            if "edge" in item:
-                edge = item["edge"]
-                if edge == "rising" and not (result and (name not in CACHE or not CACHE[name]["value"])):
-                    break
-                elif edge == "falling" and not (not result and (name not in CACHE or CACHE[name]["value"])):
-                    break
         elif "button" in item or "type" in item and item['type'] == "button":
             if 'edgetype' in item:
                 edgetype = item['edgetype']

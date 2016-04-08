@@ -5,21 +5,18 @@
             "gpio_in": 7,
 	    "edge": "rising",
             "get": "http://idiotic.hackafe.net/api/item/Laundry_Room_Motion/command/trigger",
-	    "interval": 0.1,
             "state": 0
 	},
 	"kitchen_motion": {
 	    "gpio_in": 11,
 	    "edge": "rising",
 	    "get": "http://idiotic.hackafe.net/api/item/Kitchen_Motion/command/trigger",
-	    "interval": 0.1,
 	    "state": 0
 	},
 	"entertainment_motion": {
 	    "gpio_in": 22,
 	    "edge": "rising",
 	    "get": "http://idiotic.hackafe.net/api/item/Entertainment_Room_Motion/command/trigger",
-	    "interval": 0.1,
 	    "state": 0
 	},
 	"temp": {
@@ -40,14 +37,12 @@
 	    "gpio_in": 15,
 	    "parse": "lambda r: 'off' if r else 'on'",
 	    "get": "http://idiotic.hackafe.net/api/item/Entertainment_Room_Laundry_Room_Door/command/{value}",
-	    "interval": 0.1,
 	    "state": 0
 	},
         "kitchen_door": {
 	    "gpio_in": 26,
 	    "parse": "lambda r: 'off' if r else 'on'",
 	    "get": "http://idiotic.hackafe.net/api/item/Kitchen_Door/command/{value}",
-	    "interval": 0.1,
 	    "state": 0
 	}
     }

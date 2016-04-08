@@ -24,14 +24,12 @@
             "gpio_in": 7,
 	    "edge": "rising",
             "get": "http://idiotic.hackafe.net/api/item/Hallway_Motion/command/trigger",
-            "interval": 0.1,
             "state": 0
 	},
         "br_door": {
 	    "gpio_in": 13,
 	    "parse": "lambda r: 'off' if r else 'on'",
 	    "get": "http://idiotic.hackafe.net/api/item/Bathroom_Door/command/{value}",
-	    "interval": 0.1,
 	    "state": 0,
 	    "pull": "up"
 	}

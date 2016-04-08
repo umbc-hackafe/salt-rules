@@ -12,7 +12,6 @@
 	    "gpio_in": 13,
 	    "edge": "rising",
 	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Motion/command/trigger",
-	    "interval": 0.1,
 	    "state": 0
 	},
 	"temp": {

@@ -24,7 +24,6 @@
             "gpio_in": 7,
 	    "edge": "rising",
             "get": "http://idiotic.hackafe.net/api/item/Bedroom_Motion/command/trigger",
-            "interval": 0.1,
             "state": 0
 	},
         "door": {

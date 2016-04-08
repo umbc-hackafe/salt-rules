@@ -26,7 +26,6 @@
             "gpio_in": 7,
             "parse": "lambda r: 'off' if r else 'on'",
             "put": "http://idiotic.hackafe.net/rest/items/Living_Motion_East/state",
-            "interval": 0.1,
             "state": 0
 	},
 	"led": {

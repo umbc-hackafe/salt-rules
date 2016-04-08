@@ -3,7 +3,6 @@
 	"motion": {
 	    "gpio_in": 13,
 	    "get": "http://idiotic.hackafe.net/api/item/Office_Motion/command/trigger",
-	    "interval": 0.1,
 	    "edge": "rising",
 	    "state": 0
 	},

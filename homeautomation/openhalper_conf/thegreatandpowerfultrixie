@@ -15,7 +15,6 @@
 	    "gpio_in": 22,
 	    "parse": "lambda r: 'off' if r else 'on'",
 	    "get": "http://idiotic.hackafe.net/api/item/Garage_Side_Door/command/{value}",
-	    "interval": 0.1,
 	    "state": 0,
 	    "pull": "up"
 	}

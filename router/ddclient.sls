@@ -9,3 +9,5 @@ ddclient:
   file.managed:
     - source: salt://router/ddclient.conf
     - template: jinja
+    - watch_in:
+      - service: ddclient

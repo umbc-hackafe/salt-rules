@@ -1,30 +1,37 @@
 {
     "api": {
-	"port": 80
+        "port": 80
     },
     "modules": {
-	"x10": {
-	    "host": "vinyl:5000"
-	},
+        "x10": {
+            "host": "vinyl:5000"
+        },
         "openhab_compat": {
             "api_base": "/"
         },
+        "alexa": {"disable": true},
+        "avaya": {"disable": true},
+        "modlet": {"disable": true},
+        "sign": {"disable": true},
+        "sms": {"disable": true},
+        "wink": {"disable": true},
+        "x10": {"disable": true},
         "webui": {
             "api_base": "/",
             "enable_graph": true,
             "sections": [
                 {"title": "Scenes",
                  "include_tags": ["_scene"]},
-		{"title": "Climate Control",
-		 "include_tags": ["climate"]},
+                {"title": "Climate Control",
+                 "include_tags": ["climate"]},
                 {"title": "Kitchen",
                  "include_tags": ["kitchen"]},
                 {"title": "Bedroom",
                  "include_tags": ["bedroom"]},
-		{"title": "Living Room",
-		 "include_tags": ["living"]},
-		{"title": "Office",
-		 "include_tags": ["office"]}
+                {"title": "Living Room",
+                 "include_tags": ["living"]},
+                {"title": "Office",
+                 "include_tags": ["office"]}
             ]
         }
     },

@@ -37,6 +37,6 @@
     },
     "persistence": {
         "method": "sql",
-        "engine": "sqlite://memory"
+        "engine": "sqlite://:memory"
     }
 }

@@ -177,5 +177,5 @@ base:
   'cibuildslave2.hackafe.net':
     - ci.slave
 
-  'sweetiebot':
+  'sweetiebot.hackafe.net':
     - homeautomation.idiotic

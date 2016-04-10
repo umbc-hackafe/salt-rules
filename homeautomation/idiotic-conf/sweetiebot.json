@@ -1,0 +1,35 @@
+{
+    "api": {
+	"port": 80
+    },
+    "modules": {
+	"x10": {
+	    "host": "vinyl:5000"
+	},
+        "openhab_compat": {
+            "api_base": "/"
+        },
+        "webui": {
+            "api_base": "/",
+            "enable_graph": true,
+            "sections": [
+                {"title": "Scenes",
+                 "include_tags": ["_scene"]},
+		{"title": "Climate Control",
+		 "include_tags": ["climate"]},
+                {"title": "Kitchen",
+                 "include_tags": ["kitchen"]},
+                {"title": "Bedroom",
+                 "include_tags": ["bedroom"]},
+		{"title": "Living Room",
+		 "include_tags": ["living"]},
+		{"title": "Office",
+		 "include_tags": ["office"]}
+            ]
+        }
+    },
+    "persistence": {
+        "method": "sql",
+        "engine": "sqlite://memory"
+    }
+}

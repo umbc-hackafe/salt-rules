@@ -7,14 +7,14 @@
 	    "host": "vinyl:5000"
 	},
 	"weather": {
-	    "latitude": {{ pillar.idiotic['weather']['latitude'] }},
-	    "longitude": {{ pillar.idiotic['weather']['longitude'] }}
+	    "latitude": {{ pillar.idiotic[grains.host]['weather']['latitude'] }},
+	    "longitude": {{ pillar.idiotic[grains.host]['weather']['longitude'] }}
 	},
         "openhab_compat": {
             "api_base": "/"
         },
         "camera": {
-            "credentials": {{ pillar.idiotic['camera'].credentials | json }}
+            "credentials": {{ pillar.idiotic[grains.host]['camera'].credentials | json }}
         },
         "webui": {
             "api_base": "/",
@@ -50,8 +50,8 @@
             ]
         },
         "modlet": {
-            "user": "{{ pillar.idiotic['modlet']['user'] }}",
-            "password": "{{ pillar.idiotic['modlet']['password'] }}",
+            "user": "{{ pillar.idiotic[grains.host]['modlet']['user'] }}",
+            "password": "{{ pillar.idiotic[grains.host]['modlet']['password'] }}",
             "devices": {
                 "living": 1562,
                 "entertainment": 1573,
@@ -67,12 +67,12 @@
         "wink": {
             "base_url": "https://winkapi.quirky.com",
             "client_id": "quirky_wink_android_app",
-            "client_secret": "{{ pillar.idiotic['wink']['client_secret'] }}",
-            "username": "{{ pillar.idiotic['wink']['username'] }}",
-            "password": "{{ pillar.idiotic['wink']['password'] }}"
+            "client_secret": "{{ pillar.idiotic[grains.host]['wink']['client_secret'] }}",
+            "username": "{{ pillar.idiotic[grains.host]['wink']['username'] }}",
+            "password": "{{ pillar.idiotic[grains.host]['wink']['password'] }}"
         },
         "alexa": {
-            "app_id": "{{ pillar.idiotic['alexa']['app_id'] }}"
+            "app_id": "{{ pillar.idiotic[grains.host]['alexa']['app_id'] }}"
         }
     },
     "distribution": {

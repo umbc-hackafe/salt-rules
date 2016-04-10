@@ -12,6 +12,10 @@ idiotic-config-repo:
     - name: https://github.com/umbc-hackafe/idiotic-config.git
     - force_clone: True
     - target: /etc/idiotic
+    - branch: {{ salt['grains.filter_by']({
+    'idiotic': 'master',
+    'sweetiebot': 'demo'},
+    grain='host', default='idiotic') }}
     - require:
       - pkg: idiotic
     - watch_in:
@@ -29,7 +33,7 @@ idiotic-webui-repo:
 
 /etc/idiotic/conf.json:
   file.managed:
-    - source: salt://homeautomation/idiotic-conf.json
+    - source: salt://homeautomation/idiotic-conf/{{ grains.host }}.json
     - template: jinja
     - require:
       - pkg: idiotic

@@ -16,6 +16,7 @@
         "sms": {"disable": true},
         "wink": {"disable": true},
         "x10": {"disable": true},
+        "chromecast": {"disable": true},
         "webui": {
             "api_base": "/",
             "enable_graph": true,

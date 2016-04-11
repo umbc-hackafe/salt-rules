@@ -26,6 +26,8 @@
             "sections": [
                 {"title": "Scenes",
                  "include_tags": ["_scene"]},
+		{"title": "Doodads",
+		 "include_tags": ["input", "output"]},
                 {"title": "Climate Control",
                  "include_tags": ["climate"]},
                 {"title": "Kitchen",

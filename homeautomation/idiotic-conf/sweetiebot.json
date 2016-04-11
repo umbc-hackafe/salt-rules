@@ -9,6 +9,9 @@
         "openhab_compat": {
             "api_base": "/"
         },
+	"gpio": {
+	    "mode": "board"
+	},
         "alexa": {"disable": true},
         "avaya": {"disable": true},
         "modlet": {"disable": true},

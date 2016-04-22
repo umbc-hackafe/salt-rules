@@ -62,7 +62,8 @@
         },
         "sign": {
             "host": "sign",
-            "port": 8800
+            "port": 8800,
+            "disable": true
         },
         "wink": {
             "base_url": "https://winkapi.quirky.com",

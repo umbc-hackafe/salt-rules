@@ -12,6 +12,7 @@ $TTL 3600
 vegafive	IN	A	192.168.0.1
 localhost	IN	A	127.0.0.1
 hackafe.net.	IN	A	192.168.2.42
+isitmagstockyet.com IN A 192.168.2.42
 @		IN	MX	1 aspmx.l.google.com.
 @		IN	MX	5 alt1.aspmx.l.google.com.
 @		IN	MX	5 alt2.aspmx.l.google.com.

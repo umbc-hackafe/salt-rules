@@ -179,3 +179,6 @@ base:
 
   'sweetiebot.hackafe.net':
     - homeautomation.idiotic
+
+  'minecraft.hackafe.net':
+    - minecraft

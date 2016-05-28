@@ -116,7 +116,7 @@ base:
   'cloud.hackafe.net':
     - login.reversessh
     - location.prgmr
-    - router.dns
+    - router.bind
 
   'x86buildslave.hackafe.net':
     - ci.slave

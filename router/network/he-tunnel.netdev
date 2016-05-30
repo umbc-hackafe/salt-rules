@@ -6,6 +6,6 @@ Kind=sit
 MTUBytes=1480
 
 [Tunnel]
-Local=96.234.211.231
+Local={{ salt['grains.get']('ip4_interfaces:enp0s18.4000')[0] }}
 Remote=216.66.22.2
 TTL=255

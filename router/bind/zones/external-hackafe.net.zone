@@ -1,13 +1,14 @@
 $TTL 3600
 ; hackafe.net
-@ IN SOA vegafive.hackafe.net. mark.hackafe.net. (
-	2016010314  ; Serial
+@ IN SOA {{ salt['grains.get']('fqdn) }}. mark.hackafe.net. (
+	2016053100  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
 	86400 )    ; Minimum
-		IN	NS	vegafive
+		IN	NS	{{ salt['grains.get']('host') }}
 vegafive	IN	A	192.168.0.1
+cloud		IN	A	71.19.155.60
 localhost	IN	A	127.0.0.1
 
 @		IN	MX	1 aspmx.l.google.com.

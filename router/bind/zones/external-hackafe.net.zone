@@ -1,7 +1,7 @@
 $TTL 3600
 ; hackafe.net
 @ IN SOA {{ salt['grains.get']('fqdn') }}. mark.hackafe.net. (
-	2016053113  ; Serial
+	2016053116  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
@@ -42,6 +42,14 @@ google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQK
 {{ server|replace('.hackafe.net','') }}	IN	CNAME	hackafe.net.
 {%- elif server.replace('.hackafe.net','') in salt['pillar.get']('bind:internal_servers') and not ip.startswith('169.254') and not external_set %}{% set external_set = True %}
 hackafe.net.	IN	A	{{ ip }}
+{%- endif -%}
+{%- endfor -%}
+{%- endfor -%}
+
+{%- for server, ips in salt['mine.get']('*', 'network.ip_addrs6').items() -%}
+{%- for ip in ips -%}
+{%- if server not in ignore_hosts and not salt['network.is_private'](ip) %}
+{{ server|replace('.hackafe.net','') }} IN	AAAA	{{ server }}
 {%- endif -%}
 {%- endfor -%}
 {%- endfor -%}

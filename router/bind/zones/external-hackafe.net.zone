@@ -39,7 +39,7 @@ google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQK
 {%- for server, ips in salt['mine.get']('*', 'network.ip_addrs').items() -%}
 {%- for ip in ips -%}
 {%- if server not in ignore_hosts and ip.startswith('192.168') %}
-{{ server|replace('.hackafe.net','') }}	IN	CNAME	hackafe.net.
+{{ server|replace('.hackafe.net','') }}	IN	A	{{ ip }}
 {%- elif server.replace('.hackafe.net','') in salt['pillar.get']('bind:internal_servers') and not ip.startswith('169.254') and not external_set %}{% set external_set = True %}
 hackafe.net.	IN	A	{{ ip }}
 {%- endif -%}

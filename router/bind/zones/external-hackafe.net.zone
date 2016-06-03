@@ -1,7 +1,7 @@
 $TTL 3600
 ; hackafe.net
 @ IN SOA {{ salt['grains.get']('fqdn') }}. mark.hackafe.net. (
-	2016060226  ; Serial
+	2016060300  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
@@ -44,7 +44,7 @@ google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQK
 {%- endif -%}
 {%- endfor -%}
 {%- endfor -%}
-{%- endfor -%}
+{%- endfor %}
 
 hackafe.net.	IN	A	{{ external_ip }}
 

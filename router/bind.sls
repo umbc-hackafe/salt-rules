@@ -47,3 +47,4 @@ dyndns.timer:
       ignore_hosts:
         - vegafive.hackafe.net
         - mail.hackafe.net
+        - cloud.hackafe.net

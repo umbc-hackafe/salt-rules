@@ -117,6 +117,7 @@ base:
     - login.reversessh
     - location.prgmr
     - router.bind
+    - containers
 
   'x86buildslave.hackafe.net':
     - ci.slave

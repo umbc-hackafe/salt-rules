@@ -56,7 +56,7 @@
             "user": "{{ pillar.idiotic[grains.host]['modlet']['user'] }}",
             "password": "{{ pillar.idiotic[grains.host]['modlet']['password'] }}",
             "devices": {
-                "living": 1562,
+                "living": 1907,
                 "entertainment": 1573,
                 "bedroom": 1194,
                 "office": 1826

@@ -184,3 +184,7 @@ base:
 
   'minecraft.hackafe.net':
     - minecraft
+
+  'applejack.hackafe.net':
+    - homeautomation.openhalper
+    - ci.slave

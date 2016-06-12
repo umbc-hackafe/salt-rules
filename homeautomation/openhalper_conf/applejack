@@ -1,0 +1,24 @@
+{
+    "actions": {
+	"motion": {
+	    "gpio_in": 13,
+	    "edge": "rising",
+	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Motion/command/trigger",
+	    "state": 0
+	},
+	"temp": {
+            "exec": ["temp", "24"],
+            "parse": "lambda r: float(r.split()[1])",
+            "validate": "lambda r: r > 0 and r < 40",
+            "interval": 60,
+            "lifetime": 15
+	},
+	"hum": {
+            "exec": ["temp",  "24"],
+            "parse": "lambda r: float(r.split()[0])",
+            "validate": "lambda r: r > 0 and r <= 100",
+            "interval": 60,
+            "lifetime": 15
+	}
+    }
+}

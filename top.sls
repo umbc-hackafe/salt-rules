@@ -187,4 +187,6 @@ base:
 
   'applejack.hackafe.net':
     - homeautomation.openhalper
+    - network.dhcp
+    - network.wifi
     - ci.slave

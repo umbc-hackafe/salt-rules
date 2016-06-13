@@ -3,7 +3,7 @@
 	"motion": {
 	    "gpio_in": 13,
 	    "edge": "rising",
-	    "get": "http://idiotic.hackafe.net/api/item/Living_Room_Motion/command/trigger",
+	    "get": "http://idiotic.hackafe.net/api/item/Kitchen_Motion/command/trigger",
 	    "state": 0
 	},
 	"temp": {

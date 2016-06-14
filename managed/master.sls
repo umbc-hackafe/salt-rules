@@ -17,6 +17,16 @@ salt-master-config:
     - watch_in:
       - service: salt-master
 
+cloud-config:
+  file.managed:
+    - name: /etc/salt/cloud.providers.d/proxmox.conf
+    - makedirs: True
+    - source:
+      - salt://salt/managed/cloud.conf
+    - template: jinja
+    - watch_in:
+      - service: salt-master
+
 salt-master-autosign:
   file.managed:
     - name: /etc/salt/autosign.conf

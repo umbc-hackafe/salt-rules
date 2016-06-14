@@ -22,7 +22,7 @@ cloud-config:
     - name: /etc/salt/cloud.providers.d/proxmox.conf
     - makedirs: True
     - source:
-      - salt://salt/managed/cloud.conf
+      - salt://managed/cloud.conf
     - template: jinja
     - watch_in:
       - service: salt-master

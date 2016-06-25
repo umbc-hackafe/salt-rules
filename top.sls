@@ -23,6 +23,7 @@ base:
 
   'salt.hackafe.net':
     - managed.master
+    - cloud
 
   'cheerilee.hackafe.net':
     - audio

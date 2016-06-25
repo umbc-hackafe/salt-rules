@@ -5,8 +5,6 @@ cloud-config:
     - source:
       - salt://cloud/cloud.conf
     - template: jinja
-    - watch_in:
-      - service: salt-master
 
 {% set deleted = salt['pillar.get']('cloud:deleted', []) %}
 {% set defaults = salt['pillar.get']('cloud:defaults', {}) %}

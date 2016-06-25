@@ -52,6 +52,7 @@ cloud-instance-{{ host }}:
 {% else %}
   cloud.present: {{ salt['dns.merge'](settings, defaults)|yaml }}
 {% endif %}
+{% endfor %}
 
 {% for host, settings in salt['pillar.get']('cloud:profile_instances', {}).items() %}
 cloud-instance-{{ host }}:
@@ -60,3 +61,4 @@ cloud-instance-{{ host }}:
 {% else %}
   cloud.profile: {{ settings|yaml }}
 {% endif %}
+{% endfor %}

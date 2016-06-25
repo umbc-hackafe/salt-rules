@@ -12,16 +12,16 @@ cloud-config:
 {% set defaults = salt['pillar.get']('cloud:defaults', {}) %}
 
 {% for host, settings in salt['pillar.get']('cloud:instances', {}).items() %}
-{{ host }}:
+cloud-instance-{{ host }}:
 {% if host in deleted %}
   cloud.absent
 {% else %}
-  cloud.present: {{ salt['dns.merge'](settings, defaults)|yaml }}
+  cloud.present: {{ salt['dns.merge'](settings, defaults + [{name: host}])|yaml }}
 {% endif %}
 {% endfor %}
 
 {% for host, settings in salt['pillar.get']('cloud:profile_instances', {}).items() %}
-{{ host }}:
+cloud-instance-{{ host }}:
 {% if host in deleted %}
   cloud.absent
 {% else %}

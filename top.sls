@@ -13,15 +13,12 @@ base:
 
   'vegasix.hackafe.net':
     - httpd.nginx
-    - containers
     - network.bridge
 
   'vista.hackafe.net':
-    - containers
     - network.bridge
 
   'watson.hackafe.net':
-    - containers
     - network.bridge
 
   'salt.hackafe.net':
@@ -117,7 +114,6 @@ base:
     - login.reversessh
     - location.prgmr
     - router.bind
-    - containers
 
   'x86buildslave.hackafe.net':
     - ci.slave

@@ -20,6 +20,8 @@ def mknet(*args, name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **k
     if args:
         raise ValueError("Only kwargs!")
 
+    defaults = dictlist_to_dict(__salt__['pillar.get']('cloud:defaults', []))
+
     if ip and '/' not in ip:
         ip += '/24'
 
@@ -35,7 +37,9 @@ def mknet(*args, name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **k
         'type': type
     })
 
-    return ','.join(['='.join((k,str(v))) for k, v in kwargs.items() if k in NET_PARAMS])
+    defaults.update(kwargs)
+
+    return ','.join(['='.join((k,str(v))) for k, v in defaults.items() if k in NET_PARAMS])
 
 def is_list(obj):
     return isinstance(obj, list)

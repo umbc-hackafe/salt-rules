@@ -16,10 +16,7 @@ def dictlist_to_dict(l):
 
 NET_PARAMS = ['name', 'bridge', 'gw', 'ip', 'type', 'ip6', 'hwaddr', 'tag']
 
-def mknet(*args, name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
-    if args:
-        raise ValueError("Only kwargs!")
-
+def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
     defaults = dictlist_to_dict(__salt__['pillar.get']('cloud:defaults', []))
 
     if ip and '/' not in ip:

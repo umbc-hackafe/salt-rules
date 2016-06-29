@@ -80,7 +80,7 @@ base:
     - homeautomation.lights
     - ci.slave
 
-  'ci':
+  'ci.hackafe.net':
     - ci.jenkins
 
   'cibuildslave1.hackafe.net':

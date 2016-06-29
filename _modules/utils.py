@@ -2,6 +2,41 @@ from itertools import izip
 from copy import deepcopy
 import re
 
+def dict_to_dictlist(d):
+    return [{k: v} for k, v in d.items()]
+
+def dictlist_to_dict(l):
+    res = {}
+    for d in l:
+        if len(d) != 1:
+            raise ValueError("Not a dictlist!")
+        for k, v in d.items():
+            res[k] = v
+    return res
+
+NET_PARAMS = ['name', 'bridge', 'gw', 'ip', 'type', 'ip6', 'hwaddr']
+
+def mknet(*args, name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
+    if args:
+        raise ValueError("Only kwargs!")
+
+    if ip and '/' not in ip:
+        ip += '/24'
+
+    if gw:
+        kwargs['gw'] = gw
+
+    if ip:
+        kwargs['ip'] = ip
+
+    kwargs.update({
+        'name': name,
+        'bridge': bridge,
+        'type': type
+    })
+
+    return ','.join(['='.join((k,str(v))) for k, v in kwargs.items() if k in NET_PARAMS])
+
 def is_list(obj):
     return isinstance(obj, list)
 

@@ -21,7 +21,7 @@ def filter_netparams(param_dictlist):
     return [{k: v} for d in param_dictlist for k, v in d.items() if k not in NET_PARAMS or k in KEEP_ANYWAY]
 
 def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
-    defaults = dictlist_to_dict(__salt__['pillar.get']('cloud:defaults', []))
+    defaults = dictlist_to_dict(__salt__['pillar.get']('cloud_defaults', []))
     print(defaults)
 
     if ip and '/' not in ip:

@@ -7,7 +7,7 @@ cloud-config:
     - template: jinja
 
 {% set deleted = salt['pillar.get']('cloud:deleted', []) %}
-{% set defaults = salt['pillar.get']('cloud:defaults', {}) %}
+{% set defaults = salt['pillar.get']('cloud_defaults', {}) %}
 
 {% for host, settings in salt['pillar.get']('cloud:instances', {}).items() %}
 cloud-instance-{{ host }}:

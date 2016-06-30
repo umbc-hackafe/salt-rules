@@ -42,7 +42,7 @@ def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
         'type': type
     })
 
-    return ','.join(['='.join((remap(k),str(v))) for k, v in kwargs.items() if k in NET_PARAMS])
+    return ','.join(['='.join((k,str(v))) for k, v in kwargs.items() if k in NET_PARAMS])
 
 def is_list(obj):
     return isinstance(obj, list)

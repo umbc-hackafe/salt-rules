@@ -16,6 +16,9 @@ def dictlist_to_dict(l):
 
 NET_PARAMS = ['name', 'bridge', 'gw', 'ip', 'type', 'ip6', 'hwaddr', 'tag']
 
+def filter_netparams(param_dictlist):
+    return [{k: v} for d in param_dictlist for k, v in d.items() if k not in NET_PARAMS]
+
 def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
     defaults = dictlist_to_dict(__salt__['pillar.get']('cloud:defaults', []))
 

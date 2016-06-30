@@ -14,7 +14,7 @@ cloud-instance-{{ host }}:
 {% if host in deleted %}
   cloud.absent
 {% else %}
-  cloud.present: {{ salt['dns.merge'](settings, defaults + [{"name": host}])|yaml }}
+  cloud.present: {{ salt['utils.filter_netparams'](salt['dns.merge'](settings, defaults + [{"name": host}]))|yaml }}
 {% endif %}
 {% endfor %}
 

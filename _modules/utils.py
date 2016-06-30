@@ -22,6 +22,7 @@ def filter_netparams(param_dictlist):
 
 def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
     defaults = dictlist_to_dict(__salt__['pillar.get']('cloud:defaults', []))
+    print(defaults)
 
     if ip and '/' not in ip:
         ip += '/24'

@@ -14,16 +14,19 @@ def dictlist_to_dict(l):
             res[k] = v
     return res
 
+NET_REMAP = {'ip': 'ip_address'}
+def remap(k):
+    if k in NET_REMAP:
+        return NET_REMAP[k]
+    return k
+
 NET_PARAMS = ['name', 'bridge', 'gw', 'ip', 'type', 'ip6', 'hwaddr', 'tag']
 KEEP_ANYWAY = ['name']
 
 def filter_netparams(param_dictlist):
-    return [{k: v} for d in param_dictlist for k, v in d.items() if k not in NET_PARAMS or k in KEEP_ANYWAY]
+    return [{remap(k): v} for d in param_dictlist for k, v in d.items() if k not in NET_PARAMS or k in KEEP_ANYWAY]
 
 def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
-    defaults = dictlist_to_dict(__salt__['pillar.get']('cloud_defaults', []))
-    print(defaults)
-
     if ip and '/' not in ip:
         ip += '/24'
 
@@ -39,9 +42,7 @@ def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
         'type': type
     })
 
-    defaults.update(kwargs)
-
-    return ','.join(['='.join((k,str(v))) for k, v in defaults.items() if k in NET_PARAMS])
+    return ','.join(['='.join((remap(k),str(v))) for k, v in kwargs.items() if k in NET_PARAMS])
 
 def is_list(obj):
     return isinstance(obj, list)

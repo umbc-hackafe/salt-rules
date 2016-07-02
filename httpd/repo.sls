@@ -4,6 +4,7 @@ include:
 http:
   user.present:
     - password: '$6$ws9gL7vJ$rG2TGsMWhY586fEglrYn6gPDeR4hPwo93k9CsTDw2f3LrGKXLSWCj56/S8tTcDkYWO334J3YmkaWIadyfxNno/'
+    - shell: /bin/sh
   ssh_auth.present:
     - user: http
     - source: salt://httpd/repo.key

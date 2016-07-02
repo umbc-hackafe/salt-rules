@@ -1,7 +1,7 @@
 $TTL 3600
 ; hackafe.net
 @ IN SOA {{ salt['grains.get']('fqdn') }}. mark.hackafe.net. (
-	2016070201  ; Serial
+	2016070202  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
@@ -35,7 +35,7 @@ vault		IN	CNAME	ghs.googlehosted.com.
 
 google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC/fTOEJdChhNCIWJ/BCUzqbDvOx1VhuhyftD/FgqShdzbfeEuzzVb9pYYr8QMFcs8CUABUhQRttC9j7CeFwalyXWQW1/4Cr7xcjYSTxJ4IKJJ9Cbfb0ZE+tK8Ob/WZodkKkxjimxjkdwsTzFiuli1LAwy4Uf7GA5uBsl9n/bju0wIDAQAB"
 
-{%- set external_ip = salt['dns.resolve']('bliss.dog') -%}
+{%- set external_ip = salt['dns.resolve']('bliss.dog') %}
 
 hackafe.net.	IN	A	{{ external_ip }}
 

@@ -14,7 +14,7 @@ cloud-instance-{{ host }}:
 {% if host in deleted %}
   cloud.absent
 {% else %}
-{% set full_settings = salt['dns.merge'](settings, defaults) %}
+{% set full_settings = salt['dns.merge'](defaults, settings) %}
 {% if 'net0' not in salt['utils.dictlist_to_dict'](settings) %}{% set _ = full_settings.append({'net0': salt['utils.mknet'](**salt['utils.dictlist_to_dict'](full_settings))}) %}{% endif %}
   cloud.present: {{ salt['utils.filter_netparams'](full_settings + [{"name": host}])|yaml }}
 {% endif %}

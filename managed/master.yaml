@@ -11,6 +11,8 @@ gitfs_provider: pygit2
 fileserver_backend:
   - git
 
+extension_modules: salt://_modules
+
 gitfs_remotes:
   - gogs@git.hackafe.net:hackafe/salt-rules.git:
     - privkey: /etc/salt/pki/master/salt_git_key

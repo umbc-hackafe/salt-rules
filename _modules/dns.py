@@ -1,7 +1,11 @@
 from copy import deepcopy
+import socket
 
 def is_listdict(d):
     return isinstance(d, list) and all((isinstance(n, dict) and len(n) == 1 for n in d))
+
+def resolve(hostname):
+    return socket.gethostbyname(hostname)
 
 def merge_listdict(a, b):
     "merges b into a"

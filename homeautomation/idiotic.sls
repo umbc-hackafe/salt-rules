@@ -51,6 +51,7 @@ idiotic-dependencies:
       - python-pyalexa
       - python-requests
       - python-sqlalchemy
+      - python-flask
 
 idiotic:
   pkg.latest:

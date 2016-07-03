@@ -7,14 +7,16 @@ cloud-config:
     - template: jinja
 
 {% set deleted = salt['pillar.get']('cloud:deleted', []) %}
-{% set defaults = salt['pillar.get']('cloud:defaults', {}) %}
+{% set defaults = salt['pillar.get']('cloud_defaults', {}) %}
 
 {% for host, settings in salt['pillar.get']('cloud:instances', {}).items() %}
 cloud-instance-{{ host }}:
 {% if host in deleted %}
   cloud.absent
 {% else %}
-  cloud.present: {{ salt['dns.merge'](settings, defaults + [{"name": host}])|yaml }}
+{% set full_settings = salt['dns.merge'](defaults, settings) %}
+{% if 'net0' not in salt['utils.dictlist_to_dict'](settings) %}{% set _ = full_settings.append({'net0': salt['utils.mknet'](**salt['utils.dictlist_to_dict'](full_settings))}) %}{% endif %}
+  cloud.present: {{ salt['utils.filter_netparams'](full_settings + [{"name": host}])|yaml }}
 {% endif %}
 {% endfor %}
 

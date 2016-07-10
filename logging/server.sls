@@ -1,23 +1,23 @@
-redis:
-  pkg.installed:
-    - name: redis
-  service.running:
-    - enable: True
-    - reload: True
-    - watch:
-      - pkg: redis
-
-logstash:
-  pkg.installed:
-    - name: logstash
-  file.recurse:
-    - name: /etc/logstash/conf.d
-    - source: salt://logging/logstash.conf.d
-  service.running:
-    - name: logstash
-    - enable: True
-    - watch:
-      - pkg: logstash
+#redis:
+#  pkg.installed:
+#    - name: redis
+#  service.running:
+#    - enable: True
+#    - reload: True
+#    - watch:
+#      - pkg: redis
+#
+#logstash:
+#  pkg.installed:
+#    - name: logstash
+#  file.recurse:
+#    - name: /etc/logstash/conf.d
+#    - source: salt://logging/logstash.conf.d
+#  service.running:
+#    - name: logstash
+#    - enable: True
+#    - watch:
+#      - pkg: logstash
 
 elasticsearch:
   pkg.installed: []

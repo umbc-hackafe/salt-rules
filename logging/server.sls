@@ -21,6 +21,9 @@ logstash:
 
 elasticsearch:
   pkg.installed: []
+  file.managed:
+    - name: /etc/elasticsearch/elasticsearch.yml
+    - source: salt://logging/elasticsearch.yml
   service.running:
     - enable: True
 

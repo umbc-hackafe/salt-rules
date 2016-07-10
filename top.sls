@@ -86,7 +86,7 @@ base:
   'cibuildslave1.hackafe.net':
     - ci.slave
 
-  'logs':
+  'logs.hackafe.net':
     - logging.server
 
   'repo.hackafe.net':

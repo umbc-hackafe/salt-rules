@@ -26,11 +26,13 @@ elasticsearch:
     - source: salt://logging/elasticsearch.yml
   service.running:
     - enable: True
+    - watch:
+      - pkg: elasticsearch
 
 kibana:
   pkg.installed: []
   file.managed:
-    - name: /usr/share/webapps/kibana/config/kibana.yml
+    - name: /etc/elasticsearch/kibana/kibana.yml
     - source: salt://logging/kibana.yml
   service.running:
     - enable: True

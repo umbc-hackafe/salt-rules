@@ -19,6 +19,17 @@ logstash:
     - watch:
       - pkg: logstash
 
+{% for protocol in ['tcp', 'udp'] %}
+logstash_rsyslog_{{protocol}}:
+  iptables.append:
+    - table:    nat
+    - chain:    PREROUTING
+    - protocol: {{protocol}}
+    - dport:    514
+    - jump:     REDIRECT
+    - to-port:  10514
+{% endfor %}
+
 elasticsearch:
   pkg.installed: []
   file.managed:
@@ -39,3 +50,10 @@ kibana:
     - watch:
       - pkg: kibana
       - file: kibana
+  iptables.append:
+    - table:    nat
+    - chain:    PREROUTING
+    - protocol: tcp
+    - dport:    80
+    - jump:     REDIRECT
+    - to-port:  5601

@@ -1,13 +1,8 @@
 # Kibana is served by a back end server. This controls which port to use.
-port: 80
+port: 5601
 
 # The host to bind the server to.
-host: "::"
+host: "0.0.0.0"
 
 # The Elasticsearch instance to use for all your queries.
 elasticsearch.url: "http://localhost:9200"
-
-# preserve_elasticsearch_host true will send the hostname specified in
-# `elasticsearch`. If you set it to false, then the host you use to connect to
-# *this* Kibana instance will be sent.
-elasticsearch.preserve_host: true

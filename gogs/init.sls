@@ -9,6 +9,7 @@ gogs:
     - watch_in:
       - service: gogs
   service.running:
+    - enable: true
     - require:
       - pkg: gogs
       - pkg: sqlite

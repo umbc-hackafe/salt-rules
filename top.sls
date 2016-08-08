@@ -187,3 +187,7 @@ base:
     - network.dhcp
     - network.wifi
     - ci.slave
+
+  'cheesesandwich.hackafe.net':
+    - network.dhcp
+    - network.wifi

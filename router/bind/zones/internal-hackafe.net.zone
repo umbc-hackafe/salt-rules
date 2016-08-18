@@ -3,7 +3,7 @@
 $TTL 3600
 ; hackafe.net
 @ IN SOA vegafive.hackafe.net. mark.hackafe.net. (
-	2016081801  ; Serial
+	2016081803  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
@@ -36,17 +36,19 @@ vault		IN	CNAME	ghs.googlehosted.com.
 
 google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC/fTOEJdChhNCIWJ/BCUzqbDvOx1VhuhyftD/FgqShdzbfeEuzzVb9pYYr8QMFcs8CUABUhQRttC9j7CeFwalyXWQW1/4Cr7xcjYSTxJ4IKJJ9Cbfb0ZE+tK8Ob/WZodkKkxjimxjkdwsTzFiuli1LAwy4Uf7GA5uBsl9n/bju0wIDAQAB"
 
-{%- set dns_defaults = salt['pillar.get']('dns:defaults') -%}
-{%- for name, network in salt['pillar.get']('dns:networks').items() %}
-; {{ name }}
-{%- set net_domain = salt['pillar.get']('dns:networks:' + name + ':options:domain-name', salt['pillar.get']('dns:defaults:options:domain-name')) %}
-; {{ net_domain }}
-{%- if net_domain == zone_domain -%}
-{%- for hostname, attrs in salt['pillar.get']('dns:networks:' + name + ':hosts', {}).items() %}
-{{ hostname }}	  	IN	A	{{ attrs['ip'] }}
-{%- endfor -%}
+{%- set included = [] -%}
+{%- for server, ips in salt['mine.get']('*', 'network.ip_addrs').items() -%}
+{%- for ip in ips -%}
+
+{%- if server not in included and server not in ignore_hosts -%}
+{%- set _ = included.append(server) %}
+{{ server|replace('.hackafe.net','') }} IN      A       {{ ip }}
 {%- endif -%}
+
 {%- endfor -%}
+{%- endfor -%}
+
+
 
 {%- for server, ips in salt['mine.get']('*', 'network.ip_addrs6').items() -%}
 {%- if server != 'mail.hackafe.net' -%}

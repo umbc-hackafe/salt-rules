@@ -1,12 +1,16 @@
 include:
   - augeas
 
+{% set openssh_pkgname = salt['grains.filter_by']({
+  'Arch': 'openssh',
+  'Debian': 'openssh-server'
+  }, grain='os_family', default='Arch')
+%}
+
+
 openssh:
   pkg.installed:
-    - name: {{ salt['grains.filter_by']({
-      'Arch': 'openssh',
-      'Debian': 'openssh-server'
-    }, grain='os_family', default('Arch')) }}
+    - name: {{ openssh_pkgname }}
 
 sshd:
   service.running:

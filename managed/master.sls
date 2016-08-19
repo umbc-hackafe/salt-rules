@@ -1,6 +1,5 @@
 python-pygit2:
-  pkg.installed:
-    - name: python-pygit2-fix
+  pkg.installed
 
 salt-master:
   service.running:

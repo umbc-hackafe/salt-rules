@@ -1,7 +1,7 @@
 $TTL 3600
 ; hackafe.net
 @ IN SOA {{ salt['grains.get']('fqdn') }}. mark.hackafe.net. (
-	2016070202  ; Serial
+	2016091800  ; Serial
 	28800      ; Refresh
 	1800       ; Retry
 	604800     ; Expire - 1 week
@@ -57,6 +57,8 @@ hackafe.net.	IN	A	{{ external_ip }}
 
 {%- endfor -%}
 {%- endfor -%}
+
+salt	IN	AAAA	2605:2700:1:1027:e493:dcff:fe92:cf8f
 
 {%- for server, ips in salt['mine.get']('*', 'network.ip_addrs6').items() -%}
 {%- if server != 'mail.hackafe.net' -%}

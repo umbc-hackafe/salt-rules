@@ -261,4 +261,4 @@ def serve(name):
     else:
         return "Page not found", 404
 
-app.run('0.0.0.0', port=PORT, debug=False)
+app.run('::', port=PORT, debug=False)

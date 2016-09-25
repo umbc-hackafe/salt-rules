@@ -35,7 +35,7 @@ vault		IN	CNAME	ghs.googlehosted.com.
 
 google._domain_key IN	TXT	"v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC/fTOEJdChhNCIWJ/BCUzqbDvOx1VhuhyftD/FgqShdzbfeEuzzVb9pYYr8QMFcs8CUABUhQRttC9j7CeFwalyXWQW1/4Cr7xcjYSTxJ4IKJJ9Cbfb0ZE+tK8Ob/WZodkKkxjimxjkdwsTzFiuli1LAwy4Uf7GA5uBsl9n/bju0wIDAQAB"
 
-{%- set external_ip = '71.19.148.84' %}
+{%- set external_ip = '100.16.79.63' %}
 
 hackafe.net.	IN	A	{{ external_ip }}
 

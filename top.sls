@@ -191,3 +191,4 @@ base:
   'cheesesandwich.hackafe.net':
     - network.dhcp
     - network.wifi
+    - homeautomation.car

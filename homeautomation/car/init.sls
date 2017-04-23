@@ -35,3 +35,11 @@ bluetooth:
 /etc/udev/rules.d/50/bluetooth-hci-auto-poweron.rules:
   file.managed:
     - source: salt://homeautomation/car/bluetooth.rules
+
+/etc/pulse/system.pa:
+  file.managed:
+    - source: salt://homeautomation/car/system.pa
+
+/etc/pulse/default.pa:
+  file.managed:
+    - source: salt://homeautomation/car/default.pa

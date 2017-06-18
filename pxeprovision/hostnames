@@ -1,5 +1,3 @@
-{%- for host, settings in salt['pillar.get']('cloud:instances', {}).items() -%}
-{%- if salt['utils.dictlist_to_dict'](settings).get('mac_hash', False) %}
+{%- for host in salt['pillar.get']('cloud:instances', {}) -%}
 {{ host }},{{ salt['utils.gen_mac'](host) }}
-{%- endif -%}
 {%- endfor -%}

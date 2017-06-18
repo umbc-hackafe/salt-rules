@@ -6,6 +6,7 @@ base:
     - login.admin
     - login.ssh
     - network.time
+    - network.static
     - git
     - repo
     - containerchild

@@ -2,7 +2,7 @@ python-pygit2:
   pkg.installed
 
 salt-cloud:
-  pkg.installed: {}
+  pkg.installed: []
 
 salt-master:
   service.running:

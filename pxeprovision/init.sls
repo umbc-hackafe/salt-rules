@@ -22,7 +22,8 @@ pxe-service:
 hostnames:
   file.managed:
     - name: /opt/pxe/httproot/hostnames
-    - source: salt://pxeprovision/hostnames
+    - source:
+      - salt://pxeprovision/hostnames.jinja
     - template: jinja
     - require_in:
       - file: cloud-config

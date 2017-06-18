@@ -1,6 +1,9 @@
 python-pygit2:
   pkg.installed
 
+salt-cloud:
+  pkg.installed: {}
+
 salt-master:
   service.running:
     - enable: True

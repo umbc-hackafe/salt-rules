@@ -22,6 +22,7 @@ hostnames:
   file.managed:
     - name: /opt/pxe/httproot/hostnames
     - source: salt://pxeprovision/hostnames
+    - template: jinja
 
 pxe:
   service.running:

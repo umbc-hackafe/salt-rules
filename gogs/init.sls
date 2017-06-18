@@ -1,7 +1,7 @@
 gogs:
   pkg.installed: []
   file.managed:
-    - name: /srv/gogs/conf/app.ini
+    - name: /srv/gogs/custom/conf/app.ini
     - source: salt://gogs/app.ini
     - require:
       - pkg: gogs

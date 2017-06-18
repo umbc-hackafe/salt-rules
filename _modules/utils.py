@@ -86,6 +86,6 @@ def copy(dic):
     return deepcopy(dic)
 
 def gen_mac(hostname):
-    raw = hashlib.sha256(hostname).hexdigest().lower()[-12:]
+    raw = '02' + hashlib.sha256(hostname).hexdigest().lower()[-10:]
     mac = ':'.join((a+b for a,b in pairwise(raw)))
     return mac

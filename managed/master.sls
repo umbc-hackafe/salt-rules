@@ -1,6 +1,3 @@
-python-pygit2:
-  pkg.installed
-
 salt-cloud:
   pkg.installed: []
 

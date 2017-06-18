@@ -43,6 +43,18 @@ def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
         'type': type
     })
 
+    if kwargs.get('technology') == 'qemu':
+        if 'name' in kwargs:
+            del kwargs['name']
+
+        type_ = kwargs.get('type', 'virtio')
+        if 'type' in kwargs:
+            del kwargs['type']
+
+        if 'hwaddr' in kwargs:
+            kwargs[type_] = kwargs['hwaddr']
+            del kwargs['hwaddr']
+
     return ','.join(['='.join((k,str(v))) for k, v in kwargs.items() if k in NET_PARAMS])
 
 def is_list(obj):

@@ -21,7 +21,7 @@ def remap(k):
         return NET_REMAP[k]
     return k
 
-NET_PARAMS = ['name', 'bridge', 'gw', 'ip', 'type', 'ip6', 'hwaddr', 'tag']
+NET_PARAMS = ['name', 'bridge', 'gw', 'ip', 'type', 'ip6', 'hwaddr', 'tag', 'model']
 KEEP_ANYWAY = ['name', 'ip']
 
 def filter_netparams(param_dictlist):
@@ -47,9 +47,7 @@ def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
         if 'name' in kwargs:
             del kwargs['name']
 
-        type_ = kwargs.get('type', 'virtio')
-        if 'type' in kwargs:
-            del kwargs['type']
+        del kwargs['type']
 
         if 'hwaddr' in kwargs:
             kwargs[type_] = kwargs['hwaddr']

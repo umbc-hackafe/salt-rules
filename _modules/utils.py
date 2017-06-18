@@ -34,7 +34,7 @@ def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
     if gw:
         kwargs['gw'] = gw
 
-    if ip:
+    if ip and kwargs.get('technology') != 'qemu':
         kwargs['ip'] = ip
 
     kwargs.update({

@@ -13,6 +13,7 @@ pxe-service:
   file.copy:
     - name: /etc/systemd/system/pxe.service
     - source: /opt/pxe/pxe.service
+    - force: True
     - require:
       - git: pxe-git
     - watch_in:

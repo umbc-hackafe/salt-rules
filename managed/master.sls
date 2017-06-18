@@ -4,6 +4,9 @@ python-pygit2:
 salt-cloud:
   pkg.installed: []
 
+python-IPy:
+  pkg.installed: []
+
 salt-master:
   service.running:
     - enable: True

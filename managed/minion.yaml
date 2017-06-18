@@ -15,7 +15,7 @@ retry_dns: 30
 # The user to run salt.
 user: root
 
-ipv6: True
+ipv6: False
 
 # Append a domain to a hostname in the event that it does not exist.  This is
 # useful for systems where socket.getfqdn() does not actually result in a

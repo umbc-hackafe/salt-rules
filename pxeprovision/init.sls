@@ -23,6 +23,8 @@ hostnames:
     - name: /opt/pxe/httproot/hostnames
     - source: salt://pxeprovision/hostnames
     - template: jinja
+    - require_in:
+      - file: cloud-config
 
 pxe:
   service.running:

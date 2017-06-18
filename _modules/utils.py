@@ -49,8 +49,10 @@ def mknet(name='eth0', bridge='vmbr0', gw=None, ip=None, type='veth', **kwargs):
 
         del kwargs['type']
 
+        model = kwargs.get('model', 'virtio')
+
         if 'hwaddr' in kwargs:
-            kwargs[type_] = kwargs['hwaddr']
+            kwargs[model] = kwargs['hwaddr']
             del kwargs['hwaddr']
 
     return ','.join(['='.join((k,str(v))) for k, v in kwargs.items() if k in NET_PARAMS])

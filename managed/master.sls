@@ -30,3 +30,10 @@ salt-master-autosign:
     - contents: |
       update_fileserver:
         runner.fileserver.update
+
+salt-master-firewalld:
+  firewalld.service:
+    - name: salt-master
+    - ports:
+      - 4505/tcp
+      - 4506/tcp

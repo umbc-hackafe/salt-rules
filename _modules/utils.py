@@ -1,6 +1,7 @@
 from itertools import izip
 from copy import deepcopy
 import re
+import hashlib
 
 def dict_to_dictlist(d):
     return [{k: v} for k, v in d.items()]
@@ -70,3 +71,8 @@ def exclude_keys(dic, *keys):
 
 def copy(dic):
     return deepcopy(dic)
+
+def gen_mac(hostname):
+    raw = hashlib.sha256(hostname).hexdigest().lower()[-12:]
+    mac = ':'.join((a+b for a,b in pairwise(raw)))
+    return mac

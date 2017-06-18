@@ -24,6 +24,7 @@ base:
   'salt.hackafe.net':
     - managed.master
     - cloud
+    - pxeprovision
 
   'cheerilee.hackafe.net':
     - audio

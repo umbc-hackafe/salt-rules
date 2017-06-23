@@ -1,7 +1,7 @@
 asterisk:
-  pkg.installed:
-    - require:
-      - pkg: asterisk-espeak
+  pkg.installed: []
+#    - require:
+#      - pkg: asterisk-espeak
 
   service.running:
     - enable: True

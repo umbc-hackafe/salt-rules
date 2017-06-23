@@ -10,3 +10,14 @@ systemd-networkd:
     - enable: True
     - require:
       - file: systemd.network
+
+systemd-resolved:
+  service.running:
+    - enable: True
+    - require:
+      - service: systemd-networkd
+      - file: /etc/resolv.conf
+
+/etc/resolv.conf:
+  file.symlink:
+    - target: /run/systemd/resolve/resolv.conf

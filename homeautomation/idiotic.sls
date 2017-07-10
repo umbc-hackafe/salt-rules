@@ -19,6 +19,7 @@ install-idiotic:
 /etc/idiotic/conf.yaml:
   file.managed:
     - source: salt://homeautomation/idiotic-conf/{{ grains.host }}.yaml
+    - template: jinja
     - watch_in:
       - service: idiotic
 

@@ -13,13 +13,12 @@ install-idiotic:
   cmd.run:
     - name: python3 setup.py install
     - cwd: /opt/idiotic
+    - watch_in:
+      - service: idiotic
 
 /etc/idiotic/conf.yaml:
   file.managed:
     - source: salt://homeautomation/idiotic-conf/{{ grains.host }}.yaml
-    - require:
-      - pkg: idiotic
-      - git: idiotic-config-repo
     - watch_in:
       - service: idiotic
 
@@ -40,7 +39,7 @@ idiotic:
     - enable: True
     - require:
       - git: idiotic-git-repo
-      - git: idiotic-config-repo
       - file: /etc/idiotic/conf.yaml
       - file: /etc/systemd/system/idiotic.service
       - pkg: idiotic-dependencies
+      - cmd: install-idiotic

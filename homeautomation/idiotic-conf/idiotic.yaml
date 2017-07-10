@@ -1,0 +1,38 @@
+version: 1
+global: {}
+cluster:
+  listen: '0.0.0.0'
+  rpc_port: 28301
+  port: 28300
+nodes:
+  idiotic:
+    host: 10.2.0.23
+modules:
+  smartthings:
+    oauth_token: {{ salt['pillar.get']('idiotic:smartthings:token') }}
+    endpoints_uri: https://graph.api.smartthings.com/api/smartapps/endpoints
+    location: Home
+blocks:
+  zero:
+    type: value.float
+    initial: 0.0
+
+  average_temp:
+    type: math.average
+    initial: 0
+    default: 0
+  average_humidity:
+    type: math.average
+    initial: 0
+    default: 0
+  front_light:
+    type: smartthings.switch
+    label: Living Room Lamp
+  badge_server:
+    type: badge.badge_server
+  teakettle:
+    address: 'https://api.particle.io'
+    path: '/v1/devices/'
+    access_token: 'fe7e8d11c02660ee0cfd37e5a508e184bf95a858'
+    device_id: '210035001447343338333633'
+    type: teapot.teapot

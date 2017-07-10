@@ -1,67 +1,46 @@
-/opt/idiotic:
-  file.absent: []
-
-/etc/idiotic/modules:
-  file.directory:
-    - require:
-      - pkg: idiotic
-    - makedirs: True
-
-idiotic-config-repo:
+idiotic-git-repo:
   git.latest:
-    - name: https://github.com/umbc-hackafe/idiotic-config.git
+    - name: https://github.com/idiotic/idiotic.git
+    - target: /opt/idiotic
     - force_clone: True
-    - target: /etc/idiotic
-    - rev: {{ salt['grains.filter_by']({
-    'idiotic': 'master',
-    'sweetiebot': 'demo'},
-    grain='host', default='idiotic') }}
-    - require:
-      - pkg: idiotic
+    - target: /opt/idiotic
+    - rev: develop
     - watch_in:
       - service: idiotic
+      - cmd: install-idiotic
 
-idiotic-webui-repo:
-  git.latest:
-    - name: https://github.com/umbc-hackafe/idiotic-webui.git
-    - force_clone: True
-    - target: /etc/idiotic/modules/webui
-    - require:
-      - file: /etc/idiotic/modules
-    - watch_in:
-      - service: idiotic
+install-idiotic:
+  cmd.run:
+    - name: python3 setup.py install
+    - cwd: /opt/idiotic
 
-/etc/idiotic/conf.json:
+/etc/idiotic/conf.yaml:
   file.managed:
-    - source: salt://homeautomation/idiotic-conf/{{ grains.host }}.json
-    - template: jinja
+    - source: salt://homeautomation/idiotic-conf/{{ grains.host }}.yaml
     - require:
       - pkg: idiotic
       - git: idiotic-config-repo
     - watch_in:
       - service: idiotic
+
+/etc/systemd/system/idiotic.service:
+  file.managed:
+    - source: salt://homeautomation/idiotic.service
+    - watch_in:
+      - daemon-reload
 
 idiotic-dependencies:
   pkg.installed:
     - pkgs:
-      - python-dateutil
-      - python-psycopg2
-      - python-py-wink-git
-      - python-pygal
-      - python-pyalexa
-      - python-requests
-      - python-sqlalchemy
-      - python-flask
+      - python3-requests
+      - python3-flask
 
 idiotic:
-  pkg.latest:
-    - name: idiotic-git
-    - watch_in:
-      - service: idiotic
   service.running:
     - enable: True
     - require:
-      - pkg: idiotic
+      - git: idiotic-git-repo
       - git: idiotic-config-repo
-      - file: /etc/idiotic/conf.json
+      - file: /etc/idiotic/conf.yaml
+      - file: /etc/systemd/system/idiotic.service
       - pkg: idiotic-dependencies

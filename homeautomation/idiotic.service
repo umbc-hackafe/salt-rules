@@ -1,0 +1,11 @@
+[Unit]
+Description=idiotic smarthome thing
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -m idiotic -v -c /etc/idiotic/conf.yaml idiotic
+User=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

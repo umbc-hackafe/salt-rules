@@ -216,3 +216,6 @@ base:
     - network.dhcp
     - network.wifi
     - homeautomation.car
+
+  'find.hackafe.net':
+    - homeautomation.find

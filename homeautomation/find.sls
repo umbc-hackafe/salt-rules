@@ -25,7 +25,7 @@ build-find:
     - require:
       - git: find-git
       - pkg: find-prereqs
-      - file: /opt/go
+      - file: /opt/go/find
     - onchanges:
       - git: find-git
 

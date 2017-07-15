@@ -8,11 +8,11 @@ find-prereqs:
 find-git:
   git.latest:
     - name: https://github.com/schollz/find.git
-    - target: /opt/find
+    - target: /opt/go/find
     - require:
       - pkg: find-prereqs
 
-/opt/go:
+/opt/go/find:
   file.directory:
     - makedirs: True
 
@@ -21,7 +21,7 @@ build-find:
     - env:
       - GOPATH: /opt/go
     - name: go get ./... && go build
-    - cwd: /opt/find
+    - cwd: /opt/go/find
     - require:
       - git: find-git
       - pkg: find-prereqs
@@ -29,7 +29,7 @@ build-find:
     - onchanges:
       - git: find-git
 
-/opt/find/mosquitto/conf:
+/opt/go/find/mosquitto/conf:
   file.managed:
     - makedirs: True
     - replace: False
@@ -37,7 +37,7 @@ build-find:
 
 /etc/mosquitto/mosquitto.conf:
   file.symlink:
-    - target: /opt/find/mosquitto/conf
+    - target: /opt/go/find/mosquitto/conf
     - force: True
     - require:
       - pkg: find-prereqs
@@ -49,7 +49,7 @@ mosquitto:
       - pkg: find-prereqs
       - file: /etc/mosquitto/mosquitto.conf
 
-/usr/lib/systemd/system/find.service:
+/usr/lib/systemd/system/go/find.service:
   file.managed:
     - template: jinja
     - contents: |
@@ -57,7 +57,7 @@ mosquitto:
         Description=The Framework for Internal Navigation and Discovery
         [Service]
         Type=simple
-        ExecStart=/bin/bash /opt/find/find -mqtt localhost:1883 -mqttadmin {{ salt['grains.get_or_set_hash']('mqtt:admin_user') }} -mqttadminpass {{ salt['grains.get_or_set_hash']('mqtt:admin_pass') }} -mosquitto $(pgrep mosquitto) -p :8080 0.0.0.0:8080
+        ExecStart=/bin/bash /opt/go/find/find -mqtt localhost:1883 -mqttadmin {{ salt['grains.get_or_set_hash']('mqtt:admin_user') }} -mqttadminpass {{ salt['grains.get_or_set_hash']('mqtt:admin_pass') }} -mosquitto $(pgrep mosquitto) -p :8080 0.0.0.0:8080
         Restart=always
         Requires=mosquitto.service
         After=mosquitto.service

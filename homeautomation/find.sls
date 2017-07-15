@@ -31,6 +31,7 @@ build-find:
 
 /opt/find/mosquitto/conf:
   file.managed:
+    - makedirs: True
     - replace: False
     - contents: ''
 
@@ -66,6 +67,6 @@ mosquitto:
 find:
   service.running:
     - require:
-      - file: /usr/lib/systemd/find.service
+      - file: /usr/lib/systemd/system/find.service
       - service: mosquitto
       - cmd: build-find

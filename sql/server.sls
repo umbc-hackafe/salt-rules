@@ -11,7 +11,7 @@ initdb:
   cmd.run:
     - name: initdb --locale en_US.UTF-8 -E UTF8 -D '/var/lib/postgres/data'
     - unless: test "$(ls -A /var/lib/postgres/data)"
-    - user: postgres
+    - runas: postgres
     - require:
       - pkg: postgresql
 

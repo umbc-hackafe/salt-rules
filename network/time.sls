@@ -9,7 +9,7 @@ timesyncd:
       - salt://network/timesyncd.conf
   cmd.wait:
     - name: timedatectl set-ntp true
-    - user: root
+    - runas: root
     - watch:
       - file: timesyncd
   service.running:
@@ -26,5 +26,5 @@ ntpdate:
 timezone:
   cmd.run:
     - name: timedatectl set-timezone '{{ timezone }}'
-    - user: root
+    - runas: root
     - unless: ls -l '/etc/localtime' | grep '{{ timezone }}'

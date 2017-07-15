@@ -1,6 +1,8 @@
 systemd.network:
   file.managed:
     - name: /etc/systemd/network/ens18.network
+    - watch_in:
+      - service: systemd-networkd
     - source:
       - salt://network/ens18.jinja
     - template: jinja

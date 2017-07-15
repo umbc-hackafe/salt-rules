@@ -51,6 +51,8 @@ mosquitto:
 
 /usr/lib/systemd/system/go/find.service:
   file.managed:
+    - watch_in:
+      - cmd: daemon-reload
     - template: jinja
     - contents: |
         [Unit]

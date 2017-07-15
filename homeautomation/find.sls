@@ -57,12 +57,13 @@ mosquitto:
     - contents: |
         [Unit]
         Description=The Framework for Internal Navigation and Discovery
-        [Service]
-        Type=simple
-        ExecStart=/bin/bash /opt/go/find/find -mqtt localhost:1883 -mqttadmin {{ salt['grains.get_or_set_hash']('mqtt:admin_user') }} -mqttadminpass {{ salt['grains.get_or_set_hash']('mqtt:admin_pass') }} -mosquitto $(pgrep mosquitto) -p :8080 0.0.0.0:8080
-        Restart=always
         Requires=mosquitto.service
         After=mosquitto.service
+        [Service]
+        Type=simple
+        WorkingDirectory=/opt/go/find
+        ExecStart=/bin/bash /opt/go/find/find -mqtt localhost:1883 -mqttadmin {{ salt['grains.get_or_set_hash']('mqtt:admin_user') }} -mqttadminpass {{ salt['grains.get_or_set_hash']('mqtt:admin_pass') }} -mosquitto $(pgrep mosquitto) -p :8080 0.0.0.0:8080
+        Restart=always
         [Install]
         WantedBy=multi-user.target
 

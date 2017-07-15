@@ -2,7 +2,7 @@
 Name=ens18
 
 [Network]
-Address={{ salt['dns.static_resolve'](grains['fqdn']) }}/16
+Address={{ salt['dns.static_resolve'](grains['nodename']) }}/16
 Gateway=10.2.0.1
 DNS=10.2.0.1
 

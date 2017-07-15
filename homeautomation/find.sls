@@ -62,7 +62,7 @@ mosquitto:
         [Service]
         Type=simple
         WorkingDirectory=/opt/go/find
-        ExecStart=/bin/bash -c /opt/go/find/find -mqtt localhost:1883 -p :8080 -mqttadmin '{{ salt['grains.get_or_set_hash']('mqtt:admin_user', 16) }}' -mqttadminpass '{{ salt['grains.get_or_set_hash']('mqtt:admin_pass', 16) }}' -mosquitto $(pgrep mosquitto) 0.0.0.0:80
+        ExecStart=/bin/bash -c "/opt/go/find/find -mqtt localhost:1883 -mqttadmin '{{ salt['grains.get_or_set_hash']('mqtt:admin_user', 16) }}' -mqttadminpass '{{ salt['grains.get_or_set_hash']('mqtt:admin_pass', 16) }}' -mosquitto $(pgrep mosquitto) -p :80 0.0.0.0:80"
         Restart=always
         [Install]
         WantedBy=multi-user.target

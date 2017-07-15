@@ -7,7 +7,7 @@ find-prereqs:
 
 find-git:
   git.latest:
-    - name: https://github.com/schollz/find.git:
+    - name: https://github.com/schollz/find.git
     - target: /opt/find
     - require:
       - pkg: find-prereqs

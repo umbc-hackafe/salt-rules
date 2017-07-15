@@ -12,13 +12,20 @@ find-git:
     - require:
       - pkg: find-prereqs
 
+/opt/go:
+  file.directory:
+    - makedirs: True
+
 build-find:
   cmd.run:
+    - env:
+      - GOPATH: /opt/go
     - name: go get ./... && go build
     - cwd: /opt/find
     - require:
       - git: find-git
       - pkg: find-prereqs
+      - file: /opt/go
     - onchanges:
       - git: find-git
 

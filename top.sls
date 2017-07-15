@@ -218,4 +218,5 @@ base:
     - homeautomation.car
 
   'find.hackafe.net':
+    - network.static
     - homeautomation.find

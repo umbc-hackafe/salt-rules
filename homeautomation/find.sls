@@ -49,7 +49,7 @@ mosquitto:
       - pkg: find-prereqs
       - file: /etc/mosquitto/mosquitto.conf
 
-/usr/lib/systemd/system/go/find.service:
+/usr/lib/systemd/system/find.service:
   file.managed:
     - watch_in:
       - cmd: daemon-reload

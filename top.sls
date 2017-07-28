@@ -220,3 +220,6 @@ base:
   'find.hackafe.net':
     - network.static
     - homeautomation.find
+
+  'magbadges.hackafe.net':
+    - swadges

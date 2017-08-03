@@ -223,3 +223,6 @@ base:
 
   'magbadges.hackafe.net':
     - swadges
+
+  'twilio.jasonspriggs.com':
+    - network.static

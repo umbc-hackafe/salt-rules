@@ -226,3 +226,6 @@ base:
 
   'twilio.jasonspriggs.com':
     - network.static
+
+  'nfs.hackafe.net':
+    - network.static

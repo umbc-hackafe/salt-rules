@@ -1,5 +1,12 @@
-tftp-hpa:
-  pkg.installed
+{% set tftp_pkg, tftp_svc = salt['grains.filter_by']({
+    'RedHat': ('tftp-server', 'tftp'),
+    'Arch': ('tftp-hpa', 'tftpd')},
+  grain='os_family', default='Arch')
+%}
+
+tftp-package:
+  pkg.installed:
+  - name: {{ tftp_pkg }}
 
 /srv/tftp:
   file.directory:
@@ -27,11 +34,12 @@ tftp:
     - groups:
       - tftp
 
-tftpd:
+tftp-service:
   service.running:
+    - name: {{ tftp_svc }}
     - enable: True
     - require:
-      - pkg: tftp-hpa
+      - pkg: {{ tftp_pkg }}
       - user: tftp
       - file: /srv/tftp
     - watch:

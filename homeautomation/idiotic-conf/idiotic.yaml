@@ -8,31 +8,156 @@ nodes:
   idiotic:
     host: 10.2.0.23
 modules:
+  nest:
+    oauth_token: {{ salt['pillar.get']('idiotic:nest:token') }}
   smartthings:
     oauth_token: {{ salt['pillar.get']('idiotic:smartthings:token') }}
     endpoints_uri: https://graph.api.smartthings.com/api/smartapps/endpoints
     location: Home
+  zoneminder:
+    database: {{ salt['pillar.get']('idiotic:zoneminder:url') }}
+    update_interval: 5
 blocks:
   zero:
     type: value.float
     initial: 0.0
 
+  sun:
+    type: suntime.sun
+    location:
+      latitude: {{ salt['pillar.get']('idiotic:location:latitude') }}
+      longitude: {{ salt['pillar.get']('idiotic:location:longitude') }}
+      timezone: US/Eastern
+
+  zone_driveway:
+    type: zoneminder.zone
+    monitor: Driveway
+    zone: Driveway
+
+  zone_sidewalk:
+    type: zoneminder.zone
+    monitor: Driveway
+    zone: Front Sidewalk
+
+  driveway_occupied:
+    type: occupancy.occupancy
+    inputs:
+      motion_driveway: zone_driveway
+      motion_sidewalk: zone_sidewalk
+
+  front_light_power:
+    type: logic.and
+    inputs:
+      a: driveway_occupied
+      b: sun.down
+    input_to:
+      front_light.power
+
+  zone_foscam:
+    type: zoneminder.zone
+    monitor: Foscam
+    zone: All
+
+  dining_room_occupied:
+    type: occupancy.occupancy
+    decay: .98
+    threshold: .35
+    inputs:
+      motion_foscam: zone_foscam
+    input_to:
+      - dining_table_1.power
+      - dining_table_2.power
+      - dining_table_3.power
+      - dining_room_lamp.power
+
+  downstairs_heat:
+    type: nest.thermostat
+    label: Living Room
+    kind: thermostat
+
+  upstairs_ac:
+    type: nest.thermostat
+    label: Upstairs
+    kind: thermostat
+
   average_temp:
     type: math.average
     initial: 0
     default: 0
+    inputs:
+      downstairs: downstairs_heat.temperature
+      upstairs: upstairs_ac.temperature
+
   average_humidity:
     type: math.average
     initial: 0
     default: 0
-  front_light:
+    inputs:
+      downstairs: downstairs_heat.temperature
+      upstairs: upstairs_ac.temperature
+
+  living_room_lamp:
     type: smartthings.switch
     label: Living Room Lamp
-  badge_server:
-    type: badge.badge_server
+    id: c32ee798-2e01-4d4b-ae54-acd42c196f20
+
+#  living_room_front:
+#    type: smartthings.switch
+#    label: Living Room Front
+
+  dining_room_lamp:
+    type: smartthings.switch
+    label: Dining Room Lamp
+    id: 96c9b9ff-2a93-4d8b-8477-58db1a256056
+
+  dining_table_1:
+    type: smartthings.switch
+    label: Dining Table 1
+    id: bc658d54-abfc-464d-8b60-3bf5770fc25b
+
+  dining_table_2:
+    type: smartthings.switch
+    label: Dining Table 2
+    id: cc639f14-8e6e-46e1-8085-53de8041a0cf
+
+  dining_table_3:
+    type: smartthings.switch
+    label: Dining Table 3
+    id: 103d5bbd-7fb7-41f7-8c05-bf9fbffc704c
+
+  dylan_fan_1:
+    type: smartthings.switch
+    label: Dylan's Fan 1
+
+  dylan_fan_2:
+    type: smartthings.switch
+    label: Dylan's Fan 2
+
+  dylan_fan_3:
+    type: smartthings.switch
+    label: Dylan's Fan 3
+
+  marks_room_1:
+    type: smartthings.switch
+    label: Mark's Room 1
+
+  marks_room_2:
+    type: smartthings.switch
+    label: Mark's Room 2
+
+  front_light:
+    type: smartthings.switch
+    label: Front Light
+    id: 279734bc-8c5c-4b8e-9355-09abb0b9f1c2
+
   teakettle:
+    type: teapot.teapot
     address: 'https://api.particle.io'
     path: '/v1/devices/'
-    access_token: 'fe7e8d11c02660ee0cfd37e5a508e184bf95a858'
+    access_token: {{ salt['pillar.get']('idiotic:teapot:access_token') }}
     device_id: '210035001447343338333633'
-    type: teapot.teapot
+
+  front_lights:
+    type: http.http
+    method: post
+    url: http://10.1.254.21//put_saved_animation/{animation}

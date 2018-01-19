@@ -70,6 +70,18 @@ blocks:
       - dining_table_3.power
       - dining_room_lamp.power
 
+  downstairs_scale:
+    type: value.str
+    initial: C
+    input_to:
+      - downstairs_heat.temperature_scale
+
+  downstairs_setpoint:
+    type: value.float
+    initial: 19.5
+    input_to:
+      - downstairs_heat.target
+
   downstairs_heat:
     type: nest.thermostat
     label: Living Room

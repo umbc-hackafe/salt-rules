@@ -72,7 +72,7 @@ blocks:
 
   downstairs_scale:
     type: value.str
-    initial: C
+    initial: F
 
   downstairs_scale_correct:
     type: logic.equal
@@ -95,7 +95,7 @@ blocks:
 
   downstairs_setpoint:
     type: value.float
-    initial: 19.5
+    initial: 67
 
   downstairs_setpoint_correct:
     type: logic.equal

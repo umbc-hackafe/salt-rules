@@ -112,6 +112,7 @@ blocks:
     type: logic.output_if
     inputs:
       condition: downstairs_setpoint_wrong
+      value: downstairs_setpoint
     input_to:
       - downstairs_heat.target
 

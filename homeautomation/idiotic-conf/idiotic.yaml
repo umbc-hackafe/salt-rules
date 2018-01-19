@@ -73,12 +73,45 @@ blocks:
   downstairs_scale:
     type: value.str
     initial: C
+
+  downstairs_scale_correct:
+    type: logic.equal
+    inputs:
+      a: downstairs_scale
+      b: downstairs_heat.temperature_scale
+
+  downstairs_scale_wrong:
+    type: logic.not
+    inputs:
+      a: downstairs_scale_correct
+
+  force_downstairs_scale:
+    type: logic.output_if
+    inputs:
+      condition: downstairs_scale_wrong
+      value: downstairs_scale
     input_to:
       - downstairs_heat.temperature_scale
 
   downstairs_setpoint:
     type: value.float
     initial: 19.5
+
+  downstairs_setpoint_correct:
+    type: logic.equal
+    inputs:
+      a: downstairs_setpoint
+      b: downstairs_heat.target
+
+  downstairs_setpoint_wrong:
+    type: logic.not
+    inputs:
+      a: downstairs_setpoint_correct
+
+  force_downstairs_setpoint:
+    type: logic.output_if
+    inputs:
+      condition: downstairs_setpoint_wrong
     input_to:
       - downstairs_heat.target
 

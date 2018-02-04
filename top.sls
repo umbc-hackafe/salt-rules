@@ -25,7 +25,6 @@ base:
     - network.static
     - managed.master
     - cloud
-    - pxeprovision
 
   'cheerilee.hackafe.net':
     - audio

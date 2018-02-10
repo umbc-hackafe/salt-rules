@@ -151,6 +151,10 @@ blocks:
 #    type: smartthings.switch
 #    label: Living Room Front
 
+  living_room_corner:
+    type: smartthings.switch
+    label: Living Room Corner
+
   dining_room_lamp:
     type: smartthings.switch
     label: Dining Room Lamp
@@ -207,3 +211,13 @@ blocks:
     type: http.http
     method: post
     url: http://10.1.254.21//put_saved_animation/{animation}
+
+  motion:
+    type: gpio.RPiGPIO
+    device: MotionSensor
+    options:
+      pin: 4
+    require:
+      - host.node_name: scootaloo
+    input_to:
+      - living_room_corner.power

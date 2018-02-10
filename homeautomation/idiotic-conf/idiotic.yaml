@@ -5,13 +5,14 @@ cluster:
   rpc_port: 28301
   port: 28300
 nodes:
-  idiotic:
+  idiotic.hackafe.net:
     host: 10.2.0.23
-  scootaloo:
+  scootaloo.hackafe.net:
     host: 10.1.253.240
 modules:
   nest:
     oauth_token: {{ salt['pillar.get']('idiotic:nest:token') }}
+    update_interval: 90
   smartthings:
     oauth_token: {{ salt['pillar.get']('idiotic:smartthings:token') }}
     endpoints_uri: https://graph.api.smartthings.com/api/smartapps/endpoints
@@ -220,6 +221,6 @@ blocks:
     options:
       pin: 4
     require:
-      - host.node_name: scootaloo
+      - host.node_name: scootaloo.hackafe.net
     input_to:
       - living_room_corner.power

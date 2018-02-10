@@ -31,9 +31,10 @@ install-idiotic:
 
 idiotic-dependencies:
   pkg.installed:
-    - pkgs:
-      - python3-requests
-      - python3-flask
+    - pkgs: {{ salt['grains.filter_by']({
+      'Arch': ['python-requests', 'python-flask'],
+      'RedHat': ['python3-requests', 'python3-flask']
+    }, grain='os_family', default='RedHat') | yaml }}
 
 idiotic:
   service.running:

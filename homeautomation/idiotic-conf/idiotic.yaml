@@ -51,7 +51,7 @@ blocks:
       a: driveway_occupied
       b: sun.down
     input_to:
-      front_light.power
+      - front_light.power
 
   zone_foscam:
     type: zoneminder.zone

@@ -216,7 +216,7 @@ blocks:
     url: http://10.1.254.21//put_saved_animation/{animation}
 
   motion:
-    type: gpio.RPiGPIO
+    type: gpio.pi_gpio
     device: MotionSensor
     options:
       pin: 4

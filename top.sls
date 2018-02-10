@@ -43,10 +43,9 @@ base:
     - ci.slave
 
   'scootaloo.hackafe.net':
-    - homeautomation.openhalper
+    - homeautomation.idiotic
     - network.dhcp
     - network.wifi
-    - ci.slave
 
   'vinyl.hackafe.net':
     - homeautomation.openhalper

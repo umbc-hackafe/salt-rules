@@ -7,7 +7,6 @@ base:
     - login.ssh
     - network.time
     - git
-    - repo
     - containerchild
     - logging.client
 

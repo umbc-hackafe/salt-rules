@@ -22,6 +22,7 @@ install-idiotic:
   file.managed:
     - source: salt://homeautomation/idiotic-conf/idiotic.yaml
     - template: jinja
+    - makedirs: True
     - watch_in:
       - service: idiotic
 

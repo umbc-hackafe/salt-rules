@@ -3,7 +3,7 @@ Description=idiotic smarthome thing
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 -m idiotic -v -c /etc/idiotic/conf.yaml idiotic
+ExecStart=/usr/bin/python3 -m idiotic -v -c /etc/idiotic/conf.yaml
 User=root
 Restart=always
 

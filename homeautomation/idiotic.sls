@@ -15,6 +15,8 @@ install-idiotic:
     - cwd: /opt/idiotic
     - watch_in:
       - service: idiotic
+    - require:
+      - pkg: idiotic-dependencies
 
 /etc/idiotic/conf.yaml:
   file.managed:

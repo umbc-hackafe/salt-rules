@@ -226,3 +226,6 @@ base:
 
   'nfs.hackafe.net':
     - network.static
+
+  'edge.hackafe.net':
+    - router.edgeos

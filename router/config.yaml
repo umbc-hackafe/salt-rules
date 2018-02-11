@@ -1,0 +1,869 @@
+firewall {
+    all-ping enable
+    broadcast-ping disable
+    group {
+        ipv6-address-group Netflix {
+            description "Known ipv6 blocks used by Netflix"
+            ipv6-address 2a01:578:3::/48
+            ipv6-address 2406:da00:ff00::/48
+            ipv6-address 2600:1407:19::/48
+            ipv6-address 2607:f8b0:4001::/48
+            ipv6-address 2620:108:700f::/48
+        }
+    }
+    ipv6-name tun-in {
+        default-action drop
+        description "IPv6 traffic to internal"
+        enable-default-log
+        rule 10 {
+            action accept
+            description "Accept Established Related"
+            state {
+                established enable
+                related enable
+            }
+        }
+        rule 15 {
+            action accept
+            description "Accept ICMP Echo"
+            icmpv6 {
+                type echo-request
+            }
+            log enable
+            protocol ipv6-icmp
+        }
+    }
+    ipv6-name tun-local {
+        default-action drop
+        description "IPv6 traffic to router"
+        enable-default-log
+        rule 10 {
+            action accept
+            description "Accept Established Related"
+            state {
+                established enable
+                related enable
+            }
+        }
+        rule 15 {
+            action accept
+            description "Accept ICMP Echo"
+            icmpv6 {
+                type echo-request
+            }
+            log enable
+            protocol ipv6-icmp
+        }
+    }
+    ipv6-name tun-out {
+        default-action accept
+        description "LAN IPv6 Traffic Out"
+        rule 10 {
+            action reject
+            description "Reject Netflix IPv6 Traffic Out"
+            destination {
+                group {
+                    ipv6-address-group Netflix
+                }
+            }
+        }
+    }
+    ipv6-receive-redirects disable
+    ipv6-src-route disable
+    ip-src-route disable
+    log-martians enable
+    receive-redirects disable
+    send-redirects enable
+    source-validation disable
+    syn-cookies enable
+}
+interfaces {
+    ethernet eth0 {
+        address dhcp
+        description WAN
+        duplex auto
+        speed auto
+    }
+    ethernet eth1 {
+        address 10.0.0.1/16
+        address 2001:470:e591::1/64
+        description Management
+        duplex auto
+        ipv6 {
+            dup-addr-detect-transmits 1
+            router-advert {
+                cur-hop-limit 64
+                default-preference high
+                link-mtu 0
+                managed-flag false
+                max-interval 600
+                other-config-flag true
+                prefix 2001:470:e591::1/64 {
+                    autonomous-flag true
+                    on-link-flag true
+                    valid-lifetime 2592000
+                }
+                reachable-time 0
+                retrans-timer 0
+                send-advert true
+            }
+        }
+        speed auto
+        vif 2 {
+            address 10.1.0.1/16
+            address 2001:470:e591:1::1/64
+            description LAN
+            ipv6 {
+                dup-addr-detect-transmits 1
+                router-advert {
+                    cur-hop-limit 64
+                    default-preference high
+                    link-mtu 0
+                    managed-flag false
+                    max-interval 600
+                    other-config-flag true
+                    prefix 2001:470:e591:1::1/64 {
+                        autonomous-flag true
+                        on-link-flag true
+                        valid-lifetime 2592000
+                    }
+                    reachable-time 0
+                    retrans-timer 0
+                    send-advert true
+                }
+            }
+            mtu 1500
+        }
+        vif 3 {
+            address 10.2.0.1/16
+            address 2001:470:e591:2::1/64
+            description Server
+            ipv6 {
+                dup-addr-detect-transmits 1
+                router-advert {
+                    cur-hop-limit 64
+                    default-preference high
+                    link-mtu 0
+                    managed-flag false
+                    max-interval 600
+                    other-config-flag true
+                    prefix 2001:470:e591:2::1/64 {
+                        autonomous-flag true
+                        on-link-flag true
+                        valid-lifetime 2592000
+                    }
+                    reachable-time 0
+                    retrans-timer 0
+                    send-advert true
+                }
+            }
+            mtu 1500
+        }
+        vif 200 {
+            address 10.201.0.1/16
+            description "MAGFest Vlan"
+            mtu 1500
+        }
+    }
+    ethernet eth2 {
+        duplex auto
+        speed auto
+    }
+    ethernet eth3 {
+        duplex auto
+        speed auto
+    }
+    ethernet eth4 {
+        description eth4
+        duplex auto
+        poe {
+            output off
+        }
+        speed auto
+    }
+    loopback lo {
+    }
+    switch switch0 {
+        mtu 1500
+    }
+    tunnel tun0 {
+        address 2001:470:7:10f8::2/64
+        description "Hurricane Electric IPv6 Tunnel"
+        encapsulation sit
+        firewall {
+            in {
+                ipv6-name tun-in
+            }
+            local {
+                ipv6-name tun-local
+            }
+            out {
+                ipv6-name tun-out
+            }
+        }
+        local-ip 0.0.0.0
+        multicast disable
+        remote-ip 216.66.22.2
+        ttl 255
+    }
+}
+port-forward {
+    auto-firewall enable
+    hairpin-nat enable
+    lan-interface eth1
+    rule 1 {
+        description "SSH Tunnel"
+        forward-to {
+            address 10.1.254.212
+            port 22
+        }
+        original-port 2222
+        protocol tcp_udp
+    }
+    rule 2 {
+        description Minecraft
+        forward-to {
+            address 10.2.7.2
+            port 25565
+        }
+        original-port 25565
+        protocol tcp_udp
+    }
+    rule 3 {
+        description DST
+        forward-to {
+            address 10.2.7.2
+            port 10999
+        }
+        original-port 10999
+        protocol udp
+    }
+    rule 4 {
+        description DST
+        forward-to {
+            address 10.2.7.2
+            port 11000
+        }
+        original-port 11000
+        protocol tcp_udp
+    }
+    rule 5 {
+        description DST
+        forward-to {
+            address 10.2.7.2
+            port 10888
+        }
+        original-port 10888
+        protocol udp
+    }
+    rule 6 {
+        description Proxmox
+        forward-to {
+            address 10.2.0.2
+            port 8006
+        }
+        original-port 10752
+        protocol tcp_udp
+    }
+    rule 7 {
+        description "HTTP (Letsencrypt)"
+        forward-to {
+            address 10.2.0.2
+            port 8066
+        }
+        original-port 8066
+        protocol tcp_udp
+    }
+    rule 8 {
+        description Unifi
+        forward-to {
+            address 10.2.0.8
+            port 8443
+        }
+        original-port 8443
+        protocol tcp_udp
+    }
+    rule 9 {
+        description Unifi
+        forward-to {
+            address 10.2.0.8
+            port 8080
+        }
+        original-port 8080
+        protocol tcp_udp
+    }
+    rule 10 {
+        description "Asterisk SIP"
+        forward-to {
+            address 10.2.0.21
+            port 5060
+        }
+        original-port 5060
+        protocol udp
+    }
+    rule 11 {
+        description "Asterisk RTP"
+        forward-to {
+            address 10.2.0.21
+            port 10000-20000
+        }
+        original-port 10000-20000
+        protocol udp
+    }
+    rule 12 {
+        description "Badges UDP"
+        forward-to {
+            address 10.201.0.10
+            port 8000
+        }
+        original-port 8000
+        protocol tcp_udp
+    }
+    rule 13 {
+        description "Badges API"
+        forward-to {
+            address 10.201.0.10
+            port 1337
+        }
+        original-port 1337
+        protocol tcp_udp
+    }
+    rule 14 {
+        description HTTPS
+        forward-to {
+            address 10.2.0.16
+            port 443
+        }
+        original-port 443
+        protocol tcp_udp
+    }
+    rule 15 {
+        description HTTP
+        forward-to {
+            address 10.2.0.16
+            port 80
+        }
+        original-port 80
+        protocol tcp_udp
+    }
+    rule 16 {
+        description Zoneminder
+        forward-to {
+            address 10.2.0.5
+            port 443
+        }
+        original-port 13230
+        protocol tcp_udp
+    }
+    rule 17 {
+        description FOG
+        forward-to {
+            address 10.2.0.2
+            port 8006
+        }
+        original-port 8006
+        protocol tcp
+    }
+    rule 18 {
+        description NAS
+        forward-to {
+            address 10.2.0.30
+            port 5001
+        }
+        original-port 5001
+        protocol tcp_udp
+    }
+    rule 19 {
+        description NAS
+        forward-to {
+            address 10.2.0.30
+            port 5000
+        }
+        original-port 5000
+        protocol tcp_udp
+    }
+    rule 20 {
+        description peter
+        forward-to {
+            address 10.1.254.18
+            port 80
+        }
+        original-port 8082
+        protocol tcp
+    }
+    rule 21 {
+        description UNMS
+        forward-to {
+            address 10.2.0.29
+            port 443
+        }
+        original-port 4443
+        protocol tcp_udp
+    }
+    rule 22 {
+        description OpenVPN
+        forward-to {
+            address 10.2.0.30
+            port 1194
+        }
+        original-port 1194
+        protocol tcp_udp
+    }
+    wan-interface eth0
+}
+protocols {
+    static {
+        interface-route6 ::/0 {
+            next-hop-interface tun0 {
+            }
+        }
+    }
+}
+service {
+    dhcp-server {
+        disabled false
+        global-parameters "option rfc3442-classless-static-routes code 121 = array of integer 8;"
+        hostfile-update disable
+        shared-network-name LAN {
+            authoritative disable
+            subnet 10.1.0.0/16 {
+                bootfile-name lpxelinux.0
+                bootfile-server 10.2.0.11
+                default-router 10.1.0.1
+                dns-server 10.1.0.1
+                lease 86400
+                start 10.1.1.0 {
+                    stop 10.1.255.0
+                }
+                static-mapping Google-Home {
+                    ip-address 10.1.254.92
+                    mac-address 54:60:09:9e:f4:a4
+                }
+                static-mapping Google-Home2 {
+                    ip-address 10.1.254.138
+                    mac-address f4:f5:d8:c4:19:ee
+                }
+                static-mapping Google-Home3 {
+                    ip-address 10.1.254.225
+                    mac-address f4:f5:d8:c7:47:c8
+                }
+                static-mapping Google-Home4 {
+                    ip-address 10.1.255.0
+                    mac-address f4:f5:d8:b3:ad:a2
+                }
+                static-mapping JD-PS4 {
+                    ip-address 10.1.254.202
+                    mac-address 00:d9:d1:d6:ca:c9
+                }
+                static-mapping colorchord {
+                    ip-address 10.1.253.243
+                    mac-address a0:20:a6:07:13:82
+                }
+                static-mapping ipcam {
+                    ip-address 10.1.253.249
+                    mac-address c0:99:dc:29:e3:60
+                }
+                static-mapping ipcam_00626E46DC6F {
+                    ip-address 10.1.253.248
+                    mac-address 00:62:6e:46:dc:6f
+                }
+                static-mapping ipcam_00626E46DC6F_1 {
+                    ip-address 10.1.254.167
+                    mac-address e8:ab:fa:03:01:5c
+                }
+                static-mapping peter {
+                    ip-address 10.1.254.18
+                    mac-address b8:27:eb:e4:58:37
+                }
+                static-mapping piro {
+                    ip-address 10.1.254.212
+                    mac-address bc:5f:f4:ce:9b:26
+                }
+                static-mapping raspberrypi {
+                    ip-address 10.1.254.160
+                    mac-address b8:27:eb:d7:28:09
+                }
+                static-mapping scootaloo {
+                    ip-address 10.1.253.240
+                    mac-address b8:27:eb:1e:23:6e
+                }
+                static-mapping tenda {
+                    ip-address 10.1.254.168
+                    mac-address c8:3a:35:8a:07:38
+                }
+                subnet-parameters "option vendor-encapsulated-options 06:01:03:0a:04:00:50:58:45:09:14:00:00:11:52:61:73:70:62:65:72:72:79:20:50:69:20:42:6f:6f:74:ff;"
+                tftp-server-name 10.2.0.11
+            }
+        }
+        shared-network-name MAGFest {
+            authoritative disable
+            subnet 10.201.0.0/16 {
+                default-router 10.201.0.1
+                dns-server 10.201.0.1
+                lease 86400
+                start 10.201.2.0 {
+                    stop 10.201.4.0
+                }
+                static-mapping magbadges.hackafe.net {
+                    ip-address 10.201.0.10
+                    mac-address 02:41:8c:74:d9:7d
+                }
+            }
+        }
+        shared-network-name Management {
+            authoritative disable
+            subnet 10.0.0.0/16 {
+                default-router 10.0.0.1
+                dns-server 10.0.0.1
+                lease 86400
+                start 10.0.0.100 {
+                    stop 10.0.255.0
+                }
+                static-mapping Hitoshi {
+                    ip-address 10.0.0.7
+                    mac-address 04:18:d6:6a:90:db
+                }
+                static-mapping Meimi {
+                    ip-address 10.0.0.8
+                    mac-address 04:18:d6:6a:9e:d9
+                }
+                static-mapping Osaka {
+                    ip-address 10.0.0.9
+                    mac-address 80:2a:a8:19:b4:07
+                }
+                static-mapping Tohya {
+                    ip-address 10.0.0.10
+                    mac-address 44:d9:e7:20:9c:8c
+                }
+                static-mapping luna {
+                    ip-address 10.0.128.76
+                    mac-address b8:27:eb:c4:2d:f9
+                }
+                static-mapping piromanagement {
+                    ip-address 10.0.128.68
+                    mac-address bc:5f:f4:ce:9b:26
+                }
+                static-mapping rentazilla {
+                    ip-address 10.0.0.11
+                    mac-address f0:9f:c2:6c:c7:e0
+                }
+            }
+        }
+        shared-network-name Server {
+            authoritative disable
+            subnet 10.2.0.0/16 {
+                bootfile-name lpxelinux.0
+                bootfile-server 10.2.0.11
+                default-router 10.2.0.1
+                dns-server 10.2.0.1
+                lease 86400
+                start 10.2.0.100 {
+                    stop 10.2.255.0
+                }
+                static-mapping DiskStation {
+                    ip-address 10.2.0.30
+                    mac-address 00:11:32:70:1a:39
+                }
+                static-mapping api.hackafe.net {
+                    ip-address 10.2.0.28
+                    mac-address C2:D8:24:36:09:82
+                }
+                static-mapping bigbrother {
+                    ip-address 10.2.7.12
+                    mac-address 4c:11:bf:28:c7:58
+                }
+                static-mapping unms.hackafe.net {
+                    ip-address 10.2.0.29
+                    mac-address 2A:EB:E6:DB:CD:77
+                }
+            }
+        }
+        use-dnsmasq disable
+    }
+    dns {
+        dynamic {
+            interface eth0 {
+                service custom-googledomains {
+                    host-name idiotic.io
+                    login 4x7olT72hv34GkCr
+                    password SzWFA2WqFhUqY3bk
+                    protocol dyndns2
+                    server domains.google.com
+                }
+                service dyndns {
+                    host-name 260104
+                    login thegeekguy
+                    password iPEZmS4biCGTzYf1
+                    server ipv4.tunnelbroker.net
+                }
+            }
+        }
+        forwarding {
+            cache-size 150
+            listen-on eth1.2
+            listen-on eth1.3
+            listen-on eth1.200
+            listen-on eth1.201
+            listen-on eth1
+            name-server 10.101.22.110
+            name-server 10.101.22.120
+            name-server 8.8.8.8
+            name-server 8.8.4.4
+        }
+    }
+    gui {
+        http-port 80
+        https-port 443
+        older-ciphers enable
+    }
+    nat {
+        rule 5000 {
+            description Internet
+            log disable
+            outbound-interface eth0
+            protocol all
+            type masquerade
+        }
+    }
+    snmp {
+        community snmpcommunity {
+            authorization ro
+        }
+        contact snm.hackafe.net
+        location router
+    }
+    ssh {
+        port 22
+        protocol-version v2
+    }
+    unms {
+        connection wss://unms.hackafe.net:443+sOxcMzKb20woW91e6_T2VVmJrhT8ryWz10WgTh-5Y0UHHhyW+allowSelfSignedCertificate
+    }
+}
+system {
+    domain-search {
+        domain hackafe.net
+        domain magevent.net
+    }
+    host-name ubnt
+    login {
+        user dylan {
+            authentication {
+                encrypted-password $6$/HemvNp8AGW$.pGP8S5TUq9nCETH2fFVwoDwGsZLUss8uNshqdFZ8MMeDug/o34EvSh6yOaO3N2TWOMFAcWmTRfh7v0cfSuFU/
+                plaintext-password ""
+            }
+            full-name "Dylan Whichard"
+            level admin
+        }
+        user jspriggs {
+            authentication {
+                encrypted-password $6$4.5REiK2$ZZ67ZVvPjFk.bXiKLYhQj0AfRTnkGD3k7yeoN8Rh/IqP6s1.ONeieYA6t7Px8rn6CCssxIb.ZutF1vXoZAM2K1
+                plaintext-password ""
+            }
+            full-name "Jason Spriggs"
+            level admin
+        }
+        user mark25 {
+            authentication {
+                encrypted-password $6$vqF/UDIh7mTni$7bfiF9YUc4e0LrCP0a40p5DCX.hJIZHFYxcdWh0HmikASVLg2FmKwG.CuWmkbr7kol4Fx765/3knaCxZgmuNK1
+                plaintext-password ""
+            }
+            full-name "Salt Configurator"
+            level admin
+        }
+        user root {
+            authentication {
+                encrypted-password $6$lVzizXZ25l9$DdX6k7nFxrFCZ/zotoZgk1f4G8aasin11fuwqo1r1I1EtAnsNkLo6hTCHwk8A1CzjInHIl7fwfOkZLOTu2mxB1
+                plaintext-password ""
+            }
+            full-name ""
+            level admin
+        }
+        user salt {
+            authentication {
+                encrypted-password $6$XMkfybTaaE$4h9MLZPEe54PvvR3ZFuvKOHxyrKPNcYnbwKZlD237e3sUXc9Z95nSbDwzY8GIZSvKqlgu95fjeIxGPSy78Ct.0
+                plaintext-password ""
+            }
+            full-name "Salt Configurator"
+            level admin
+        }
+    }
+    name-server 8.8.8.8
+    name-server 8.8.4.4
+    name-server 2001:470:20::2
+    ntp {
+        server 0.ubnt.pool.ntp.org {
+        }
+        server 1.ubnt.pool.ntp.org {
+        }
+        server 2.ubnt.pool.ntp.org {
+        }
+        server 3.ubnt.pool.ntp.org {
+        }
+    }
+    offload {
+        hwnat enable
+    }
+    package {
+        repository wheezy {
+            components "main contrib non-free"
+            distribution wheezy
+            password ""
+            url http://http.us.debian.org/debian
+            username ""
+        }
+    }
+    static-host-mapping {
+        host-name api.hackafe.net {
+            alias api
+            inet 10.2.0.28
+        }
+        host-name asterisk {
+            inet 10.2.0.21
+        }
+        host-name asterisk.hackafe.net {
+            inet 10.2.0.21
+        }
+        host-name basement.hackafe.net {
+            inet 10.0.0.2
+        }
+        host-name edge.hackafe.net {
+            alias edge
+            inet 10.0.0.1
+        }
+        host-name erika.hackafe.net {
+            inet 10.0.0.5
+        }
+        host-name find.hackafe.net {
+            inet 10.2.0.25
+        }
+        host-name fog.hackafe.net {
+            inet 10.2.0.2
+        }
+        host-name git {
+            inet 10.2.0.10
+        }
+        host-name git.hackafe.net {
+            inet 10.2.0.10
+        }
+        host-name hackafe.net {
+            inet 10.2.0.16
+        }
+        host-name hitoshi.hackafe.net {
+            inet 10.0.0.7
+        }
+        host-name idiotic.hackafe.net {
+            alias idiotic
+            inet 10.2.0.23
+        }
+        host-name idiotic.io {
+            alias web.hackafe.net
+            inet 10.2.0.16
+        }
+        host-name librenms.hackafe.net {
+            alias librenms
+            inet 10.2.0.31
+        }
+        host-name mariadb.hackafe.net {
+            inet 10.2.0.6
+        }
+        host-name meimi.hackafe.net {
+            inet 10.0.0.8
+        }
+        host-name mikrotik.hackafe.net {
+            inet 10.0.0.6
+        }
+        host-name nas.hackafe.net {
+            alias nas
+            inet 10.2.0.30
+        }
+        host-name nfs.hackafe.net {
+            alias nfs.hackafe.net
+            inet 10.2.0.27
+        }
+        host-name osaka.hackafe.net {
+            inet 10.0.0.9
+        }
+        host-name peter.hackafe.net {
+            alias peter
+            inet 10.1.254.18
+        }
+        host-name rentazilla.hackafe.net {
+            inet 10.0.0.11
+        }
+        host-name repo.hackafe.net {
+            alias repo
+            inet 10.2.0.17
+        }
+        host-name salt {
+            inet 10.2.0.7
+        }
+        host-name salt.hackafe.net {
+            inet 10.2.0.7
+        }
+        host-name tftp.hackafe.net {
+            alias tftp
+            inet 10.2.0.11
+        }
+        host-name tohya.hackafe.net {
+            alias tohya
+            inet 10.0.0.10
+        }
+        host-name unifi.hackafe.net {
+            inet 10.2.0.8
+        }
+        host-name unms.hackafe.net {
+            alias unms
+            inet 10.2.0.29
+        }
+        host-name upstairs.hackafe.net {
+            inet 10.0.0.3
+        }
+        host-name web1.hackafe.net {
+            inet 10.2.0.16
+        }
+        host-name web.hackafe.net {
+            alias web
+            inet 10.2.0.16
+        }
+        host-name wgaming.hackafe.net {
+            inet 10.2.0.100
+        }
+        host-name zoneminder.hackafe.net {
+            inet 10.2.0.5
+        }
+    }
+    syslog {
+        global {
+            facility all {
+                level notice
+            }
+            facility protocols {
+                level debug
+            }
+        }
+    }
+    time-zone UTC
+    traffic-analysis {
+        dpi enable
+        export enable
+    }
+}
+vpn {
+    ipsec {
+        auto-firewall-nat-exclude enable
+        ipsec-interfaces {
+            interface eth0
+        }
+        nat-networks {
+            allowed-network 0.0.0.0/0 {
+            }
+        }
+        nat-traversal enable
+    }
+}
+
+
+/* Warning: Do not remove the following line. */
+/* === vyatta-config-version: "config-management@1:conntrack@1:cron@1:dhcp-relay@1:dhcp-server@4:firewall@5:ipsec@5:nat@3:qos@1:quagga@2:system@4:ubnt-pptp@1:ubnt-unms@1:ubnt-util@1:vrrp@1:webgui@1:webproxy@1:zone-policy@1" === */
+/* Release version: v1.9.7+hotfix.4.5024279.171006.0255 */

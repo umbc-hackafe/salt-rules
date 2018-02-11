@@ -96,11 +96,11 @@ blocks:
       a: living_room_occupied
       b: living_room_not_movie_mode
     input_to:
-      - living_room_front
-      - living_room_corner
-      - living_room_lamp
-      - living_room_lamp_2
-      - living_room_lamp_3
+      - living_room_front.power
+      - living_room_corner.power
+      - living_room_lamp.power
+      - living_room_lamp_2.power
+      - living_room_lamp_3.power
 
   downstairs_scale:
     type: value.str

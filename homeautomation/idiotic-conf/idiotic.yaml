@@ -62,9 +62,7 @@ blocks:
     zone: All
 
   dining_room_occupied:
-    type: occupancy.occupancy
-    decay: .98
-    threshold: .35
+    type: occupancy.staged_motion
     inputs:
       motion_foscam: zone_foscam
     input_to:
@@ -83,9 +81,7 @@ blocks:
       - host.node_name: scootaloo.hackafe.net
 
   living_room_occupied:
-    type: occupancy.occupancy
-    decay: .9
-    threshold: .35
+    type: occupancy.staged_motion
     inputs:
       motion_living_room: motion_living_room
 

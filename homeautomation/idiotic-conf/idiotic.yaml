@@ -157,6 +157,7 @@ blocks:
   living_room_corner:
     type: smartthings.switch
     label: Living Room Corner
+    id: 79da0afa-84a6-49a3-8358-b1a86f31ea47
 
   dining_room_lamp:
     type: smartthings.switch

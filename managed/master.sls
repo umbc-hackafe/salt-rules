@@ -52,3 +52,6 @@ salt-master-firewalld:
     - ports:
       - 4505/tcp
       - 4506/tcp
+
+salt-ssh:
+  pkg.installed: []

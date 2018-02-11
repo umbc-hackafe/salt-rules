@@ -68,10 +68,39 @@ blocks:
     inputs:
       motion_foscam: zone_foscam
     input_to:
-      - dining_table_1.power
-      - dining_table_2.power
-      - dining_table_3.power
-      - dining_room_lamp.power
+      - dining_lamp_1.power
+      - dining_lamp_2.power
+      - dining_lamp_3.power
+      - dining_room_1.power
+      - dining_room_2.power
+
+  living_room_occupied:
+    type: occupancy.occupancy
+    decay: .9
+    threshold: .35
+    inputs:
+      motion_living_room: motion_living_room
+
+  living_room_movie_mode:
+    type: value.bool
+    initial: False
+
+  living_room_not_movie_mode:
+    type: logic.not
+    inputs:
+      a: living_room_movie_mode
+
+  living_room_should_light:
+    type: logic.and
+    inputs:
+      a: living_room_occupied
+      b: living_room_not_movie_mode
+    input_to:
+      - living_room_front
+      - living_room_corner
+      - living_room_lamp
+      - living_room_lamp_2
+      - living_room_lamp_3
 
   downstairs_scale:
     type: value.str
@@ -145,64 +174,104 @@ blocks:
       downstairs: downstairs_heat.temperature
       upstairs: upstairs_ac.temperature
 
-  living_room_lamp:
-    type: smartthings.switch
-    label: Living Room Lamp
-    id: c32ee798-2e01-4d4b-ae54-acd42c196f20
+  #####################
+  # SmartThings Items #
+  #  Auto-Generated   #
+  #####################
 
-#  living_room_front:
-#    type: smartthings.switch
-#    label: Living Room Front
-
-  living_room_corner:
+  bathroom_hall_1:
+    id: ab5f0221-8b7f-4e8c-b384-a62fc15fc13d
+    label: Bathroom Hall 1
     type: smartthings.switch
-    label: Living Room Corner
-    id: 79da0afa-84a6-49a3-8358-b1a86f31ea47
-
-  dining_room_lamp:
+  bathroom_hall_2:
+    id: cdd89671-0fd5-4b68-b83c-873499658348
+    label: Bathroom Hall 2
     type: smartthings.switch
-    label: Dining Room Lamp
+  dining_lamp_1:
     id: 96c9b9ff-2a93-4d8b-8477-58db1a256056
-
-  dining_table_1:
+    label: Dining Lamp 1
     type: smartthings.switch
-    label: Dining Table 1
-    id: bc658d54-abfc-464d-8b60-3bf5770fc25b
-
-  dining_table_2:
-    type: smartthings.switch
-    label: Dining Table 2
-    id: cc639f14-8e6e-46e1-8085-53de8041a0cf
-
-  dining_table_3:
-    type: smartthings.switch
-    label: Dining Table 3
+  dining_lamp_2:
     id: 103d5bbd-7fb7-41f7-8c05-bf9fbffc704c
-
-  dylan_fan_1:
+    label: Dining Lamp 2
     type: smartthings.switch
+  dining_lamp_3:
+    id: 4ef5e37b-a6ac-4186-82ac-e1462b9770e0
+    label: Dining Lamp 3
+    type: smartthings.switch
+  dining_room_1:
+    id: bc658d54-abfc-464d-8b60-3bf5770fc25b
+    label: Dining Room 1
+    type: smartthings.switch
+  dining_room_2:
+    id: cc639f14-8e6e-46e1-8085-53de8041a0cf
+    label: Dining Room 2
+    type: smartthings.switch
+  dylans_fan_1:
+    id: e2f79795-996c-41fa-a1ba-f4d490c29b4c
     label: Dylan's Fan 1
-
-  dylan_fan_2:
     type: smartthings.switch
+  dylans_fan_2:
+    id: eb1ce5c2-5d23-4298-9f43-acd2acbc853e
     label: Dylan's Fan 2
-
-  dylan_fan_3:
     type: smartthings.switch
+  dylans_fan_3:
+    id: 4f2e5f0c-860e-43c5-a171-3cf8559a9035
     label: Dylan's Fan 3
-
-  marks_room_1:
     type: smartthings.switch
-    label: Mark's Room 1
-
-  marks_room_2:
-    type: smartthings.switch
-    label: Mark's Room 2
-
   front_light:
-    type: smartthings.switch
-    label: Front Light
     id: 279734bc-8c5c-4b8e-9355-09abb0b9f1c2
+    label: Front Light
+    type: smartthings.switch
+  hue_white_lamp_2:
+    id: b711932a-fa40-428f-9f82-941a8b7b1784
+    label: Hue white lamp 2
+    type: smartthings.switch
+  kitchen_1:
+    id: ec216774-822b-49d3-b843-3e6867a0418d
+    label: Kitchen 1
+    type: smartthings.switch
+  kitchen_2:
+    id: 08a0ae83-f355-44dd-8378-6baaccb25d79
+    label: Kitchen 2
+    type: smartthings.switch
+  kitchen_3:
+    id: 552cd710-45e8-4446-8ce2-ce67bc5428c6
+    label: Kitchen 3
+    type: smartthings.switch
+  living_room_corner:
+    id: 79da0afa-84a6-49a3-8358-b1a86f31ea47
+    label: Living Room Corner
+    type: smartthings.switch
+  living_room_front:
+    id: 5261d3fc-69e9-42cd-a47a-3e2a00ff4aa0
+    label: Living Room Front
+    type: smartthings.switch
+  living_room_lamp:
+    id: c32ee798-2e01-4d4b-ae54-acd42c196f20
+    label: Living Room Lamp
+    type: smartthings.switch
+  living_room_lamp_2:
+    id: aab854a6-ba65-441b-8911-4d4e80cff943
+    label: Living Room Lamp 2
+    type: smartthings.switch
+  living_room_lamp_3:
+    id: 44447a3a-86da-464a-bf00-5a8ab83a64e9
+    label: Living Room Lamp 3
+    type: smartthings.switch
+  marks_room_1:
+    id: c6fb973b-3d7c-4716-b641-8a21aa35e7c0
+    label: Mark's Room 1
+    type: smartthings.switch
+  marks_room_2:
+    id: 3b4b5c0b-457f-4227-8735-2cee7a32f52e
+    label: Mark's Room 2
+    type: smartthings.switch
+
+  #####################
+  #  End SmartThings  #
+  #  Auto-Generated   #
+  #####################
 
   teakettle:
     type: teapot.teapot
@@ -216,7 +285,7 @@ blocks:
     method: post
     url: http://10.1.254.21//put_saved_animation/{animation}
 
-  motion:
+  motion_living_room:
     type: gpio.rpi
     device: MotionSensor
     options:

@@ -1,14 +1,17 @@
 salt-cloud:
   pkg.installed: []
 
-python-IPy:
+python2-IPy:
+  pkg.installed: []
+
+python2-pygit2:
   pkg.installed: []
 
 salt-master:
   service.running:
     - enable: True
     - require:
-      - pkg: python-pygit2
+      - pkg: python2-pygit2
 
 salt-master-config:
   file.managed:

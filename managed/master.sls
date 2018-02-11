@@ -19,6 +19,15 @@ salt-master-config:
     - watch_in:
       - service: salt-master
 
+salt-master-roster:
+  file.managed:
+    - name: /etc/salt/roster
+    - source:
+      - salt://managed/roster.yaml
+    - template: jinja
+    - watch_in:
+      - service: salt-master
+
 salt-master-autosign:
   file.managed:
     - name: /etc/salt/autosign.conf

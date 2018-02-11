@@ -74,6 +74,14 @@ blocks:
       - dining_room_1.power
       - dining_room_2.power
 
+  motion_living_room:
+    type: gpio.rpi
+    device: MotionSensor
+    options:
+      pin: 4
+    require:
+      - host.node_name: scootaloo.hackafe.net
+
   living_room_occupied:
     type: occupancy.occupancy
     decay: .9
@@ -284,13 +292,3 @@ blocks:
     type: http.http
     method: post
     url: http://10.1.254.21//put_saved_animation/{animation}
-
-  motion_living_room:
-    type: gpio.rpi
-    device: MotionSensor
-    options:
-      pin: 4
-    require:
-      - host.node_name: scootaloo.hackafe.net
-    input_to:
-      - living_room_corner.power

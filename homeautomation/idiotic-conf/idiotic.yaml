@@ -8,7 +8,7 @@ nodes:
   idiotic.hackafe.net:
     host: 10.2.0.23
   scootaloo.hackafe.net:
-    host: 10.1.253.240
+    host: 10.1.253.237
 modules:
   nest:
     oauth_token: {{ salt['pillar.get']('idiotic:nest:token') }}

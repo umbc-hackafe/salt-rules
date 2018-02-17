@@ -229,3 +229,6 @@ base:
 
   'edge':
     - router.edgeos
+
+  'orthogonal.space':
+    - orthogonalspace

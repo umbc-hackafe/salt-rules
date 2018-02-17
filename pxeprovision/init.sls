@@ -28,9 +28,9 @@ hostnames:
     - require_in:
       - file: cloud-config
 
-pxe:
-  service.running:
-    - enable: True
-    - require:
-      - file: pxe-service
-      - file: hostnames
+#pxe:
+#  service.running:
+#    - enable: True
+#    - require:
+#      - file: pxe-service
+#      - file: hostnames

@@ -1,6 +1,6 @@
 interface: '::'
 
-ipv6: True
+ipv6: False
 
 worker_threads: 8
 

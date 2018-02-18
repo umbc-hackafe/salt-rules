@@ -1,4 +1,4 @@
-interface: '::'
+interface: '0.0.0.0'
 
 ipv6: False
 

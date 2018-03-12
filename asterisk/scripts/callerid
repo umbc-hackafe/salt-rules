@@ -2,6 +2,8 @@
 
 echo $! >> /tmp/callerid
 
-while [ -f /tmp/callerid ]; do
+STOPTIME="$(($(date '+%s') + 60))"
+
+while [ -f /tmp/callerid -a "$(date '+%s')" -lt "${STOPTIME}"]; do
     /usr/bin/send-text -h 10.1.253.237 -f /usr/share/flaschen-taschen/fonts/10x20.bdf -g 512x20+0+6+1 -b ff0000 -s 20 -O "Call From: $1 $2"
 done

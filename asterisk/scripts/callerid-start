@@ -1,5 +1,5 @@
 #!/bin/bash
 
 if [ ! -f /tmp/callerid ]; then
-    /usr/bin/callerid "$1" "$2"
+    /usr/bin/callerid "$1" "$2" &
 fi
